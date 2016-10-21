@@ -144,6 +144,7 @@ fluid.defaults("gpii.ul.website.harness", {
                         type: "gpii.ul.api",
                         options: {
                             priority: "after:jsonQueryParser",
+                            templateDirs: "{harness}.options.templateDirs",
                             urls:     "{harness}.options.urls",
                             listeners: {
                                 "onReady.notifyParent": {
