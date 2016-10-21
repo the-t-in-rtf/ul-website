@@ -11,7 +11,11 @@ require("gpii-launcher");
 
 fluid.defaults("gpii.ul.website.launcher", {
     gradeNames: ["gpii.launcher"],
-    includeOptions: false,
+    yargsOptions: {
+        describe: {
+            "ports": "The ports (ports.api, ports.couch, and ports.lucene) used by this instance."
+        }
+    },
     listeners: {
         "onOptionsMerged.launch": {
             funcName: "gpii.ul.website.harness",
