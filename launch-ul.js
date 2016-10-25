@@ -5,7 +5,7 @@ var fluid = require("infusion");
 fluid.setLogging(true);
 
 var gpii  = fluid.registerNamespace("gpii");
-require("./src/js/server/harness");
+require("./");
 
 require("gpii-launcher");
 
@@ -14,12 +14,9 @@ fluid.defaults("gpii.ul.website.launcher", {
     yargsOptions: {
         describe: {
             "ports": "The ports (ports.api, ports.couch, and ports.lucene) used by this instance."
-        }
-    },
-    listeners: {
-        "onOptionsMerged.launch": {
-            funcName: "gpii.ul.website.harness",
-            args:     ["{arguments}.0"]
+        },
+        defaults: {
+            "optionsFile": "%ul-website/configs/dev.json"
         }
     }
 });

@@ -25,7 +25,7 @@
     "gpii-express-user": "git://github.com/the-t-in-rtf/gpii-express-user.git#c0becab841193c6378911643370c79b2c487b436",
     "gpii-handlebars": "git://github.com/the-t-in-rtf/gpii-handlebars.git#9bc7d7254d941cdea1bf168d3f9477907a72b9e8",
     "gpii-json-schema": "git://github.com/the-t-in-rtf/gpii-json-schema.git#3b15986a750a4bca6511db165acfbd5197900596",
-    "gpii-launcher": "git://github.com/the-t-in-rtf/gpii-launcher.git#e5951025969fa6c515cfd41018a348b7b258d908",
+    "gpii-launcher": "git://github.com/the-t-in-rtf/gpii-launcher.git#de16e831469ed549504c15048b0e868fc4b3da49",
     "gpii-location-bar-relay": "git://github.com/the-t-in-rtf/gpii-location-bar-relay.git#db00b6e2168517d1e7d80d64224f024fa3ff248d",
     "gpii-pouchdb": "git://github.com/the-t-in-rtf/gpii-pouchdb.git#c5f401181b1f021e13400bf7a5d117880cb18b16",
     "gpii-pouchdb-lucene": "git://github.com/the-t-in-rtf/gpii-pouchdb-lucene.git#c87dbcb7ee8f09c6402af9d926546e81fff5ed16",

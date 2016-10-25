@@ -1,0 +1,12 @@
+{
+  "type": "devConfig",
+  "options": {
+    "gradeNames": ["gpii.tests.ul.website.harness"],
+    "listeners": {
+      "onCreate.constructFixtures": {
+        "func": "{that}.events.constructFixtures.fire"
+      }
+    }
+  },
+  "require": ["%ul-website/tests/js/lib/"]
+}
