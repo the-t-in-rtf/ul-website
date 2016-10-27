@@ -38,7 +38,7 @@
                         },
                         {
                             func: "{testEnvironment}.requestor.makeRequest",
-                            args: ["http://localhost:6194/api/product/unified/1421059432806-826608318"]
+                            args: ["http://localhost:7217/api/product/unified/1421059432806-826608318"]
                         },
                         {
                             listener: "gpii.tests.ul.api.cors.examinePage",
@@ -75,7 +75,7 @@
                         },
                         {
                             func: "{testEnvironment}.requestor.makeRequest",
-                            args: ["http://localhost:6194/src/js/client/transformArray.js"]
+                            args: ["http://localhost:7217/restricted"]
                         },
                         {
                             listener: "gpii.tests.ul.api.cors.examinePage",
