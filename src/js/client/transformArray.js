@@ -15,7 +15,7 @@
         var returnArray = [];
 
         fluid.each(valueArray, function (singleValue) {
-            returnArray.push(fluid.model.transformWithRules(singleValue, transformSpec.rules))
+            returnArray.push(fluid.model.transformWithRules(singleValue, transformSpec.rules));
         });
 
         return returnArray;
