@@ -16,7 +16,7 @@
                 { value: "new", label: "New"},
                 { value: "active", label: "Active"},
                 { value: "discontinued", label: "Discontinued"},
-                { value: "deleted", label: "Deleted"},
+                { value: "deleted", label: "Deleted"}
             ]
         },
         selectors:  {
