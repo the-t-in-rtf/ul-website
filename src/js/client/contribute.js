@@ -1,4 +1,3 @@
-// TODO: Migrate this to a "content aware" part of the API when this feature is complete:  https://github.com/GPII/gpii-express/pull/6
 // TODO:  Figure out what happens when a user contributes changes to the same product a second time.
 // Component to allow end users to contribute changes, which can be reviewed and incorporated into the unified record.
 /* global fluid */
@@ -6,21 +5,42 @@
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
 
+    fluid.registerNamespace("gpii.ul.contribute.form");
+    gpii.ul.contribute.form.setSource = function (that) {
+        var source = that.model.user ? "~" + that.model.user.username : undefined;
+        that.applier.change("product.source", source);
+    };
+
+    // TODO: Make this better able to handle JSON input failures
     // The component that handles data entry, including saving changes.
     fluid.defaults("gpii.ul.contribute.form", {
-        gradeNames:    ["gpii.handlebars.templateFormControl"],
+        gradeNames: ["gpii.schemas.client.errorAwareForm"],
+        schemaKey:  "product-update-input.json",
         hideOnSuccess: false,
         hideOnError:   false,
         ajaxOptions: {
-            method:   "PUT",
             url:      "/api/product/",
-            dataType: "json",
-            json:     true
+            method:   "PUT",
+            contentType: "application/json",
+            headers: {
+                accept: "application/json"
+            },
+            dataType: "json"
+        },
+        model: {
+            product: {
+                sid: "{that}.id"
+            }
         },
         rules: {
+            // TODO:  Clean this up as it prevents client-side validation
             modelToRequestPayload: {
-                "":       "product",
-                "source": "user.username"
+                "": {
+                    transform: {
+                        type:      "fluid.transforms.objectToJSONString",
+                        inputPath: "product"
+                    }
+                }
             },
             successResponseToModel: {
                 "":             "notfound",
@@ -53,22 +73,124 @@
             settingsRestart:  ".contribute-form-settings-restart"
         },
         bindings: {
-            source:           "user.username",
-            name:             "product.name",
-            description:      "product.description",
-            manufacturerName: "product.manufacturer.name",
-            address:          "product.manufacturer.address",
-            cityTown:         "product.manufacturer.cityTown",
-            provinceRegion:   "product.manufacturer.provinceRegion",
-            postalCode:       "product.manufacturer.postalCode",
-            country:          "product.manufacturer.country",
-            email:            "product.manufacturer.email",
-            phone:            "product.manufacturer.phone",
-            url:              "product.manufacturer.url",
+            name: {
+                selector: "name",
+                path:     "product.name",
+                rules: {
+                    domToModel: {
+                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                    }
+                }
+            },
+            description: {
+                selector: "description",
+                path:     "product.description",
+                rules: {
+                    domToModel: {
+                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                    }
+                }
+            },
+            source: "product.source",
+            manufacturerName: {
+                selector: "manufacturerName",
+                path:     "product.manufacturer.name",
+                rules: {
+                    domToModel: {
+                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                    }
+                }
+            },
+            address: {
+                selector: "address",
+                path:     "product.manufacturer.address",
+                rules: {
+                    domToModel: {
+                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                    }
+                }
+            },
+            cityTown: {
+                selector: "cityTown",
+                path:     "product.manufacturer.cityTown",
+                rules: {
+                    domToModel: {
+                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                    }
+                }
+            },
+            provinceRegion: {
+                selector: "provinceRegion",
+                path:     "product.manufacturer.provinceRegion",
+                rules: {
+                    domToModel: {
+                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                    }
+                }
+            },
+            postalCode: {
+                selector: "postalCode",
+                path:     "product.manufacturer.postalCode",
+                rules: {
+                    domToModel: {
+                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                    }
+                }
+            },
+            country: {
+                selector: "country",
+                path:     "product.manufacturer.country",
+                rules: {
+                    domToModel: {
+                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                    }
+                }
+            },
+            email: {
+                selector: "email",
+                path:     "product.manufacturer.email",
+                rules: {
+                    domToModel: {
+                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                    }
+                }
+            },
+            phone: {
+                selector: "phone",
+                path:     "product.manufacturer.phone",
+                rules: {
+                    domToModel: {
+                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                    }
+                }
+            },
+            url: {
+                selector: "url",
+                path:     "product.manufacturer.url",
+                rules: {
+                    domToModel: {
+                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                    }
+                }
+            },
             settingsDesc:     "product.sourceData.settings.description",
             pricing:          "product.sourceData.pricing",
             settingsStorage:  "product.sourceData.settings.storage",
             settingsRestart:  "product.sourceData.settings.restart"
+        },
+        errorBindings: {
+            name:             "name",
+            description:      "description",
+            source:           "source",
+            manufacturerName: "manufacturer.name",
+            address:          "manufacturer.address",
+            cityTown:         "manufacturer.cityTown",
+            provinceRegion:   "manufacturer.provinceRegion",
+            postalCode:       "manufacturer.postalCode",
+            country:          "manufacturer.country",
+            email:            "manufacturer.email",
+            phone:            "manufacturer.phone",
+            url:              "manufacturer.url"
         },
         templates: {
             initial: "contribute-form"
@@ -80,6 +202,12 @@
             // We defer to the parent's feedback components and disable those included in `templateFormControl` by default.
             error:   { createOnEvent: "never"},
             success: { createOnEvent: "never"}
+        },
+        modelListeners: {
+            "user": {
+                funcName: "gpii.ul.contribute.form.setSource",
+                args:     ["{that}"]
+            }
         }
     });
 
@@ -146,11 +274,11 @@
                     description:  "responseJSON.product.description",
                     manufacturer: "responseJSON.product.manufacturer"
                 },
-                errorMessage:   { literalValue: null }
+                error:   { literalValue: null }
             },
             errorResponseToModel: {
-                "":             "notfound",
-                errorMessage:   "message",
+                "": "notfound",
+                "error": "responseJSON",
                 successMessage: { literalValue: null }
             },
             ajaxOptions: {
@@ -228,9 +356,9 @@
                 createOnEvent: "{contribute}.events.onMarkupRendered",
                 container:     ".contribute-error",
                 options: {
-                    template: "common-error",
+                    template: "validation-error-summary",
                     model: {
-                        message: "{contribute}.model.errorMessage"
+                        message: "{contribute}.model.error"
                     }
                 }
             },
