@@ -22,6 +22,38 @@ fluid.defaults("gpii.ul.website.harness", {
         couch:  5984,
         lucene: 5985
     },
+    sessionKey:   "_ul_user",
+    rules: {
+        contextToExpose: {
+            "layout": "layout", // This is required to support custom layouts
+            "model": {
+                "user":    "req.session._ul_user",
+                "product": "product"
+            },
+            "req":  {
+                "query":  "req.query",
+                "params": "req.params"
+            }
+        }
+    },
+    distributeOptions: [
+        {
+            source: "{that}.options.rules.contextToExpose",
+            target: "{that gpii.express.singleTemplateMiddleware}.options.rules.contextToExpose"
+        },
+        {
+            source: "{that}.options.rules.contextToExpose",
+            target: "{that gpii.ul.api.htmlMessageHandler}.options.rules.contextToExpose"
+        },
+        {
+            source: "{that}.options.rules.contextToExpose",
+            target: "{that gpii.handlebars.dispatcherMiddleware}.options.rules.contextToExpose"
+        },
+        {
+            source: "{that}.options.sessionKey",
+            target: "{that gpii.express.handler}.options.sessionKey"
+        }
+    ],
     urls: {
         couch: {
             expander: {
@@ -84,7 +116,7 @@ fluid.defaults("gpii.ul.website.harness", {
                     corsHeaders: {
                         type: "gpii.express.middleware.headerSetter",
                         options: {
-                            priority: "after:allSchemas",
+                            priority: "after:queryParser",
                             headers: {
                                 cors: {
                                     fieldName: "Access-Control-Allow-Origin",
@@ -94,11 +126,43 @@ fluid.defaults("gpii.ul.website.harness", {
                             }
                         }
                     },
+                    handlebars: {
+                        type: "gpii.express.hb",
+                        options: {
+                            priority: "after:corsHeaders",
+                            templateDirs: "{harness}.options.templateDirs",
+                            components: {
+                                initBlock: {
+                                    options: {
+                                        contextToOptionsRules: {
+                                            req:     "req",
+                                            product: "product"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    cookieparser: {
+                        type:     "gpii.express.middleware.cookieparser",
+                        options: {
+                            priority: "after:handlebars"
+                        }
+                    },
+                    session: {
+                        type: "gpii.express.middleware.session",
+                        options: {
+                            priority: "after:cookieparser",
+                            sessionOptions: {
+                                secret: "Printer, printer take a hint-ter."
+                            }
+                        }
+                    },
                     // Client-side Handlebars template bundles
                     inline: {
                         type: "gpii.handlebars.inlineTemplateBundlingMiddleware",
                         options: {
-                            priority: "after:corsHeaders",
+                            priority: "after:handlebars",
                             path: "/hbs",
                             templateDirs: "{harness}.options.templateDirs"
                         }
@@ -143,14 +207,26 @@ fluid.defaults("gpii.ul.website.harness", {
                     api: {
                         type: "gpii.ul.api",
                         options: {
-                            priority: "after:jsonQueryParser",
+                            priority: "after:session",
                             templateDirs: "{harness}.options.templateDirs",
                             urls:     "{harness}.options.urls",
                             listeners: {
                                 "onReady.notifyParent": {
                                     func: "{harness}.events.apiReady.fire"
                                 }
+                            },
+                            components: {
+                                // Defang the "session" handling middleware included with ul-api in favor of ours.
+                                session:      { type: "fluid.component" }
                             }
+                        }
+                    },
+                    dispatcher: {
+                        type: "gpii.handlebars.dispatcherMiddleware",
+                        options: {
+                            priority: "after:api",
+                            path: ["/:template", "/"],
+                            templateDirs: "{harness}.options.templateDirs"
                         }
                     }
                 }

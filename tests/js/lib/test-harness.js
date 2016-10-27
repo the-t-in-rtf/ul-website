@@ -12,6 +12,9 @@ require("../../../");
 
 fluid.require("%gpii-pouchdb");
 fluid.require("%gpii-pouchdb-lucene");
+fluid.require("%gpii-express");
+
+fluid.require("%gpii-express/tests/js/lib/test-middleware-hello.js");
 
 fluid.registerNamespace("gpii.tests.ul.website.harness");
 gpii.tests.ul.website.harness.stopServer = function (that) {

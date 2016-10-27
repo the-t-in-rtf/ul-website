@@ -12,7 +12,7 @@ gpii.test.ul.api.testEnvironment.withBrowser.stopFixtures = function (that) {
     that.browser.end();
 };
 fluid.defaults("gpii.test.ul.api.testEnvironment.withBrowser", {
-    gradeNames: ["gpii.test.browser.environment", "gpii.tests.ul.api.harness"],
+    gradeNames: ["gpii.test.webdriver.testEnvironment", "gpii.tests.ul.website.harness"],
     events: {
         onFixturesConstructed: {
             events: {
