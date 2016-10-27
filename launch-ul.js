@@ -15,6 +15,7 @@ fluid.defaults("gpii.ul.website.launcher", {
         describe: {
             "ports": "The ports (ports.api, ports.couch, and ports.lucene) used by this instance."
         },
+        help: true,
         defaults: {
             "optionsFile": "%ul-website/configs/dev.json"
         }

@@ -8,5 +8,5 @@
       }
     }
   },
-  "require": ["%ul-website/tests/js/lib/"]
+  "require": ["%ul-website/tests/js/lib/test-harness.js"]
 }
