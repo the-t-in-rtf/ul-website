@@ -1,19 +1,16 @@
-// TODO:  Figure out what happens when a user contributes changes to the same product a second time.
 // Component to allow end users to contribute changes, which can be reviewed and incorporated into the unified record.
 /* global fluid */
 (function () {
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
 
-    fluid.registerNamespace("gpii.ul.contribute.form");
-    gpii.ul.contribute.form.setSource = function (that) {
+    fluid.registerNamespace("gpii.ul.contribute");
+    gpii.ul.contribute.setSource = function (that) {
         var source = that.model.user ? "~" + that.model.user.username : undefined;
         that.applier.change("product.source", source);
     };
 
-    // TODO: Make this better able to handle JSON input failures
-    // The component that handles data entry, including saving changes.
-    fluid.defaults("gpii.ul.contribute.form", {
+    fluid.defaults("gpii.ul.contribute", {
         gradeNames: ["gpii.schemas.client.errorAwareForm"],
         schemaKey:  "product-update-input.json",
         hideOnSuccess: false,
@@ -43,20 +40,18 @@
                 }
             },
             successResponseToModel: {
-                "":             "notfound",
-                product:         "responseJSON.product",
-                successMessage: { literalValue: "Your submission has been saved.  You may continue revising this or close the window."},
-                errorMessage:   { literalValue: null }
-            },
-            errorResponseToModel: {
-                successMessage: { literalValue: null }
+                "": "notfound",
+                product: "responseJSON.product",
+                successMessage: {literalValue: "Your submission has been saved.  You may continue revising this or close the window."},
+                errorMessage: {literalValue: null},
+                fieldErrors: {literalValue: null}
             }
         },
         selectors: {
-            initial:          "",
+            initial:          ".contribute-viewport",
             name:             ".contribute-form-name",
             description:      ".contribute-form-description",
-            manufacturerName: ".contribute-form-manufacturer-name",
+            manufacturer:     ".manufacturer-name-label",
             address:          ".contribute-form-manufacturer-address",
             cityTown:         ".contribute-form-manufacturer-citytown",
             provinceRegion:   ".contribute-form-manufacturer-provinceregion",
@@ -193,183 +188,15 @@
             url:              "manufacturer.url"
         },
         templates: {
-            initial: "contribute-form"
+            initial: "contribute-viewport"
         },
         events: {
             never: null
         },
-        components: {
-            // We defer to the parent's feedback components and disable those included in `templateFormControl` by default.
-            error:   { createOnEvent: "never"},
-            success: { createOnEvent: "never"}
-        },
         modelListeners: {
             "user": {
-                funcName: "gpii.ul.contribute.form.setSource",
+                funcName: "gpii.ul.contribute.setSource",
                 args:     ["{that}"]
-            }
-        }
-    });
-
-    // The main container that handles the initial load and is a gatekeeper for rendering and displaying the data entry form.
-    fluid.registerNamespace("gpii.ul.contribute");
-
-    // We can only retrieve existing product data if we have a uid.
-    gpii.ul.contribute.makeRequestIfNeeded = function (that) {
-        if (that.options.req.query.uid) {
-            that.makeRequest();
-        }
-    };
-
-    gpii.ul.contribute.onlyDrawFormIfLoggedIn = function (that) {
-        var form = that.locate("form");
-        if (that.model.user && that.model.user.username) {
-            form.show();
-
-            // The form will be created the first time this is fired and will be ignored after that.
-            that.events.onReadyToEdit.fire(that);
-        }
-        else {
-            form.hide();
-            that.applier.change("errorMessage", that.options.messages.loginRequired);
-        }
-    };
-
-    // The component that loads the product content and controls the initial rendering.  Subcomponents
-    // listen for this component to give the go ahead, and then take over parts of the interface.
-    fluid.defaults("gpii.ul.contribute", {
-        gradeNames: ["gpii.handlebars.ajaxCapable", "gpii.handlebars.templateAware"],
-        baseUrl:    "/api/product/",
-        messages: {
-            loginRequired: "You must log in to contribute to the Unified Listing."
-        },
-        selectors: {
-            viewport: ".contribute-viewport",
-            form:     ".contribute-form"
-        },
-        mergePolicy: {
-            rules: "noexpand"
-        },
-        ajaxOptions: {
-            method:   "GET",
-            dataType: "json"
-        },
-        model: {
-            successMessage: false,
-            errorMessage:   false,
-            product: {
-                uid:    "{that}.options.req.query.uid",
-                status: "new"
-            }
-        },
-        rules: {
-            modelToRequestPayload: {
-                "":      "notfound"
-            },
-            successResponseToModel: {
-                "":     "notfound",
-                // Only update the model with select data, rather than inappropriately clobbering the source, sid, etc.
-                product: {
-                    name:         "responseJSON.product.name",
-                    description:  "responseJSON.product.description",
-                    manufacturer: "responseJSON.product.manufacturer"
-                },
-                error:   { literalValue: null }
-            },
-            errorResponseToModel: {
-                "": "notfound",
-                "error": "responseJSON",
-                successMessage: { literalValue: null }
-            },
-            ajaxOptions: {
-                json:     true,
-                dataType: "json",
-                url: {
-                    transform: {
-                        type: "gpii.ul.stringTemplate",
-                        template: "%baseUrl/unified/%uid",
-                        terms: {
-                            baseUrl: "{that}.options.baseUrl",
-                            uid:     "{that}.options.req.query.uid"
-                        },
-                        value: "https://issues.fluidproject.org/browse/FLUID-5703" // <--- The bug that requires this unused block.
-                    }
-                }
-            }
-        },
-        template: "contribute-viewport",
-        events: {
-            onReadyToEdit: null,
-            onRenderedAndReadyToEdit: {
-                events: {
-                    onMarkupRendered: "onMarkupRendered",
-                    onReadyToEdit:    "onReadyToEdit"
-                }
-            }
-        },
-        invokers: {
-            renderInitialMarkup: {
-                func: "{that}.renderMarkup",
-                args: ["viewport", "{that}.options.template", "{that}.model"]
-            },
-            onlyDrawFormIfLoggedIn: {
-                funcName: "gpii.ul.contribute.onlyDrawFormIfLoggedIn",
-                args:     ["{that}"]
-            }
-        },
-        listeners: {
-            "onCreate.makeRequestIfNeeded": {
-                funcName: "gpii.ul.contribute.makeRequestIfNeeded",
-                args:     ["{that}"]
-            },
-            "onCreate.drawFormIfNeeded": {
-                func: "{that}.onlyDrawFormIfLoggedIn"
-            }
-        },
-        modelListeners: {
-            user: [
-                {
-                    func: "{that}.onlyDrawFormIfLoggedIn"
-                },
-                {
-                    func: "{that}.applier.change",
-                    args: ["product.source", "{change}.value.name"]
-                }
-            ]
-        },
-        components: {
-            // The common component for positive feedback.
-            success: {
-                type:          "gpii.handlebars.templateMessage",
-                createOnEvent: "{contribute}.events.onMarkupRendered",
-                container:     ".contribute-success",
-                options: {
-                    template: "common-success",
-                    model: {
-                        message: "{contribute}.model.successMessage"
-                    }
-                }
-            },
-            // The common component for negative feedback (errors, etc).
-            error: {
-                type:          "gpii.handlebars.templateMessage",
-                createOnEvent: "{contribute}.events.onMarkupRendered",
-                container:     ".contribute-error",
-                options: {
-                    template: "validation-error-summary",
-                    model: {
-                        message: "{contribute}.model.error"
-                    }
-                }
-            },
-            // The data entry form.
-            form: {
-                type:          "gpii.ul.contribute.form",
-                createOnEvent: "{contribute}.events.onRenderedAndReadyToEdit",
-                container:     "{contribute}.options.selectors.form",
-                options: {
-                    model: "{contribute}.model"
-                }
             }
         }
     });

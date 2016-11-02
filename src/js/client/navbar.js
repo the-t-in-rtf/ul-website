@@ -12,9 +12,9 @@
     var gpii = fluid.registerNamespace("gpii");
     fluid.registerNamespace("jQuery");
 
-    fluid.registerNamespace("gpii.ul.search.navbar");
+    fluid.registerNamespace("gpii.ul.navbar");
 
-    gpii.ul.search.navbar.changeOffset = function (that, event) {
+    gpii.ul.navbar.changeOffset = function (that, event) {
         that.oldFocus = event.target;
 
         event.preventDefault();
@@ -22,31 +22,31 @@
         that.applier.change("offset", newOffset);
     };
 
-    gpii.ul.search.navbar.checkKey = function (that, event) {
+    gpii.ul.navbar.checkKey = function (that, event) {
         if (event.keyCode === 13) {
             that.changeOffset(event);
         }
     };
 
     // Preserve focus on a redraw
-    gpii.ul.search.navbar.focusAfterRender = function (that) {
+    gpii.ul.navbar.focusAfterRender = function (that) {
         if (that.oldFocus) {
             // The "next" and "previous" links may have the same offset as a numbered link.  We go through this to
             // determine which one should receive focus.
 
             // We are working with our own "previous" link
             var classList = fluid.makeArray(that.oldFocus.classList);
-            if (classList.indexOf("search-nav-prev-link") !== -1) {
+            if (classList.indexOf("nav-prev-link") !== -1) {
                 that.locate("navPrevLink").focus();
             }
 
             // We are working with our own "next" link
-            else if (classList.indexOf("search-nav-next-link") !== -1) {
+            else if (classList.indexOf("nav-next-link") !== -1) {
                 that.locate("navNextLink").focus();
             }
 
             // We are working with one of our numbered navigation links
-            else if (classList.indexOf("search-nav-num-link") !== -1) {
+            else if (classList.indexOf("nav-num-link") !== -1) {
                 var focused = false;
                 fluid.each(that.locate("navNumLink"), function (link) {
                     var linkOffset = parseInt(link.getAttribute("offset"), 10);
@@ -64,7 +64,7 @@
     };
 
     // Start with `totalRows` and generate the data we need to create a navigation bar.
-    gpii.ul.search.navbar.generatePagingData = function (that) {
+    gpii.ul.navbar.generatePagingData = function (that) {
         var newPagingData = [];
         var showNavBar     = false;
         var hasPrevious    = false;
@@ -101,9 +101,9 @@
         that.applier.change("pages",          newPagingData);
     };
 
-    fluid.defaults("gpii.ul.search.navbar", {
+    fluid.defaults("gpii.ul.navbar", {
         gradeNames: ["gpii.handlebars.templateAware"],
-        template:   "search-topnav",
+        template:   "navbar",
         members: {
             oldFocus: undefined
         },
@@ -119,10 +119,10 @@
         selectors: {
             initial:     "",
             focused:     ":focus",
-            navLink:     ".search-nav-link",
-            navPrevLink: ".search-nav-link.search-nav-prev-link",
-            navNumLink:  ".search-nav-link.search-nav-num-link",
-            navNextLink: ".search-nav-link.search-nav-next-link"
+            navLink:     ".nav-link",
+            navPrevLink: ".nav-link.nav-prev-link",
+            navNumLink:  ".nav-link.nav-num-link",
+            navNextLink: ".nav-link.nav-next-link"
         },
         invokers: {
             renderInitialMarkup: {
@@ -130,15 +130,15 @@
                 args: ["initial", "{that}.options.template", "{that}.model"]
             },
             generatePagingData: {
-                funcName: "gpii.ul.search.navbar.generatePagingData",
+                funcName: "gpii.ul.navbar.generatePagingData",
                 args:     ["{that}"]
             },
             changeOffset: {
-                funcName: "gpii.ul.search.navbar.changeOffset",
+                funcName: "gpii.ul.navbar.changeOffset",
                 args:     ["{that}", "{arguments}.0"]
             },
             checkKey: {
-                funcName: "gpii.ul.search.navbar.checkKey",
+                funcName: "gpii.ul.navbar.checkKey",
                 args:     ["{that}", "{arguments}.0"]
             }
         },
@@ -156,7 +156,7 @@
                 }
             ],
             "onMarkupRendered.focusAfterRender": {
-                funcName: "gpii.ul.search.navbar.focusAfterRender",
+                funcName: "gpii.ul.navbar.focusAfterRender",
                 args:     ["{that}"]
             }
         },

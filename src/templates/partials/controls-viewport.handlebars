@@ -15,6 +15,7 @@
     {{#if user}}
         <ul>
             <li class="user-menu-logout selectable" tabindex="0">Log Out</li>
+            <li><a class="selectable" tabindex="0" href="/api/products?sources=%5B%22~{{user.username}}%22%5D&unified=false">View Your Contributions</a></li>
             <li class="user-controls-toggle selectable" tabindex="0">Cancel</li>
         </ul>
     {{else}}

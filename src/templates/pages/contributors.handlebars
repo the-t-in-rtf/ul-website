@@ -23,6 +23,13 @@
     <p>
        If a product is not already in the Unified Listing, please take the time to <a href="/contribute">contribute a new product</a>.
     </p>
+
+      {{#if model.user}}
+        <h3>View Your Contributions</h3>
+          <p>
+              Have you already contributed information to the Unified Listing? <a href="/api/products?sources=%5B%22~{{model.user.username}}%22%5D&unified=false">View your contributions here.</a>
+          </p>
+      {{/if}}
   </div>
 </div>
 

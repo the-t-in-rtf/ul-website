@@ -24,4 +24,14 @@
     fluid.defaults("gpii.ul.transforms.transformArray", {
         gradeNames: ["fluid.standardTransformFunction"]
     });
+
+    gpii.ul.transforms.filterAndEncode = function (payload) {
+        var filtered = fluid.filterKeys(payload, ["q", "sources", "statuses", "sortBy", "unified", "includeSources"]);
+        return gpii.express.querystring.encodeObject(filtered);
+    };
+
+    fluid.defaults("gpii.ul.transforms.filterAndEncode", {
+        gradeNames: ["fluid.standardTransformFunction"]
+    });
+
 })();

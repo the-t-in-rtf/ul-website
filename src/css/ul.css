@@ -6,7 +6,11 @@
     margin-top: 1em;
 }
 
-.column.small-12 {
+hr {
+    max-width: inherit;
+}
+
+.combined-top-bar .column.small-12 {
     padding-left: 0;
     padding-right: 0;
 }

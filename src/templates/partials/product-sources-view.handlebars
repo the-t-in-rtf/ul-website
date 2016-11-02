@@ -3,11 +3,7 @@
     {{#each sources}}
       <li>
           <a href="/api/product/{{source}}/{{sid}}" target="_blank">
-              {{#equals source @root.user.username}}
-                  View your suggested updates to this record.
-              {{else}}
-                  {{source}}
-              {{/equals}}
+              {{source}} : {{name}}
           </a>
       </li>
     {{/each}}

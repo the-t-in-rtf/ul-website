@@ -20,21 +20,12 @@
     };
 
     gpii.ul.search.query.submitForm = function (that, event) {
-        // Fire an event that other components can listen to, for example, so that the results component can toggle a "loading..." message.
+        // Fire an event that other components can listen to, for example, so that the products component can toggle a "loading..." message.
         // TODO:  Make our client-side dataSource fire an event that we can listen to instead of handling it this way.
         that.events.onStartLoading.fire();
 
         gpii.handlebars.templateFormControl.submitForm(that, event);
     };
-
-    gpii.ul.search.query.filterAndEncode = function (payload) {
-        var filtered = fluid.filterKeys(payload, ["q", "sources", "statuses", "sortBy", "offset", "limit", "unified", "includeSources"]);
-        return gpii.express.querystring.encodeObject(filtered);
-    };
-
-    fluid.defaults("gpii.ul.search.query.filterAndEncode", {
-        gradeNames: ["fluid.standardTransformFunction"]
-    });
 
     fluid.defaults("gpii.ul.search.query", {
         gradeNames: ["gpii.handlebars.templateFormControl"],
@@ -52,7 +43,7 @@
             successResponseToModel: {
                 "":           "notfound",
                 products:     "responseJSON.products", // The "products" component will handle displaying products.
-                totalRows:    "responseJSON.total_rows",
+                totalRows:    "responseJSON.products.length",
                 errorMessage: { literalValue: false }
             },
             errorResponseToModel: {
@@ -63,7 +54,7 @@
             modelToRequestPayload: {
                 "": {
                     transform: {
-                        type: "gpii.ul.search.query.filterAndEncode",
+                        type: "gpii.ul.filterAndEncode",
                         inputPath: ""
                     }
                 }
@@ -110,11 +101,6 @@
                 funcName:      "gpii.ul.search.query.refreshOnUpdateIfHasQuery",
                 excludeSource: "init",
                 args:          ["{that}"]
-            },
-            limit: {
-                funcName:      "gpii.ul.search.query.refreshOnUpdateIfHasQuery",
-                excludeSource: "init",
-                args:          ["{that}"]
             }
         },
         listeners: {
@@ -130,67 +116,16 @@
 
     fluid.registerNamespace("gpii.ul.search.products");
 
-    // TODO:  Review the common paging component and confirm whether we can replace this.
-    // Return `limit` products from `array`, starting at `offset`
-    gpii.ul.search.products.pageResults = function (array, offset, limit) {
-        if (!array) { return; }
-
-        // Set sensible defaults if we are not passed anything.
-        var start = offset ? offset : 0;
-        var end   = limit ? start + limit : array.length - offset;
-        return array.slice(start, end);
-    };
-
-    gpii.ul.search.products.pageAndRender = function (that) {
-        that.model.pagedProducts = gpii.ul.search.products.pageResults(that.model.products, that.model.offset, that.model.limit);
-        that.renderInitialMarkup();
-    };
-
     gpii.ul.search.products.toggleLoading = function (that, state) {
-        var resultsElement = that.locate("results");
+        var resultsElement = that.locate("products");
         resultsElement.toggleClass("loading", state);
     };
 
     fluid.defaults("gpii.ul.search.products", {
-        gradeNames: ["gpii.handlebars.templateAware"],
+        gradeNames: ["gpii.ul.productsTable"],
         events: {
             onStartLoading: "{gpii.ul.search}.events.onStartLoading",
             onStopLoading:  "{gpii.ul.search}.events.onStopLoading"
-        },
-        model: {
-            products:  []
-        },
-        selectors: {
-            results: ""
-        },
-        template: "search-products",
-        invokers: {
-            renderInitialMarkup: {
-                func: "{that}.renderMarkup",
-                args: ["results", "{that}.options.template", "{that}.model"]
-            },
-            pageAndRender: {
-                funcName: "gpii.ul.search.products.pageAndRender",
-                args:     ["{that}"]
-            }
-        },
-        modelListeners: {
-            products: {
-                func:          "{that}.pageAndRender",
-                excludeSource: "init"
-            },
-            offset: {
-                func:          "{that}.pageAndRender",
-                excludeSource: "init"
-            },
-            limit: {
-                func:          "{that}.pageAndRender",
-                excludeSource: "init"
-            },
-            sortBy: {
-                funcName: "gpii.sort",
-                args:     ["{that}.model.products", "{that}.model.sortBy"] // dataToSort, sortCriteria
-            }
         },
         listeners: {
             "onStartLoading": {
@@ -200,111 +135,6 @@
             "onStopLoading": {
                 funcName: "gpii.ul.search.products.toggleLoading",
                 args:     ["{that}", false]
-            }
-        }
-    });
-
-    // The "sortBy" control that updates the sortBy values based on a predefined list of possible settings.
-    fluid.defaults("gpii.ul.search.sortBy", {
-        gradeNames: ["gpii.ul.select"],
-        template:   "search-sortBy",
-        selectors:  {
-            initial: "",
-            select:  ".search-sortBy-select"
-        },
-        select: {
-            options: {
-                nameAsc: {
-                    label: "by name, A-Z",
-                    value: "/name"
-                },
-                nameDesc: {
-                    label: "by name, Z-A",
-                    value: "\\name"
-                },
-                updatedDesc: {
-                    label: "by date of last update, newest first",
-                    value: "\\updated"
-                },
-                updatedAsc: {
-                    label: "by date of last update, oldest first",
-                    value: "updated"
-                }
-            }
-        }
-    });
-
-    // The "statuses" control that updates the statuses value when checkboxes are changed.
-    fluid.defaults("gpii.ul.search.statuses", {
-        gradeNames: ["gpii.ul.checkboxPanel"],
-        template: "search-statuses",
-        label:    "Filter by status:",
-        checkboxes: {
-            "new": {
-                label: "New",
-                value: "new"
-            },
-            active: {
-                label: "Active",
-                value: "active"
-            },
-            discontinued: {
-                label: "Discontinued",
-                value: "discontinued"
-            },
-            deleted: {
-                label: "Deleted",
-                value: "deleted"
-            }
-        }
-    });
-
-    // The "limit" control that updates the number of products per page based on a predefined list of possible settings.
-    fluid.defaults("gpii.ul.search.limit", {
-        gradeNames: ["gpii.ul.select"],
-        template:   "search-limit",
-        selectors:  {
-            initial: "",
-            select:  ".search-limit-select"
-        },
-        bindings: {
-            select: {
-                path: "select",
-                selector: "select",
-                rules: {
-                    domToModel: {
-                        "": {
-                            transform: {
-                                type:  "fluid.transforms.stringToNumber",
-                                inputPath: ""
-                            }
-                        }
-                    },
-                    modelToDom: {
-                        "": {
-                            transform: {
-                                type: "fluid.transforms.numberToString",
-                                inputPath: ""
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        select: {
-            options: {
-                twentyFive: {
-                    label: "25 products per page",
-                    value: 25
-                },
-                fifty: {
-                    label: "50 products per page",
-                    value: 50
-                },
-                hundred: {
-                    label: "100 products per page",
-                    value: 100
-                }
             }
         }
     });
@@ -322,7 +152,7 @@
             statuses:        [ "new", "active", "discontinued"],
             sortBy:           "/name",
             offset:           0,
-            limit:            25,
+            limit:            250,
             totalRows:        0,
             unified:          true,
             includeSources:   true,
@@ -369,7 +199,7 @@
             },
             // The top pagination bar.
             topnav: {
-                type:          "gpii.ul.search.navbar",
+                type:          "gpii.ul.navbar",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
                 container:     "{search}.dom.topnav",
                 options: {
@@ -383,7 +213,7 @@
             // TODO:  Try drawing both controls with a single selector and component
             // The bottom pagination bar
             bottomnav: {
-                type:          "gpii.ul.search.navbar",
+                type:          "gpii.ul.navbar",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
                 container:     "{search}.dom.bottomnav",
                 options: {
@@ -396,7 +226,7 @@
             },
             // The sort controls
             sortBy: {
-                type:          "gpii.ul.search.sortBy",
+                type:          "gpii.ul.sortBy",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
                 container:     "{search}.dom.sortBy",
                 options: {
@@ -407,7 +237,7 @@
             },
             // The statuses filtering controls
             statuses: {
-                type:          "gpii.ul.search.statuses",
+                type:          "gpii.ul.statuses",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
                 container:     "{search}.dom.statuses",
                 options: {
@@ -418,7 +248,7 @@
             },
             // The "products per page" controls
             limit: {
-                type:          "gpii.ul.search.limit",
+                type:          "gpii.ul.limit",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
                 container:     "{search}.dom.limit",
                 options: {

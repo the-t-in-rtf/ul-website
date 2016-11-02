@@ -38,7 +38,7 @@
     "marked": "0.3.6",
     "moment": "2.15.0",
     "pagedown": "1.1.0",
-    "ul-api": "git://github.com/the-t-in-rtf/ul-api.git#852da548767364dda798cf30d0b52266d4852071"
+    "ul-api": "git://github.com/the-t-in-rtf/ul-api.git#5a0beabdc244961346e2dff845b1120b5e082a71"
   },
   "devDependencies": {
     "eslint": "3.5.0",
