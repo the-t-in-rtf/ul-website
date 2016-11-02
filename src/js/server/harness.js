@@ -228,6 +228,13 @@ fluid.defaults("gpii.ul.website.harness", {
                             path: ["/:template", "/"],
                             templateDirs: "{harness}.options.templateDirs"
                         }
+                    },
+                    htmlErrorHandler: {
+                        type:     "gpii.handlebars.errorRenderingMiddleware",
+                        options: {
+                            priority: "after:dispatcher",
+                            templateKey: "pages/error"
+                        }
                     }
                 }
             }
