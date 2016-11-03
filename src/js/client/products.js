@@ -3,8 +3,6 @@
 (function () {
     "use strict";
 
-    // TODO:  Decouple the back-end "limit" from the front-end page size.
-
     // The wrapper component that wires together all controls.
     fluid.defaults("gpii.ul.products", {
         gradeNames: ["gpii.handlebars.ajaxCapable", "gpii.handlebars.templateAware"],
@@ -37,16 +35,22 @@
                 }
             }
         },
+        params: {
+            status:         [ "new", "active", "discontinued"],
+            sortBy:         "/name",
+            unified:        true,
+            includeSources: true
+        },
         model: {
-            statuses:        [ "new", "active", "discontinued"],
-            sortBy:           "/name",
-            offset:           0,
-            limit:            25,
-            totalRows:        0,
-            unified:          true,
-            includeSources:   true,
-            sources:          ["unified"],
-            products:         []
+            status:         "{that}.options.params.status",
+            sortBy:         "{that}.options.params.sortBy",
+            offset:         0,
+            limit:          25,
+            totalRows:      0,
+            unified:        "{that}.options.params.unified",
+            includeSources: "{that}.options.params.includeSources",
+            sources:        "{that}.options.params.sources",
+            products:       []
         },
         modelListeners: {
             products: {
@@ -54,10 +58,12 @@
                 args: ["totalRows", "{that}.model.products.length"]
             },
             sortBy: {
-                func: "{that}.makeRequest"
+                func: "{that}.makeRequest",
+                excludeSource: "init"
             },
-            statuses: {
-                func: "{that}.makeRequest"
+            status: {
+                func: "{that}.makeRequest",
+                excludeSource: "init"
             }
         },
         components: {
@@ -66,10 +72,10 @@
                 type: "gpii.locationBar",
                 options: {
                     model: {
-                        "sources": "{gpii.ul.products}.model.sources",
-                        "statuses": "{gpii.ul.products}.model.statuses",
-                        "sortBy": "{gpii.ul.products}.model.sortBy",
-                        "unified": "{gpii.ul.products}.model.unified",
+                        "sources":        "{gpii.ul.products}.model.sources",
+                        "status":         "{gpii.ul.products}.model.status",
+                        "sortBy":         "{gpii.ul.products}.model.sortBy",
+                        "unified":        "{gpii.ul.products}.model.unified",
                         "includeSources": "{gpii.ul.products}.model.includeSources"
                     }
                 }
@@ -139,14 +145,14 @@
                     }
                 }
             },
-            // The statuses filtering controls
-            statuses: {
+            // The status filtering controls
+            status: {
                 type:          "gpii.ul.statuses",
                 createOnEvent: "{gpii.ul.products}.events.onDomChange",
-                container:     "{gpii.ul.products}.dom.statuses",
+                container:     "{gpii.ul.products}.dom.status",
                 options: {
                     model: {
-                        checkboxValue: "{gpii.ul.products}.model.statuses"
+                        checkboxValue: "{gpii.ul.products}.model.status"
                     }
                 }
             },
@@ -188,7 +194,7 @@
             topnav:    ".products-topnav",
             products:  ".products-products",
             sortBy:    ".products-sortBy",
-            statuses:  ".products-statuses",
+            status:    ".products-statuses",
             limit:     ".products-limit",
             bottomnav: ".products-bottomnav"
         },

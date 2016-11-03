@@ -23,13 +23,13 @@
     "foundation-sites": "6.2.4-rc1",
     "gpii-binder": "git://github.com/the-t-in-rtf/gpii-binder#0bb79d96aeb5b9ed19efd01fbc9149440f6fe4a4",
     "gpii-express": "git://github.com/the-t-in-rtf/gpii-express#baa1558d22ee7abcb6d6b6410af7cc95693f1b80",
-    "gpii-express-user": "git://github.com/the-t-in-rtf/gpii-express-user.git#c0becab841193c6378911643370c79b2c487b436",
+    "gpii-express-user": "git://github.com/the-t-in-rtf/gpii-express-user.git#df88d54741a203f11bd962966252f1389108a694",
     "gpii-handlebars": "git://github.com/the-t-in-rtf/gpii-handlebars.git#9bc7d7254d941cdea1bf168d3f9477907a72b9e8",
-    "gpii-json-schema": "git://github.com/the-t-in-rtf/gpii-json-schema.git#3b15986a750a4bca6511db165acfbd5197900596",
+    "gpii-json-schema": "git://github.com/the-t-in-rtf/gpii-json-schema.git#a3017d562125415a98b9d11675fdf5ddc7ebadf7",
     "gpii-launcher": "git://github.com/the-t-in-rtf/gpii-launcher.git#de16e831469ed549504c15048b0e868fc4b3da49",
-    "gpii-location-bar-relay": "git://github.com/the-t-in-rtf/gpii-location-bar-relay.git#db00b6e2168517d1e7d80d64224f024fa3ff248d",
+    "gpii-location-bar-relay": "git://github.com/the-t-in-rtf/gpii-location-bar-relay#db00b6e2168517d1e7d80d64224f024fa3ff248d",
     "gpii-pouchdb": "git://github.com/the-t-in-rtf/gpii-pouchdb.git#c5f401181b1f021e13400bf7a5d117880cb18b16",
-    "gpii-pouchdb-lucene": "git://github.com/the-t-in-rtf/gpii-pouchdb-lucene.git#d3c45d089c4b3c99cf0d1ea205247b01eacfdbc3",
+    "gpii-pouchdb-lucene": "0.1.0-dev.20161027T075313Z.8ef66e1",
     "gpii-sort": "git://github.com/the-t-in-rtf/gpii-sort#3508dc67e9d84311249192102c22829931315b20",
     "handlebars": "4.0.5",
     "infusion": "git://github.com/the-t-in-rtf/infusion.git#056bd1a246fd63f0123fcd375db8f6b157e245b8",
@@ -38,7 +38,7 @@
     "marked": "0.3.6",
     "moment": "2.15.0",
     "pagedown": "1.1.0",
-    "ul-api": "git://github.com/the-t-in-rtf/ul-api.git#5a0beabdc244961346e2dff845b1120b5e082a71"
+    "ul-api": "git://github.com/the-t-in-rtf/ul-api.git#13764344791408c28503352d958655d53d03c652"
   },
   "devDependencies": {
     "eslint": "3.5.0",

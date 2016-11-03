@@ -54,7 +54,7 @@
             modelToRequestPayload: {
                 "": {
                     transform: {
-                        type: "gpii.ul.filterAndEncode",
+                        type: "gpii.ul.transforms.filterAndEncode",
                         inputPath: ""
                     }
                 }

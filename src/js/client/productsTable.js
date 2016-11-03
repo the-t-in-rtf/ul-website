@@ -54,6 +54,7 @@
                 excludeSource: "init"
             },
             sortBy: {
+                excludeSource: "init",
                 funcName: "gpii.sort",
                 args:     ["{that}.model.products", "{that}.model.sortBy"] // dataToSort, sortCriteria
             }

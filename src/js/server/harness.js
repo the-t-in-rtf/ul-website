@@ -36,7 +36,21 @@ fluid.defaults("gpii.ul.website.harness", {
             }
         }
     },
+    contextToOptionsRules: {
+        req:      "req",
+        product:  "product",
+        products: "products",
+        model: {
+            user:     "req.session._ul_user",
+            product:  "product",
+            products: "products"
+        }
+    },
     distributeOptions: [
+        {
+            source: "{that}.options.sessionKey",
+            target: "{that gpii.express.handler}.options.sessionKey"
+        },
         {
             source: "{that}.options.rules.contextToExpose",
             target: "{that gpii.express.singleTemplateMiddleware}.options.rules.contextToExpose"
@@ -48,10 +62,6 @@ fluid.defaults("gpii.ul.website.harness", {
         {
             source: "{that}.options.rules.contextToExpose",
             target: "{that gpii.handlebars.dispatcherMiddleware}.options.rules.contextToExpose"
-        },
-        {
-            source: "{that}.options.sessionKey",
-            target: "{that gpii.express.handler}.options.sessionKey"
         }
     ],
     urls: {
@@ -130,17 +140,7 @@ fluid.defaults("gpii.ul.website.harness", {
                         type: "gpii.express.hb",
                         options: {
                             priority: "after:corsHeaders",
-                            templateDirs: "{harness}.options.templateDirs",
-                            components: {
-                                initBlock: {
-                                    options: {
-                                        contextToOptionsRules: {
-                                            req:     "req",
-                                            product: "product"
-                                        }
-                                    }
-                                }
-                            }
+                            templateDirs: "{harness}.options.templateDirs"
                         }
                     },
                     cookieparser: {
@@ -226,7 +226,15 @@ fluid.defaults("gpii.ul.website.harness", {
                         options: {
                             priority: "after:api",
                             path: ["/:template", "/"],
-                            templateDirs: "{harness}.options.templateDirs"
+                            templateDirs: "{harness}.options.templateDirs",
+                            rules: {
+                                contextToExpose: {
+                                    req:      "req",
+                                    user:     "req.session._ul_user",
+                                    product:  "product",
+                                    products: "products"
+                                }
+                            }
                         }
                     },
                     htmlErrorHandler: {
