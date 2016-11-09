@@ -11,11 +11,13 @@
                 <button class="product-edit-button product-toggle expanded button" style="display:none;">Edit Record</button>
             </div>
             <div class="column medium-2 small-12 right">
-                {{#if user}}
-                    <a class="button expanded" href="/suggest/{{product.uid}}">Suggest a Change</a>
-                {{else}}
-                    <a href="/api/user/login" class="button expanded">Log in to Suggest a Change</a>
-                {{/if}}
+                {{#equals product.source "unified"}}
+                    {{#if user}}
+                        <a class="button expanded" href="/suggest/{{product.uid}}">Suggest a Change</a>
+                    {{else}}
+                        <a href="/api/user/login" class="button expanded">Log in to Suggest a Change</a>
+                    {{/if}}
+                {{/equals}}
             </div>
         </div>
     </div>
