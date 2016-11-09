@@ -36,7 +36,7 @@
             }
         },
         params: {
-            status:         [ "new", "active", "discontinued"],
+            status:         [ "new", "active", "discontinued", "deleted"],
             sortBy:         "/name",
             unified:        true,
             includeSources: true
