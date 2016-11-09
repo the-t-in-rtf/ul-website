@@ -31,7 +31,11 @@ label.required:after {
     left: 90%;
 }
 
+.controls-viewport {
+    position: relative;
+}
 .user-menu {
+    position: absolute;
     margin-top: 0.4em;
 }
 /* Adapted from: http://websiteaccessibility.donaldevans.com/?p=1020 */
