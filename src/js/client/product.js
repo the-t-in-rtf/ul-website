@@ -24,15 +24,15 @@
         }
     });
 
+    fluid.registerNamespace("gpii.ul.product.edit");
+
     // The component that handles the binding, etc. for the "Edit" form.
     fluid.defaults("gpii.ul.product.edit", {
-        // gradeNames: ["gpii.handlebars.templateFormControl"],
         gradeNames: ["gpii.schemas.client.errorAwareForm"],
         schemaKey:  "product-update-input.json",
         ajaxOptions: {
             url:         "/api/product",
             method:      "PUT",
-            // processData: false,
             contentType: "application/json",
             headers: {
                 accept: "application/json"
@@ -94,7 +94,7 @@
                 path:     "product.manufacturer.name",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -103,7 +103,7 @@
                 path:     "product.manufacturer.address",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -112,7 +112,7 @@
                 path:     "product.manufacturer.cityTown",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -121,7 +121,7 @@
                 path:     "product.manufacturer.provinceRegion",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -130,7 +130,7 @@
                 path:     "product.manufacturer.postalCode",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -139,7 +139,7 @@
                 path:     "product.manufacturer.country",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -148,7 +148,7 @@
                 path:     "product.manufacturer.email",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -157,7 +157,7 @@
                 path:     "product.manufacturer.phone",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -166,7 +166,7 @@
                 path:     "product.manufacturer.url",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             }
@@ -203,21 +203,22 @@
 
     fluid.registerNamespace("gpii.ul.product");
 
-    // Defer to the parent success handler, but fire an event to instantiate the toggle and edit components if appropriate.
-    // TODO: Migrate to using permissions to check whether editing should be allowed.
-    // TODO: Delegate handling of the "edit" panel to a subcomponent
+    // When our permissions data ("sources") are updated, confirm whether we are allowed to edit the record directly.
+    // Also set the "updated" date to today's date.
     gpii.ul.product.checkReadyToEdit = function (that) {
         var editControls    = that.locate("editControls");
-        var suggestControls = that.locate("suggestControls");
 
-        if (that.model.product && that.model.product.source === "unified" && that.model.user && that.model.user.roles && that.model.user.roles.indexOf("reviewers") !== -1) {
-            editControls.show();
-            suggestControls.hide();
+        if (that.model.user && that.model.writableSources && that.model.writableSources.length > 0) {
+            that.applier.change("editableProduct.updated", (new Date()).toISOString());
+
+            if (that.model.product && that.model.writableSources && that.model.writableSources.indexOf(that.model.product.source) !== -1) {
+                editControls.show();
+            }
+            else if (that.model.product.source === "unified") {
+                editControls.hide();
+            }
+
             that.events.onReadyForEdit.fire(that);
-        }
-        else {
-            editControls.hide();
-            suggestControls.show();
         }
     };
 
@@ -252,16 +253,72 @@
         }
     });
 
+    fluid.registerNamespace("gpii.ul.product.permChecker");
+
+    // If the user is logged in, retrieve the list of sources they are allowed to read/write.
+    gpii.ul.product.permChecker.startPermCheck = function (that) {
+        if (that.model.user) {
+            that.makeRequest();
+        }
+        else {
+            that.applier.change("writableSources", []);
+        }
+    };
+
+    fluid.defaults("gpii.ul.product.permChecker", {
+        gradeNames: ["gpii.handlebars.ajaxCapable"],
+        ajaxOptions: {
+            method:   "GET",
+            url:      "/api/sources",
+            dataType: "json",
+            headers:  { accept: "application/json" }
+        },
+        rules: {
+            modelToRequestPayload: {
+                "": "notfound"
+            },
+            successResponseToModel: {
+                "": "notfound",
+                "writableSources": "responseJSON.writableSources",
+                "errorMessage": { literalValue: false }
+            },
+            errorResponseToModel: {
+                "": "notfound",
+                "writableSources": { literalValue: [] },
+                "errorMessage": "responseJSON.message"
+            }
+        },
+        model: {
+            user:            false,
+            writableSources: [],
+            errorMessage:    false
+        },
+        invokers: {
+            "checkPerms": {
+                funcName: "gpii.ul.product.permChecker.startPermCheck",
+                args:     ["{that}"]
+            }
+        },
+        listeners: {
+            "onCreate.makeRequest": {
+                func: "{that}.makeRequest"
+            }
+        },
+        modelListeners: {
+            "user": {
+                func: "{that}.makeRequest",
+                excludeSource: "init"
+            }
+        }
+    });
+
     // The component that loads the product content and controls the initial rendering.  Subcomponents
     // listen for this component to give the go ahead, and then take over parts of the interface.
-
     fluid.defaults("gpii.ul.product", {
         gradeNames: ["gpii.handlebars.templateAware"],
-        baseUrl:    "/api/product/",
         selectors: {
-            viewport:        ".product-viewport",
-            editControls:    ".product-edit-control-panel",
-            suggestControls: ".product-suggest-control-panel"
+            viewport:     ".product-viewport",
+            editControls: ".product-edit-button"
         },
         mergePolicy: {
             rules: "noexpand"
@@ -274,39 +331,12 @@
             }
         },
         model: {
-            successMessage: false,
-            errorMessage:   false,
-            product:        false,
-            user:           false
-        },
-        rules: {
-            modelToRequestPayload: {
-                "":      "notfound",
-                sources: { literalValue: true }
-            },
-            successResponseToModel: {
-                "":     "notfound",
-                product: "responseJSON"
-            },
-            ajaxOptions: {
-                dataType: "json",
-                // TODO:  Make the header bits part of a standard grade
-                // This is the only way I've found to avoid jQuery.ajax() adding */* to the list of accepted formats.
-                headers: {
-                    accept: "application/json"
-                },
-                url: {
-                    transform: {
-                        type: "gpii.ul.stringTemplate",
-                        input: "%baseUrl%source/%sid",
-                        terms: {
-                            baseUrl: "{that}.options.baseUrl",
-                            source:  "{that}.options.req.query.source",
-                            sid:     "{that}.options.req.query.sid"
-                        }
-                    }
-                }
-            }
+            successMessage:   false,
+            errorMessage:     false,
+            product:          false,
+            editableProduct:  "{that}.model.product",
+            user:             false,
+            writableSources:  []
         },
         template: "product-viewport",
         events: {
@@ -321,28 +351,33 @@
             onViewRendered: null
         },
         modelListeners: {
-            product: {
-                func: "{that}.checkReadyToEdit"
-            },
-            user: {
+            "writableSources": {
                 func: "{that}.checkReadyToEdit"
             }
         },
         components: {
+            permChecker: {
+                type: "gpii.ul.product.permChecker",
+                options: {
+                    model: {
+                        writableSources: "{gpii.ul.product}.model.writableSources",
+                        user:            "{gpii.ul.product}.model.user"
+                    }
+                }
+            },
             view: {
                 type:          "gpii.handlebars.templateMessage",
                 container:     ".product-view",
                 createOnEvent: "{product}.events.onMarkupRendered",
                 options: {
                     template: "product-view",
-                    model:    "{product}.model",
+                    model:    {
+                        product: "{product}.model.product",
+                        user:    "{product}.model.user"
+                    },
                     listeners: {
                         "onMarkupRendered.notifyParent": {
                             func: "{product}.events.onViewRendered.fire"
-                        },
-                        // Check to see if our "edit" button should be visible on render
-                        "onMarkupRendered.checkReadyToEdit": {
-                            func: "{product}.checkReadyToEdit"
                         }
                     }
                 }
@@ -353,7 +388,7 @@
                 container:     ".product-edit",
                 options: {
                     model: {
-                        product: "{product}.model.product"
+                        product: "{product}.model.editableProduct"
                     }
                 }
             },
@@ -365,7 +400,7 @@
                 container:     "{product}.container",
                 options: {
                     selectors: {
-                        toggle: ".product-view .product-toggle"
+                        toggle: ".product-view-control-panel .product-toggle"
                     },
                     events: {
                         // Our view may be redrawn over and over again, and we have to make sure our bindings work each time.

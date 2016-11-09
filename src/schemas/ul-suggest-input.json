@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "id": "ul-suggest-input.json",
+  "properties": {
+    "uid": {
+      "type": "string",
+      "minLength": 1,
+      "errors": {
+        "type": "You must enter a valid UID.",
+        "minLength": "You must enter a valid UID."
+      }
+    }
+  },
+  "required": [
+    "uid"
+  ],
+  "errors": {
+    "#/required/0": "You must enter a valid UID."
+  },
+  "additionalProperties": false
+}

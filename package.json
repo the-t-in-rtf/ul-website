@@ -21,7 +21,7 @@
   "dependencies": {
     "ajv": "4.8.2",
     "foundation-sites": "6.2.4-rc1",
-    "gpii-binder": "git://github.com/the-t-in-rtf/gpii-binder#0bb79d96aeb5b9ed19efd01fbc9149440f6fe4a4",
+    "gpii-binder": "git://github.com/the-t-in-rtf/gpii-binder#c696f3c8f7541eb8a32c4b56a6d5acf19c9a7821",
     "gpii-express": "git://github.com/the-t-in-rtf/gpii-express#baa1558d22ee7abcb6d6b6410af7cc95693f1b80",
     "gpii-express-user": "git://github.com/the-t-in-rtf/gpii-express-user.git#df88d54741a203f11bd962966252f1389108a694",
     "gpii-handlebars": "git://github.com/the-t-in-rtf/gpii-handlebars.git#9bc7d7254d941cdea1bf168d3f9477907a72b9e8",
@@ -38,7 +38,7 @@
     "marked": "0.3.6",
     "moment": "2.15.0",
     "pagedown": "1.1.0",
-    "ul-api": "git://github.com/the-t-in-rtf/ul-api.git#13764344791408c28503352d958655d53d03c652"
+    "ul-api": "git://github.com/the-t-in-rtf/ul-api.git#fbf7e0c928c3f3e77ac1f70fb32e3887973fd37f"
   },
   "devDependencies": {
     "eslint": "3.5.0",

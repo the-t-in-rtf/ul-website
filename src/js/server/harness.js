@@ -5,6 +5,7 @@
 /* eslint-env node */
 "use strict";
 var fluid = require("infusion");
+fluid.logObjectRenderChars = 64000;
 
 require("../../../");
 
@@ -13,16 +14,18 @@ fluid.require("%gpii-express-user");
 fluid.require("%gpii-handlebars");
 fluid.require("%ul-api");
 
+require("./suggest");
+
 fluid.defaults("gpii.ul.website.harness", {
     gradeNames:   ["fluid.component"],
     templateDirs: ["%ul-website/src/templates", "%gpii-express-user/src/templates", "%gpii-json-schema/src/templates"],
-    schemaDirs:   ["%ul-api/src/schemas", "%gpii-express-user/src/schemas"],
+    schemaDirs:   ["%ul-website/src/schemas", "%ul-api/src/schemas", "%gpii-express-user/src/schemas"],
     ports: {
         api:    7633,
         couch:  5984,
         lucene: 5985
     },
-    sessionKey:   "_ul_user",
+    sessionKey: "_ul_user",
     rules: {
         contextToExpose: {
             "layout": "layout", // This is required to support custom layouts
@@ -95,22 +98,23 @@ fluid.defaults("gpii.ul.website.harness", {
         users: "users"
     },
     events: {
-        apiReady:   null,
-        apiStopped: null
+        apiReady:     null,
+        apiStopped:   null
     },
     components: {
         express: {
             type: "gpii.express.withJsonQueryParser",
             options: {
-                // gradeNames: ["gpii.express.user.withRequiredMiddleware"],
                 port :   "{harness}.options.ports.api",
                 templateDirs: "{harness}.options.templateDirs",
                 events: {
                     apiReady: null,
+                    suggestReady: null,
                     onReady: {
                         events: {
                             apiReady: "apiReady",
-                            onStarted: "onStarted"
+                            onStarted: "onStarted",
+                            suggestReady: "suggestReady"
                         }
                     }
                 },
@@ -217,14 +221,27 @@ fluid.defaults("gpii.ul.website.harness", {
                             },
                             components: {
                                 // Defang the "session" handling middleware included with ul-api in favor of ours.
-                                session:      { type: "fluid.component" }
+                                session: { type: "fluid.component" }
+                            }
+                        }
+                    },
+                    suggest: {
+                        type: "gpii.ul.website.suggest",
+                        options: {
+                            priority: "after:allSchemas",
+                            templateDirs: "{harness}.options.templateDirs",
+                            urls:         "{harness}.options.urls",
+                            listeners: {
+                                "onSchemasDereferenced.notifyParent": {
+                                    func: "{express}.events.suggestReady.fire"
+                                }
                             }
                         }
                     },
                     dispatcher: {
                         type: "gpii.handlebars.dispatcherMiddleware",
                         options: {
-                            priority: "after:api",
+                            priority: "after:suggest",
                             path: ["/:template", "/"],
                             templateDirs: "{harness}.options.templateDirs",
                             rules: {

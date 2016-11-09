@@ -109,6 +109,10 @@ body > .row {
     max-width: inherit;
 }
 
+.combined-top-bar {
+    margin-bottom: 1em;
+}
+
 select.ul-updates-sources-control {
     height: inherit;
 }

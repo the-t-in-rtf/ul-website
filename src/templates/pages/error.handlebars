@@ -1,7 +1,17 @@
 {{>common-topbar}}
 
 <div class="row">
-    {{>common-error}}
+    <div class="callout alert" role="alert">
+        {{#if message}}
+            {{message}}
+        {{else}}
+            An unknown error occurred.  Please contact a system administrator.
+
+            <pre>
+                {{jsonify .}}
+            </pre>
+        {{/if}}
+    </div>
 </div>
 
 {{>common-page-user-controls}}

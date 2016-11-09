@@ -26,7 +26,9 @@
         },
         model: {
             product: {
-                sid: "{that}.id"
+                sid: "{that}.id",
+                status: "new",
+                manufacturer: {}
             }
         },
         rules: {
@@ -51,7 +53,7 @@
             initial:          ".contribute-viewport",
             name:             ".contribute-form-name",
             description:      ".contribute-form-description",
-            manufacturer:     ".manufacturer-name-label",
+            manufacturerName: ".contribute-form-manufacturer-name",
             address:          ".contribute-form-manufacturer-address",
             cityTown:         ".contribute-form-manufacturer-citytown",
             provinceRegion:   ".contribute-form-manufacturer-provinceregion",
@@ -73,7 +75,7 @@
                 path:     "product.name",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -82,7 +84,7 @@
                 path:     "product.description",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -92,7 +94,7 @@
                 path:     "product.manufacturer.name",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -101,7 +103,7 @@
                 path:     "product.manufacturer.address",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -110,7 +112,7 @@
                 path:     "product.manufacturer.cityTown",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -119,7 +121,7 @@
                 path:     "product.manufacturer.provinceRegion",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -128,7 +130,7 @@
                 path:     "product.manufacturer.postalCode",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -137,7 +139,7 @@
                 path:     "product.manufacturer.country",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -146,7 +148,7 @@
                 path:     "product.manufacturer.email",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -155,7 +157,7 @@
                 path:     "product.manufacturer.phone",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -164,7 +166,7 @@
                 path:     "product.manufacturer.url",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.schemas.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
