@@ -113,6 +113,10 @@ body > .row {
     margin-bottom: 1em;
 }
 
+.ul-deleted, .ul-deleted * {
+    text-decoration: line-through;
+}
+
 select.ul-updates-sources-control {
     height: inherit;
 }

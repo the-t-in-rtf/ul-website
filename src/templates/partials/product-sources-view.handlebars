@@ -1,7 +1,7 @@
 {{#if sources}}
   <ul>
     {{#each sources}}
-      <li>
+      <li{{#equals status "deleted"}} class="ul-deleted"{{/equals}}>
           <a href="/api/product/{{source}}/{{sid}}" target="_blank">
               {{source}} : {{name}}
           </a>
