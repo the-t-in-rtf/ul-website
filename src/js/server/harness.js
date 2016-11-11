@@ -68,6 +68,18 @@ fluid.defaults("gpii.ul.website.harness", {
         }
     ],
     urls: {
+        api: {
+            expander: {
+                funcName: "fluid.stringTemplate",
+                args:     ["http://localhost:%port", { port: "{that}.options.ports.api" }]
+            }
+        },
+        login: {
+            expander: {
+                funcName: "fluid.stringTemplate",
+                args:     ["http://localhost:%port/api/user/login", { port: "{that}.options.ports.api" }]
+            }
+        },
         couch: {
             expander: {
                 funcName: "fluid.stringTemplate",

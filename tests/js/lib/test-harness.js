@@ -27,6 +27,7 @@ gpii.tests.ul.website.harness.stopServer = function (that) {
 
 fluid.defaults("gpii.tests.ul.website.harness", {
     gradeNames:   ["gpii.ul.website.harness"],
+    templateDirs: ["%ul-website/src/templates", "%gpii-express-user/src/templates", "%gpii-json-schema/src/templates", "%ul-website/tests/templates"],
     ports: {
         api:    7217,
         couch:  7218,
@@ -62,7 +63,19 @@ fluid.defaults("gpii.tests.ul.website.harness", {
     },
     components: {
         express: {
-            createOnEvent: "constructFixtures"
+            createOnEvent: "constructFixtures",
+            options: {
+                components: {
+                    tests: {
+                        type: "gpii.express.router.static",
+                        options: {
+                            priority: "before:htmlErrorHandler",
+                            path:    "/tests",
+                            content: ["%ul-website/tests"]
+                        }
+                    }
+                }
+            }
         },
         pouch: {
             type: "gpii.express",

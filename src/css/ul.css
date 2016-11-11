@@ -35,7 +35,8 @@ label.required:after {
     position: relative;
 }
 .user-menu {
-    position: absolute;
+    position:   absolute;
+    z-index:    99;
     margin-top: 0.4em;
 }
 /* Adapted from: http://websiteaccessibility.donaldevans.com/?p=1020 */
@@ -143,3 +144,16 @@ select.ul-updates-sources-control {
     margin-bottom: .5em;
 }
 
+/* contrast fixes for foundation styles */
+
+.button.secondary {
+    background-color: #717171;
+}
+
+.menu a {
+    color: #8888ff;
+}
+
+a {
+    color: #0d0dff;
+}
