@@ -30,6 +30,8 @@
      },
     ```
 
+    For screen reader compatibility, you should also set a `legend` option.
+
     If you want to add verbiage near the panel, you can create your own template for use in
     `options.template`, and then call the default template as a partial, as in:
 
@@ -102,7 +104,7 @@
 (function () {
     "use strict";
     fluid.defaults("gpii.ul.checkboxPanel", {
-        gradeNames: ["gpii.handlebars.templateAware.serverAware"],
+        gradeNames: ["gpii.handlebars.templateAware.serverAware", "gpii.binder.bindOnDomChange"],
         template: "common-checkboxPanel",
         selectors: {
             initial:         "",
@@ -117,7 +119,7 @@
         invokers: {
             renderInitialMarkup: {
                 func: "{that}.renderMarkup",
-                args: ["initial", "{that}.options.template", {id: "{that}.id", checkboxes: "{that}.options.checkboxes"}]
+                args: ["initial", "{that}.options.template", {id: "{that}.id", checkboxes: "{that}.options.checkboxes", legend: "{that}.options.legend"}]
             }
         }
     });

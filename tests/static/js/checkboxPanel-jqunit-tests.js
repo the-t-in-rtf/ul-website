@@ -2,87 +2,6 @@
 /* globals fluid */
 (function () {
     "use strict";
-    fluid.registerNamespace("gpii.tests.ul.checkboxPanel");
-
-    fluid.defaults("gpii.tests.ul.checkboxPanel.component.base", {
-        gradeNames: ["gpii.ul.checkboxPanel"],
-        distributeOptions: {
-            record: "http://localhost:6194/hbs",
-            target: "{that renderer}.options.templateUrl"
-        }
-    });
-
-    fluid.defaults("gpii.tests.ul.checkboxPanel.component.string", {
-        gradeNames: ["gpii.tests.ul.checkboxPanel.component.base"],
-        checkboxes: {
-            string: {
-                label: "String",
-                value: "a string value"
-            },
-            "false": {
-                label: "False (String)",
-                value: "false"
-            },
-            utf8: {
-                label: "*flip table*",
-                value: "(╯°□°）╯︵ ┻━┻"
-            }
-        }
-    });
-
-    fluid.defaults("gpii.tests.ul.checkboxPanel.component.number", {
-        gradeNames: ["gpii.tests.ul.checkboxPanel.component.base"],
-        bindings: {
-            checkboxes: {
-                selector: "checkboxOptions",
-                path: "checkboxValue",
-                rules: {
-                    domToModel: {
-                        "": {
-                            transform: {
-                                type: "gpii.ul.transforms.transformArray",
-                                inputPath: "",
-                                rules: {
-                                    "": {
-                                        transform: {
-                                            type: "fluid.transforms.stringToNumber",
-                                            inputPath: ""
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    modelToDom: {
-                        "": {
-                            transform: {
-                                type: "gpii.ul.transforms.transformArray",
-                                inputPath: "",
-                                rules: {
-                                    "": {
-                                        transform: {
-                                            type: "fluid.transforms.numberToString",
-                                            inputPath: ""
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        checkboxes: {
-            pi: {
-                label: "𝝿",
-                value: 3.1415926
-            },
-            tau: {
-                label: "𝞽",
-                value: 6.283185
-            }
-        }
-    });
 
     fluid.defaults("gpii.tests.ul.checkboxPanel.caseHolder.string", {
         gradeNames: ["fluid.test.testCaseHolder"],
@@ -206,6 +125,73 @@
             },
             binder: {
                 type:      "gpii.tests.ul.checkboxPanel.component.number",
+                container: "{testEnvironment}.options.markupFixture"
+            }
+        }
+    });
+
+    fluid.defaults("gpii.tests.ul.checkboxPanel.caseHolder.string", {
+        gradeNames: ["fluid.test.testCaseHolder"],
+        modules: [{
+            name: "Testing a checkbox panel with string values...",
+            tests: [
+                {
+                    name: "Model changes should result in form field updates...",
+                    type: "test",
+                    sequence: [
+                        {
+                            func: "{testEnvironment}.binder.applier.change",
+                            args: ["checkboxValue", ["a string value"]]
+                        },
+                        {
+                            func: "gpii.tests.binder.testElement",
+                            args: ["assertDeepEq", "The checkbox form value should have been updated", ["a string value"], "input[name='checkbox-option']"] // fnName, message, expected, selector
+                        },
+                        {
+                            func: "{testEnvironment}.binder.applier.change",
+                            args: ["checkboxValue", ["(╯°□°）╯︵ ┻━┻", "false", "a string value"]]
+                        },
+                        {
+                            func: "gpii.tests.binder.testElement",
+                            args: ["assertDeepEq", "Multiple checkbox form values should have been updated", [ "a string value", "false", "(╯°□°）╯︵ ┻━┻"], "input[name='checkbox-option']"] // fnName, message, expected, selector
+                        },
+                        {
+                            func: "{testEnvironment}.binder.applier.change",
+                            args: ["checkboxValue", ["(╯°□°）╯︵ ┻━┻"]]
+                        },
+                        {
+                            func: "gpii.tests.binder.testElement",
+                            args: ["assertDeepEq", "UTF8 characters should be passed to the form correctly", ["(╯°□°）╯︵ ┻━┻"], "input[name='checkbox-option']"] // fnName, message, expected, selector
+                        }
+                    ]
+                },
+                {
+                    name: "Form field changes should result in model updates...",
+                    type: "test",
+                    sequence: [
+                        {
+                            func: "fluid.changeElementValue",
+                            args: ["input[name='checkbox-option']", ["false"]]
+                        },
+                        {
+                            func: "jqUnit.assertDeepEq",
+                            args: ["The model data should have been updated...", ["false"], "{testEnvironment}.binder.model.checkboxValue"]
+                        }
+                    ]
+                }
+            ]
+        }]
+    });
+
+    fluid.defaults("gpii.tests.ul.checkboxPanel.environment.string", {
+        gradeNames:    ["fluid.test.testEnvironment"],
+        markupFixture: ".checkboxPanel-string-viewport",
+        components: {
+            caseHolder: {
+                type: "gpii.tests.ul.checkboxPanel.caseHolder.string"
+            },
+            binder: {
+                type:      "gpii.tests.ul.checkboxPanel.component.string",
                 container: "{testEnvironment}.options.markupFixture"
             }
         }
