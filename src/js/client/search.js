@@ -152,7 +152,7 @@
             statuses:        [ "new", "active", "discontinued"],
             sortBy:           "/name",
             offset:           0,
-            limit:            250,
+            limit:            25,
             totalRows:        0,
             unified:          true,
             includeSources:   true,

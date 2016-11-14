@@ -143,17 +143,3 @@ select.ul-updates-sources-control {
     margin-top:    .5em;
     margin-bottom: .5em;
 }
-
-/* contrast fixes for foundation styles */
-
-.button.secondary {
-    background-color: #717171;
-}
-
-.menu a {
-    color: #8888ff;
-}
-
-a {
-    color: #0d0dff;
-}

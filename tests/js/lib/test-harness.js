@@ -33,6 +33,10 @@ fluid.defaults("gpii.tests.ul.website.harness", {
         couch:  7218,
         lucene: 7219
     },
+    distributeOptions: {
+        record: 30000, // Searches that hit lucene need more time, at least for the first search.
+        target: "{that gpii.express.handler}.options.timeout"
+    },
     events: {
         constructFixtures: null,
         pouchStarted:      null,

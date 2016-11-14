@@ -5,7 +5,7 @@
 /* eslint-env node */
 "use strict";
 var fluid = require("infusion");
-fluid.logObjectRenderChars = 64000;
+fluid.setLogging(fluid.logLevel.FAIL);
 
 require("../../../");
 

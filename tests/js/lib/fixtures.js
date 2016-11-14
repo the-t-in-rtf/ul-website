@@ -189,7 +189,7 @@ gpii.test.ul.website.testEnvironment.stopFixtures = function (that) {
 
 fluid.defaults("gpii.test.ul.website.testEnvironment", {
     gradeNames: ["gpii.test.webdriver.testEnvironment", "gpii.tests.ul.website.harness"],
-    hangWait: 10000, // pouchdb-lucene needs longer to start up.
+    hangWait: 20000, // pouchdb-lucene needs longer to start up.
     endpoint: "/",
     startUrl:   {
         expander: {
