@@ -22,12 +22,12 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder", {
                     {
                         event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
                         listener: "{testEnvironment}.webdriver.wait",
-                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".search-product"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".product-listing a"}]
+                        args:     [{ css: ".search-product a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
@@ -55,11 +55,10 @@ fluid.defaults("gpii.tests.ul.website.search.environment", {
     components: {
         caseHolder: {
             type: "gpii.tests.ul.website.search.caseHolder"
+        },
+        accessibilityReports: {
+            type: "gpii.test.ul.website.caseHolder.accessibilityReports"
         }
-        // TODO:  Reenable these once https://issues.gpii.net/browse/GPII-2128 is resolved
-        // accessibilityReports: {
-        //     type: "gpii.test.ul.website.caseHolder.accessibilityReports"
-        // }
     }
 });
 
@@ -77,12 +76,12 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
                 sequence: [
                     {
                         func: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".search-product"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".product-listing a"}]
+                        args:     [{ css: ".search-product a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
@@ -101,12 +100,12 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
                     {
                         event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
                         listener: "{testEnvironment}.webdriver.wait",
-                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".search-product"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".product-listing a"}]
+                        args:     [{ css: ".search-product a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
@@ -120,12 +119,12 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
                     {
                         event:    "{testEnvironment}.webdriver.events.onNavigateHelperComplete",
                         listener: "{testEnvironment}.webdriver.wait",
-                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".search-product"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".product-listing a"}]
+                        args:     [{ css: ".search-product a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
@@ -140,12 +139,12 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
                 sequence: [
                     {
                         func: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".search-product"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".product-listing a"}]
+                        args:     [{ css: ".search-product a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
@@ -171,7 +170,7 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
                     {
                         event:    "{testEnvironment}.webdriver.events.onSleepComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".product-listing a"}]
+                        args:     [{ css: ".search-product a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
@@ -190,7 +189,7 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
                     {
                         event:    "{testEnvironment}.webdriver.events.onSleepComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".product-listing a"}]
+                        args:     [{ css: ".search-product a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
@@ -258,7 +257,7 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.status", {
                     {
                         event:    "{testEnvironment}.webdriver.events.onSleepComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".product-listing a"}]
+                        args:     [{ css: ".search-product a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
