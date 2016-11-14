@@ -6,111 +6,81 @@ var gpii = fluid.registerNamespace("gpii");
 require("../../");
 require("./lib/");
 
-fluid.defaults("gpii.tests.ul.website.search.caseHolder", {
+fluid.defaults("gpii.tests.ul.website.products.caseHolder", {
     gradeNames: ["gpii.test.ul.website.caseHolder"],
     rawModules: [{
-        name: "Test the search interface...",
+        name: "Test the products interface...",
         tests: [
             {
-                name: "Perform a simple search (no pagination controls expected)...",
+                name: "View a public source...",
                 type: "test",
                 sequence: [
                     {
-                        func: "{testEnvironment}.webdriver.actionsHelper",
-                        args: [{ fn: "sendKeys", args: [gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, "jaws", gpii.webdriver.Key.ENTER]}]
-                    },
-                    {
-                        event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
-                        listener: "{testEnvironment}.webdriver.wait",
-                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".search-product"))]
+                        func:     "{testEnvironment}.webdriver.wait",
+                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".search-product a"}]
+                        args:     [{ css: ".product-listing"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
-                        args:     ["The first search result should be correct...", "{arguments}.0", "getText", "Jaws For Windows"] // message, element, elementFn, expectedValue, jqUnitFn
+                        listener: "jqUnit.assert",
+                        args:     ["There should be product listings..."]
                     },
                     {
-                        func: "{testEnvironment}.webdriver.findElements",
-                        args: [{ id: ".search-topnav .nav-link"}]
+                        func: "{testEnvironment}.webdriver.findElement",
+                        args: [{ css: ".products-topnav .nav-link"}]
                     },
                     {
-                        event:    "{testEnvironment}.webdriver.events.onFindElementsComplete",
-                        listener: "jqUnit.assertDeepEq",
-                        args:     ["There should be no pagination controls...", [], "{arguments}.0"]
+                        event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
+                        listener: "jqUnit.assert",
+                        args:     ["There should be pagination controls..."]
                     }
                 ]
-            }
-        ]
-    }]
-});
-
-fluid.defaults("gpii.tests.ul.website.search.environment", {
-    gradeNames: ["gpii.test.ul.website.testEnvironment"],
-    endpoint:   "/api/search",
-    components: {
-        caseHolder: {
-            type: "gpii.tests.ul.website.search.caseHolder"
-        },
-        accessibilityReports: {
-            type: "gpii.test.ul.website.caseHolder.accessibilityReports"
-        }
-    }
-});
-
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.search.environment" });
-
-
-fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
-    gradeNames: ["gpii.test.ul.website.caseHolder"],
-    rawModules: [{
-        name: "Test the paging and sorting controls...",
-        tests: [
+            },
             {
                 name: "Use the paging controls to navigate back and forth...",
                 type: "test",
                 sequence: [
                     {
                         func: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".search-product"))]
+                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".search-product a"}]
+                        args:     [{ css: ".product-listing a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
                         listener: "gpii.test.webdriver.inspectElement",
-                        args:     ["The first search result should be from the first page...", "{arguments}.0", "getText", "Whetstone 000"] // message, element, elementFn, expectedValue, jqUnitFn
+                        args:     ["The first product should be from the first page...", "{arguments}.0", "getText", "A record ahead of its time."] // message, element, elementFn, expectedValue, jqUnitFn
                     },
                     {
                         func: "{testEnvironment}.webdriver.actionsHelper",
                         args: [{ fn: "sendKeys", args: [
                             gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                       // use the "skip to content" link
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, // tab past "options", "search form", "go"
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, // tab past "previous", "1", "2"
+                            gpii.webdriver.Key.TAB,                                                 // tab past "options"
+                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, // tab past "previous", "1", focus on "2"
                             gpii.webdriver.Key.ENTER                                                // Open the second page of results
                         ]}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
                         listener: "{testEnvironment}.webdriver.wait",
-                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".search-product"))]
+                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".search-product a"}]
+                        args:     [{ css: ".product-listing a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
                         listener: "gpii.test.webdriver.inspectElement",
-                        args:     ["The first search result should now be from the second page...", "{arguments}.0", "getText", "Whetstone 025"] // message, element, elementFn, expectedValue, jqUnitFn
+                        args:     ["The first search result should now be from the second page...", "{arguments}.0", "getText", "Whetstone 016"] // message, element, elementFn, expectedValue, jqUnitFn
                     },
                     {
                         func: "{testEnvironment}.webdriver.navigateHelper",
@@ -119,17 +89,17 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
                     {
                         event:    "{testEnvironment}.webdriver.events.onNavigateHelperComplete",
                         listener: "{testEnvironment}.webdriver.wait",
-                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".search-product"))]
+                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".search-product a"}]
+                        args:     [{ css: ".product-listing a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
                         listener: "gpii.test.webdriver.inspectElement",
-                        args:     ["The first search result should be from the first page again...", "{arguments}.0", "getText", "Whetstone 000"] // message, element, elementFn, expectedValue, jqUnitFn
+                        args:     ["The first search result should be from the first page again...", "{arguments}.0", "getText", "A record ahead of its time."] // message, element, elementFn, expectedValue, jqUnitFn
                     }
                 ]
             },
@@ -139,17 +109,17 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
                 sequence: [
                     {
                         func: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".search-product"))]
+                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".search-product a"}]
+                        args:     [{ css: ".product-listing a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
                         listener: "gpii.test.webdriver.inspectElement",
-                        args:     ["The first search result should be the first alphabetical entry...", "{arguments}.0", "getText", "Whetstone 000"] // message, element, elementFn, expectedValue, jqUnitFn
+                        args:     ["The first search result should be the first alphabetical entry...", "{arguments}.0", "getText", "A record ahead of its time."] // message, element, elementFn, expectedValue, jqUnitFn
                     },
                     {
                         func: "{testEnvironment}.webdriver.actionsHelper",
@@ -170,7 +140,7 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
                     {
                         event:    "{testEnvironment}.webdriver.events.onSleepComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".search-product a"}]
+                        args:     [{ css: ".product-listing a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
@@ -189,80 +159,90 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
                     {
                         event:    "{testEnvironment}.webdriver.events.onSleepComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".search-product a"}]
+                        args:     [{ css: ".product-listing a"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
                         listener: "gpii.test.webdriver.inspectElement",
-                        args:     ["The first search result should be the first alphabetical entry again...", "{arguments}.0", "getText", "Whetstone 000"] // message, element, elementFn, expectedValue, jqUnitFn
+                        args:     ["The first search result should be the first alphabetical entry again...", "{arguments}.0", "getText", "A record ahead of its time."] // message, element, elementFn, expectedValue, jqUnitFn
                     }
                 ]
             }
+            // TODO:  Reenable these once chromedriver supports sending space keys again: https://bugs.chromium.org/p/chromedriver/issues/detail?id=1502&q=&colspec=ID%20Status%20Pri%20Owner%20Summary
+            // {
+            //     name: "Test the status controls...",
+            //     type: "test",
+            //     sequence: [
+            //         {
+            //             func: "{testEnvironment}.webdriver.actionsHelper",
+            //             args: [{ fn: "sendKeys", args: [
+            //                 gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                                               // use the "skip to content" link
+            //                 gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                                               // tab to "options", hit "enter" to open it
+            //                 gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, // three tabs to "products per page", one more to "sort records".
+            //                 gpii.webdriver.Key.TAB, gpii.webdriver.Key.SPACE                                                // Tab to, and untick the "new" status.
+            //             ]}]
+            //         },
+            //         // We have to manually wait because the same markup (with different results) is already present and we would pick up the old results otherwise.
+            //         // TODO:  Update this once we have some way of knowing when the client component is finished.
+            //         {
+            //             event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
+            //             listener: "{testEnvironment}.webdriver.sleep",
+            //             args:     [10000]
+            //         },
+            //         {
+            //             event:    "{testEnvironment}.webdriver.events.onSleepComplete",
+            //             listener: "{testEnvironment}.webdriver.findElement",
+            //             args:     [{ css: ".product-listing a"}]
+            //         },
+            //         {
+            //             event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
+            //             listener: "gpii.test.webdriver.inspectElement",
+            //             args:     ["The first product listing should now be a deleted record...", "{arguments}.0", "getText", "Deleted record"] // message, element, elementFn, expectedValue, jqUnitFn
+            //         }
+            //     ]
+            // }
         ]
     }]
 });
 
-fluid.defaults("gpii.tests.ul.website.search.environment.whetstone", {
+fluid.defaults("gpii.tests.ul.website.products.environment", {
     gradeNames: ["gpii.test.ul.website.testEnvironment"],
-    endpoint:   "/api/search?q=%22whetstone%22",
+    endpoint:   "/api/products?sources=%22unified%22",
     components: {
         caseHolder: {
-            type: "gpii.tests.ul.website.search.caseHolder.whetstone"
+            type: "gpii.tests.ul.website.products.caseHolder"
         }
+        // TODO:  Reenable these once https://issues.gpii.net/browse/GPII-2128 is resolved
+        // accessibilityReports: {
+        //     type: "gpii.test.ul.website.caseHolder.accessibilityReports"
+        // }
     }
 });
 
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.search.environment.whetstone" });
+// gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.products.environment" });
 
-fluid.defaults("gpii.tests.ul.website.search.caseHolder.status", {
+fluid.defaults("gpii.tests.ul.website.products.caseHolder.contributions.anonymous", {
     gradeNames: ["gpii.test.ul.website.caseHolder"],
     rawModules: [{
-        name: "Test the paging and sorting controls...",
+        name: "Load a user's contributed records without logging in...",
         tests: [
             {
-                name: "Test the status controls...",
+                name: "View a user's contributed records...",
                 type: "test",
                 sequence: [
                     {
-                        func: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".search-products p"))]
+                        func:     "{testEnvironment}.webdriver.wait",
+                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".alert"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".search-products p"}]
+                        args:     [{ css: ".alert"}]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
-                        args:     ["There should be no search results with the default statuses...", "{arguments}.0", "getText", "No products found.  Please update your search terms."] // message, element, elementFn, expectedValue, jqUnitFn
-                    },
-                    {
-                        func: "{testEnvironment}.webdriver.actionsHelper",
-                        args: [{ fn: "sendKeys", args: [
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                                               // use the "skip to content" link
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                                               // tab to "options", hit "enter" to open it
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, // three tabs to "products per page", one more to "sort records".
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, // four more tabs to get to the last "status" control (deleted).
-                            gpii.webdriver.Key.SPACE                                                                   // hit "b" to select the next menu item
-                        ]}]
-                    },
-                    // We have to manually wait because the same markup (with different results) is already present and we would pick up the old results otherwise.
-                    // TODO:  Update this once we have some way of knowing when the client component is finished.
-                    {
-                        event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
-                        listener: "{testEnvironment}.webdriver.sleep",
-                        args:     [10000]
-                    },
-                    {
-                        event:    "{testEnvironment}.webdriver.events.onSleepComplete",
-                        listener: "{testEnvironment}.webdriver.findElement",
-                        args:     [{ css: ".search-product a"}]
-                    },
-                    {
-                        event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
-                        args:     ["The first search result should now be a deleted record...", "{arguments}.0", "getText", "Deleted record"] // message, element, elementFn, expectedValue, jqUnitFn
+                        listener: "jqUnit.assert",
+                        args:     ["There should be an error..."]
                     }
                 ]
             }
@@ -270,15 +250,46 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.status", {
     }]
 });
 
-fluid.defaults("gpii.tests.ul.website.search.environment.status", {
+fluid.defaults("gpii.tests.ul.website.products.caseHolder.contributions.loggedIn", {
+    gradeNames: ["gpii.test.ul.website.caseHolder.loggedIn"],
+    rawModules: [{
+        name: "Load a user's contributed records while logged in...",
+        tests: [
+            {
+                name: "View a user's contributed records while logged in...",
+                type: "test",
+                sequence: [
+                    {
+                        func:     "{testEnvironment}.webdriver.wait",
+                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                    },
+                    {
+                        event:    "{testEnvironment}.webdriver.events.onWaitComplete",
+                        listener: "{testEnvironment}.webdriver.findElement",
+                        args:     [{ css: ".product-listing"}]
+                    },
+                    {
+                        event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
+                        listener: "jqUnit.assert",
+                        args:     ["There should be product listings..."]
+                    }
+                ]
+            }
+        ]
+    }]
+});
+
+fluid.defaults("gpii.tests.ul.website.products.environment.contributions", {
     gradeNames: ["gpii.test.ul.website.testEnvironment"],
-    endpoint:   "/api/search?q=%22deleted%22",
+    endpoint:   "/api/products?sources=%22~existing%22",
     components: {
-        caseHolder: {
-            type: "gpii.tests.ul.website.search.caseHolder.status"
+        anonymousCaseHolder: {
+            type: "gpii.tests.ul.website.products.caseHolder.contributions.anonymous"
+        },
+        loggedInCaseHolder: {
+            type: "gpii.tests.ul.website.products.caseHolder.contributions.loggedIn"
         }
     }
 });
 
-// TODO:  Reenable these once chromedriver supports sending space keys again: https://bugs.chromium.org/p/chromedriver/issues/detail?id=1502&q=&colspec=ID%20Status%20Pri%20Owner%20Summary
-// gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.search.environment.status" });
+gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.products.environment.contributions" });
