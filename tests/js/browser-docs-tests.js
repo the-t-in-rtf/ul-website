@@ -37,11 +37,10 @@ fluid.defaults("gpii.tests.ul.website.docs.environment", {
     components: {
         caseHolder: {
             type: "gpii.tests.ul.website.docs.caseHolder"
+        },
+        accessibilityReports: {
+            type: "gpii.test.ul.website.caseHolder.accessibilityReports"
         }
-        // TODO:  Reenable these once https://issues.gpii.net/browse/GPII-2128 is resolved
-        // accessibilityReports: {
-        //     type: "gpii.test.ul.website.caseHolder.accessibilityReports"
-        // }
     }
 });
 

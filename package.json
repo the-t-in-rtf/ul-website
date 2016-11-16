@@ -46,7 +46,7 @@
     "eslint": "3.9.1",
     "eslint-config-fluid": "1.0.0",
     "fluid-grunt-eslint": "18.1.2",
-    "gpii-webdriver": "git://github.com/the-t-in-rtf/gpii-webdriver#cccba4bab1e6a4f9484907d92b26c80d5ec8b72b",
+    "gpii-webdriver": "git://github.com/the-t-in-rtf/gpii-webdriver#2d9342eec6d9ff52ed0edfa5f3f3555cec08b062",
     "grunt": "1.0.1",
     "grunt-jsonlint": "1.1.0",
     "istanbul": "0.4.5",

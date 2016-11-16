@@ -147,11 +147,10 @@ fluid.defaults("gpii.tests.ul.website.contribute.environment", {
         },
         loggedInCaseHolder: {
             type: "gpii.tests.ul.website.contribute.caseHolder.loggedIn"
+        },
+        accessibilityReports: {
+            type: "gpii.tests.ul.website.contribute.accessibilityReports"
         }
-        // TODO:  Reenable these once https://issues.gpii.net/browse/GPII-2128 is resolved
-        // accessibilityReports: {
-        //     type: "gpii.tests.ul.website.contribute.accessibilityReports"
-        // }
     }
 });
 

@@ -94,10 +94,9 @@ fluid.defaults("gpii.tests.ul.website.checkboxPanel.environment.functional", {
         // caseHolder: {
         //     type: "gpii.tests.ul.website.checkboxPanel.caseHolder.functional"
         // },
-        // TODO:  Reenable these once https://issues.gpii.net/browse/GPII-2128 is resolved
-        // accessibilityReports: {
-        //     type: "gpii.test.ul.website.caseHolder.accessibilityReports"
-        // }
+        accessibilityReports: {
+            type: "gpii.test.ul.website.caseHolder.accessibilityReports"
+        }
     }
 });
 

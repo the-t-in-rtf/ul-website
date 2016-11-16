@@ -120,6 +120,7 @@ fluid.defaults("gpii.test.ul.website.caseHolder.accessibilityReports", {
         axs: "%ul-website/node_modules/accessibility-developer-tools/dist/js/axs_testing.js"
     },
     sequenceStart: gpii.test.ul.website.anonymousPageStartSequence,
+    axeOptions: { rules: [{ id: "color-contrast", enabled: false }]}, // We use UIOptions to handle high contrast
     rawModules: [{
         name: "Building accessibility reports...",
         tests: [
@@ -139,7 +140,7 @@ fluid.defaults("gpii.test.ul.website.caseHolder.accessibilityReports", {
                     {
                         event: "{testEnvironment}.webdriver.events.onExecuteAsyncScriptComplete",
                         listener: "gpii.test.webdriver.axe.checkResults",
-                        args: ["{arguments}.0"]
+                        args: ["{arguments}.0", "{that}.options.axeOptions"]
                     }
                 ]
             }

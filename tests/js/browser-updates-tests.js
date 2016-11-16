@@ -193,11 +193,10 @@ fluid.defaults("gpii.tests.ul.website.updates.environment.anonymous", {
     components: {
         anonymousCaseHolder: {
             type: "gpii.tests.ul.website.updates.caseHolder.anonymous"
+        },
+        accessibilityReports: {
+            type: "gpii.test.ul.website.caseHolder.accessibilityReports"
         }
-        // TODO:  Reenable these once https://issues.gpii.net/browse/GPII-2128 is resolved
-        // accessibilityReports: {
-        //     type: "gpii.test.ul.website.caseHolder.accessibilityReports"
-        // }
     }
 });
 
