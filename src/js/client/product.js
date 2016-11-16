@@ -1,4 +1,3 @@
-// TODO: Migrate this to a "content aware" part of the API when this feature is complete:  https://github.com/GPII/gpii-express/pull/6
 // Component to display the view/edit interface for a single product.
 
 /* global fluid */
@@ -6,7 +5,6 @@
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
 
-    // TODO:  Fix this to enable reviewer editing of the "status" field.
     // The sub-component that handles editing the "status" field.
     fluid.defaults("gpii.ul.product.edit.status", {
         gradeNames: ["gpii.ul.select"],
