@@ -109,6 +109,13 @@ fluid.defaults("gpii.tests.ul.website.skipNav.environment.signup", {
 });
 gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.skipNav.environment.signup" });
 
+fluid.defaults("gpii.tests.ul.website.skipNav.environment.contribute", {
+    gradeNames: ["gpii.tests.ul.website.skipNav.environment.base"],
+    endpoint:   "/contribute"
+});
+gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.skipNav.environment.contribute" });
+
+
 fluid.defaults("gpii.tests.ul.website.skipNav.environment.contributors", {
     gradeNames: ["gpii.tests.ul.website.skipNav.environment.base"],
     endpoint:   "/contributors"
