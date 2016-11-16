@@ -87,12 +87,7 @@ fluid.defaults("gpii.tests.ul.website.checkboxPanel.caseHolder.functional", {
 
 fluid.defaults("gpii.tests.ul.website.checkboxPanel.environment.functional", {
     gradeNames: ["gpii.test.ul.website.testEnvironment"],
-    startUrl:   {
-        expander: {
-            func: "fluid.stringTemplate",
-            args: ["%apiUrl/checkboxPanel-functional-tests", { apiUrl: "{that}.options.urls.api" }]
-        }
-    },
+    endpoint: "/checkboxPanel-functional-tests",
     components: {
         // Activating a control with a space will not work until this bug is resolved: https://bugs.chromium.org/p/chromedriver/issues/detail?id=1502
         // TODO:  Continue monitoring the issue and reenable this ASAP

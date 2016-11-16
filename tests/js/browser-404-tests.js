@@ -33,12 +33,7 @@ fluid.defaults("gpii.tests.ul.website.fourohfour.caseHolder", {
 
 fluid.defaults("gpii.tests.ul.website.fourohfour.environment", {
     gradeNames: ["gpii.test.ul.website.testEnvironment"],
-    startUrl:   {
-        expander: {
-            func: "fluid.stringTemplate",
-            args: ["%apiUrl/notfound", { apiUrl: "{that}.options.urls.api" }]
-        }
-    },
+    endpoint:   "/notfound",
     components: {
         caseHolder: {
             type: "gpii.tests.ul.website.fourohfour.caseHolder"
