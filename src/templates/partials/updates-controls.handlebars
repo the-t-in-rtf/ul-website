@@ -1,32 +1,35 @@
-{{#if user}}
-    <form>
-        <!-- date picker -->
+<form>
+    <!-- date picker -->
+    <label id="updates-updatedSince-control-label">
         Show records updated since:
-        <input type="date" class="ul-updates-updatedSince-control"/>
+    </label>
+    <input type="date" aria-labelledby="updates-updatedSince-control-label" class="ul-updates-updatedSince-control"/>
 
-        <!-- choose databases -->
+    <!-- choose databases -->
+    <label id="updates-sources-control-label">
         Show differences between unified record and these sources:
-        <select multiple="true" class="ul-updates-sources-control" size="{{sources.length}}">
-            {{#each sources}}<option value="{{.}}" selected="true">{{.}}</option>{{/each}}
-        </select>
+    </label>
+    <select multiple="true" aria-labelledby="updates-sources-control-label" class="ul-updates-sources-control" size="{{sources.length}}">
+        {{#each sources}}<option value="{{.}}" selected="true">{{.}}</option>{{/each}}
+    </select>
 
-        <!-- Whether to show records newer or older than the source -->
-        Show unified records:
-        <div>
-            <input type="radio" id="source-newer-true" name="ul-updates-sourceNewer-control" value="true"/>
-            <label for="source-newer-true">
-                older than my contributions
-            </label>
+    <!-- Whether to show records newer or older than the source -->
+    <fieldset>
+        <legend>Show unified records:</legend>
 
-            <input type="radio" id="source-newer-false" name="ul-updates-sourceNewer-control" value="false"/>
-            <label for="source-newer-false">
-                newer than my contributions
-            </label>
-        </div>
-
-    </form>
-{{else}}
-    <div class="ul-updates-updated-control"/>
-    <div class="ul-updates-sources-control"/>
-    <input type="hidden" name="ul-updates-sourceNewer-control"/>
-{{/if}}
+        <ul class="no-bullet">
+            <li>
+                <input type="radio" id="source-newer-true" name="ul-updates-sourceNewer-control" value="true"/>
+                <label for="source-newer-true">
+                    older than the source records.
+                </label>
+            </li>
+            <li>
+                <input type="radio" id="source-newer-false" name="ul-updates-sourceNewer-control" value="false"/>
+                <label for="source-newer-false">
+                    newer than the source records.
+                </label>
+            </li>
+        </ul>
+    </fieldset>
+</form>

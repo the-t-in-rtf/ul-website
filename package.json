@@ -38,7 +38,7 @@
     "marked": "0.3.6",
     "moment": "2.16.0",
     "pagedown": "1.1.0",
-    "ul-api": "git://github.com/the-t-in-rtf/ul-api.git#25a4b000849895d52bd5f6f69a99cf3b8d2f6b66"
+    "ul-api": "git://github.com/the-t-in-rtf/ul-api.git#0ed9fd4e2c33c7575925bf5fb5b75d1ed93ecb4e"
   },
   "devDependencies": {
     "accessibility-developer-tools": "2.11.0",

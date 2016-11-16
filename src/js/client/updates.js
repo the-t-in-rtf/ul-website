@@ -22,16 +22,14 @@
         },
         rules: {
             successResponseToModel: {
+                "": "notfound",
+                "errorMessage": { literalValue: false },
                 "sources": {
                     transform: {
                         type:      "gpii.ul.updates.controls.excludeUnifiedSource",
                         inputPath: "responseJSON.sources"
                     }
                 }
-            },
-            errorResponseToModel: {
-                "":             "notfound",
-                "errorMessage": { literalValue: "Error loading the list of allowed sources." }
             },
             modelToRequestPayload: {
                 "": "notfound"
@@ -64,10 +62,14 @@
             "sourceNewer":  "input[name='ul-updates-sourceNewer-control']"
         },
         bindings: [
-            // TODO: Clearing this out results in an error.
             {
                 selector:    "updatedSince",
-                path:        "updatedSince"
+                path:        "updatedSince",
+                rules: {
+                    domToModel: {
+                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                    }
+                }
             },
             {
                 selector:    "sources",
@@ -111,7 +113,7 @@
 
 
     fluid.defaults("gpii.ul.updates", {
-        gradeNames: ["gpii.handlebars.templateFormControl"],
+        gradeNames: ["gpii.schemas.client.errorAwareForm"],
         hideOnSuccess: false,
         hideOnError:   false,
         ajaxOptions: {
@@ -131,17 +133,8 @@
             successResponseToModel: {
                 "":           "notfound",
                 products:     "responseJSON.products",
-                errorMessage: { literalValue: null }
+                errorMessage: { literalValue: false }
             },
-
-            // Rules to control how an error is applied to the model
-            errorResponseToModel: {
-                "":             "notfound",
-                errorMessage:   "responseJSON.message",
-                successMessage: { literalValue: null },
-                products:       { literalValue: false }
-            },
-
             // Rules to control how our model is parsed before making a request
             modelToRequestPayload: {
                 "": {
@@ -194,7 +187,6 @@
             sources:      [],
             products:     false,
             errorMessage: null,
-            // TODO: Ensure that this value is stripped out by the transform, so that it can be set to `null` by default.
             updatedSince: new Date(0),
             sourceNewer:  true
         },

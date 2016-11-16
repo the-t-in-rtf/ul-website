@@ -166,7 +166,7 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
                     {
                         event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
                         listener: "{testEnvironment}.webdriver.sleep",
-                        args:     [10000]
+                        args:     [2500]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onSleepComplete",
@@ -185,7 +185,7 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
                     {
                         event:    "{testEnvironment}.webdriver.events.onNavigateHelperComplete",
                         listener: "{testEnvironment}.webdriver.sleep",
-                        args:     [10000]
+                        args:     [2500]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onSleepComplete",
@@ -245,7 +245,7 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.status", {
                             gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                                               // tab to "options", hit "enter" to open it
                             gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, // three tabs to "products per page", one more to "sort records".
                             gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, // four more tabs to get to the last "status" control (deleted).
-                            gpii.webdriver.Key.SPACE                                                                   // hit "b" to select the next menu item
+                            gpii.webdriver.Key.SPACE                                                                        // hit space to activate the control
                         ]}]
                     },
                     // We have to manually wait because the same markup (with different results) is already present and we would pick up the old results otherwise.

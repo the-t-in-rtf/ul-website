@@ -75,6 +75,7 @@
             email:            ".manufacturer-email",
             phone:            ".manufacturer-phone",
             url:              ".manufacturer-url",
+            form:             ".product-edit-form",
             error:            ".product-edit-error",
             success:          ".product-edit-success",
             submit:           ".product-edit-submit"
@@ -84,8 +85,6 @@
         bindings: {
             name:             "product.name",
             description:      "product.description",
-            // "status" is handled by a subcomponent (see below)
-            // status: "product.status",
             source:           "product.source",
             sid:              "product.sid",
             uid:              "product.uid",
@@ -226,10 +225,12 @@
     fluid.defaults("gpii.ul.product.toggle", {
         gradeNames: ["gpii.ul.toggle"],
         selectors: {
+            controls: ".product-view-control-panel",
             editForm: ".product-edit",
             viewForm: ".product-view"
         },
         toggles: {
+            controls: true,
             editForm: true,
             viewForm: true
         }
@@ -394,21 +395,13 @@
             },
             // Toggles must exist at this level so that they can be aware of both the view and edit form, thus we have
             // two very similar toggle controls that are instantiated if we're editing, and which are rebound as needed.
-            toggleFromView: {
+            editControls: {
                 type:          "gpii.ul.product.toggle",
                 createOnEvent: "{product}.events.onRenderedAndReadyForEdit",
                 container:     "{product}.container",
                 options: {
                     selectors: {
                         toggle: ".product-view-control-panel .product-toggle"
-                    },
-                    events: {
-                        // Our view may be redrawn over and over again, and we have to make sure our bindings work each time.
-                        onRefresh: {
-                            events: {
-                                parentReady: "{product}.events.onViewRendered"
-                            }
-                        }
                     },
                     // We need to refresh on startup because the view may already have been rendered.
                     listeners: {

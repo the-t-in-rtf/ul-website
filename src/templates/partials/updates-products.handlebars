@@ -1,26 +1,11 @@
-{{#if user}}
-    {{#if message}}
-        <p>The following unified records match your search criteria.</p>
+{{#if message}}
+    <p>The following updates match the selected options.</p>
 
-        {{#each message}}
-            <div class="row">
-                <div class="column small-3">
-                    <a href="/api/product/{{source}}/{{sid}}">{{name}}</a>
-                </div>
-                <div class="column small-9 ul-updates-product-description">
-                    {{#if description}}{{{md description}}}{{/if}}
-                </div>
-            </div>
-            <ul>
-            </ul>
-        {{/each}}
-    {{else}}
-        <div class="panel">
-            No records were found.  Check your search criteria and the filters you have chosen.
-        </div>
-    {{/if}}
+    {{#each message}}
+        {{>product-listing}}
+    {{/each}}
 {{else}}
     <div class="panel">
-        You must log in to use this interface.
+        No differences were found matching the selected options.
     </div>
 {{/if}}

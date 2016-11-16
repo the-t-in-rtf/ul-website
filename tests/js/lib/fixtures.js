@@ -41,17 +41,6 @@ gpii.test.ul.website.loadPageAndFocus = [
     },
     {
         event:    "{testEnvironment}.webdriver.events.onGetComplete",
-        listener: "{testEnvironment}.webdriver.findElement",
-        args:     [gpii.webdriver.By.css("#focus-here")]
-    },
-    {
-        event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-        listener: "{testEnvironment}.webdriver.actionsHelper",
-        // We must call "click" with a specific element located in the previous call, i.e. {arguments}.0
-        args:     [[{fn: "click", args: ["{arguments}.0"]}]]
-    },
-    {
-        event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
         listener: "fluid.identity"
     }
 ];
