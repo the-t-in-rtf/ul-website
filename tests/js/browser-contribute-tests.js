@@ -128,10 +128,6 @@ fluid.defaults("gpii.tests.ul.website.contribute.caseHolder.loggedIn", {
     }]
 });
 
-fluid.defaults("gpii.tests.ul.website.contribute.accessibilityReports", {
-    gradeNames: ["gpii.test.ul.website.caseHolder.accessibilityReports", "gpii.test.ul.website.caseHolder.loggedIn"]
-});
-
 fluid.defaults("gpii.tests.ul.website.contribute.environment", {
     gradeNames: ["gpii.test.ul.website.testEnvironment"],
     endpoint:   "/contribute",
@@ -149,7 +145,10 @@ fluid.defaults("gpii.tests.ul.website.contribute.environment", {
             type: "gpii.tests.ul.website.contribute.caseHolder.loggedIn"
         },
         accessibilityReports: {
-            type: "gpii.tests.ul.website.contribute.accessibilityReports"
+            type: "gpii.test.ul.website.caseHolder.accessibilityReports",
+            options: {
+                gradeNames: ["gpii.test.ul.website.caseHolder.loggedIn"]
+            }
         }
     }
 });

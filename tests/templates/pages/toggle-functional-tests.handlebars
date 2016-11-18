@@ -1,0 +1,42 @@
+{{>prefs-editor}}
+
+<div role="main" id="main" tabindex="0">
+    <div class="first-short-toggle-viewport row">
+        <div class="column medium-3 small-12">
+            <button class="toggle button">Toggle First "Short Notation" Control</button>
+        </div>
+        <div class="column medium-9 small-12 toToggle">The first "short notation" toggle controls this content.</div>
+    </div>
+
+    <div class="second-short-toggle-viewport row">
+        <div class="column medium-3 small-12">
+            <button class="toggle button">Toggle Second "Short Notation" Control</button>
+        </div>
+        <div class="column medium-9 small-12 toToggle">The second "short notation" toggle controls this content.</div>
+    </div>
+
+    <div class="first-long-toggle-viewport row">
+        <div class="column medium-3 small-12">
+            <button class="toggle button">Toggle First "Long Notation" Control</button>
+        </div>
+        <div class="column medium-9 small-12 toToggle">The first "long notation" toggle controls this content.</div>
+    </div>
+
+    <div class="second-long-toggle-viewport row">
+        <div class="column medium-3 small-12">
+            <button class="toggle button">Toggle Second "Long Notation" Control</button>
+        </div>
+        <div class="column medium-9 small-12 toToggle">The second "long notation" toggle controls this content.</div>
+    </div>
+</div>
+
+<script src="/src/js/client/toggle.js"></script>
+<script type="text/javascript" src="/tests/static/js/toggle-fixtures.js"></script>
+<link type="text/css" rel="stylesheet" href="/tests/static/css/toggle-functional-tests.css"/>
+
+<script type="text/javascript">
+    var firstShortToggle  = gpii.tests.ul.toggle.short(".first-short-toggle-viewport");
+    var secondShortToggle = gpii.tests.ul.toggle.short(".second-short-toggle-viewport");
+    var firstLongToggle   = gpii.tests.ul.toggle.long(".first-long-toggle-viewport");
+    var secondLongToggle  = gpii.tests.ul.toggle.long(".second-long-toggle-viewport");
+</script>

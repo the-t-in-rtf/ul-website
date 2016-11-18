@@ -44,13 +44,8 @@ fluid.registerNamespace("gpii.ul.website.suggest.handler");
  */
 gpii.ul.website.suggest.handler.handleRequest = function (that) {
     var user = that.options.request.session && that.options.request.session[that.options.sessionKey];
-    if (user && user.username) {
-        var params = ["~" + user.username, that.options.request.params.uid];
-        that.existingSuggestionReader.get({ key: JSON.stringify(params)});
-    }
-    else {
-        that.sendResponse(401, { isError: true, statusCode: 401, errorMessage: that.options.errorMessages.notAuthorized });
-    }
+    var params = ["~" + user.username, that.options.request.params.uid];
+    that.existingSuggestionReader.get({ key: JSON.stringify(params)});
 };
 
 /**

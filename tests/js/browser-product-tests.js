@@ -143,8 +143,14 @@ fluid.defaults("gpii.tests.ul.website.product.caseHolder.unified.reviewer", {
                             "updated title", gpii.webdriver.Key.ENTER         // change it, then submit the form by hitting "Enter"
                         ]}]
                     },
+                    // TODO: Come up with a better way of detecting markup changes or component events.
                     {
-                        event: "{testEnvironment}.webdriver.events.onActionsHelperComplete",
+                        event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
+                        listener: "{testEnvironment}.webdriver.sleep",
+                        args:     [2000]
+                    },
+                    {
+                        event:    "{testEnvironment}.webdriver.events.onSleepComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
                         args:     [{ css: ".product-view h3"}]
                     },
@@ -187,8 +193,14 @@ fluid.defaults("gpii.tests.ul.website.product.caseHolder.unified.reviewer", {
                             gpii.webdriver.Key.DELETE, gpii.webdriver.Key.ENTER // delete the value, then attempt to submit the form by hitting "Enter"
                         ]}]
                     },
+                    // TODO: Come up with a better way of detecting markup changes or component events.
                     {
                         event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
+                        listener: "{testEnvironment}.webdriver.sleep",
+                        args:     [2000]
+                    },
+                    {
+                        event:    "{testEnvironment}.webdriver.events.onSleepComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
                         args:     [{ css: ".alert.fieldError"}]
                     },
@@ -221,6 +233,10 @@ fluid.defaults("gpii.tests.ul.website.product.environment.unified", {
     gradeNames: ["gpii.test.ul.website.testEnvironment"],
     endpoint:   "/api/product/unified/unifiedNewer",
     components: {
+        // TODO:  Figure out why we cannot safely run these in combination with the rest of the reports.
+        // accessibilityReports: {
+        //     type: "gpii.test.ul.website.caseHolder.accessibilityReports"
+        // },
         anonymousCaseHolder: {
             type: "gpii.tests.ul.website.product.caseHolder.unified.anonymous"
         },
@@ -229,9 +245,6 @@ fluid.defaults("gpii.tests.ul.website.product.environment.unified", {
         },
         reviewerCaseHolder: {
             type: "gpii.tests.ul.website.product.caseHolder.unified.reviewer"
-        },
-        accessibilityReports: {
-            type: "gpii.test.ul.website.caseHolder.accessibilityReports"
         }
     }
 });
@@ -318,8 +331,14 @@ fluid.defaults("gpii.tests.ul.website.product.caseHolder.contributions.loggedIn"
                             "updated title", gpii.webdriver.Key.ENTER                                 // change it, then submit the form by hitting "Enter"
                         ]}]
                     },
+                    // TODO: Come up with a better way of detecting markup changes or component events.
                     {
-                        event: "{testEnvironment}.webdriver.events.onActionsHelperComplete",
+                        event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
+                        listener: "{testEnvironment}.webdriver.sleep",
+                        args:     [2000]
+                    },
+                    {
+                        event:    "{testEnvironment}.webdriver.events.onSleepComplete",
                         listener: "{testEnvironment}.webdriver.findElement",
                         args:     [{ css: ".product-view h3"}]
                     },

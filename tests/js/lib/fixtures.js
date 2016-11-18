@@ -48,6 +48,23 @@ gpii.test.ul.website.loadPageAndFocus = [
 // The base, combined with the harness startup steps from gpii-express
 gpii.test.ul.website.anonymousPageStartSequence = gpii.test.express.standardSequenceStart.concat(gpii.test.ul.website.loadPageAndFocus);
 
+
+// End sequence steps to collect coverage data
+gpii.test.ul.website.coverageCollectionSequence = [
+    {
+        func: "{testEnvironment}.webdriver.executeScript",
+        args: [gpii.test.webdriver.invokeGlobal, "fluid.getGlobalValue", "window.__coverage__"]
+    },
+    {
+        event:    "{testEnvironment}.webdriver.events.onExecuteScriptComplete",
+        listener: "gpii.tests.ul.website.coverage.saveCoverageData",
+        args:     ["{testEnvironment}", "{arguments}.0"]
+    },
+    { func: "{testEnvironment}.events.stopFixtures.fire", args: [] },
+    { listener: "fluid.identity", event: "{testEnvironment}.events.onFixturesStopped"}
+];
+
+
 /*
 
  A caseHolder that opens a given page anonymously.  Before each test, it:
@@ -62,7 +79,8 @@ gpii.test.ul.website.anonymousPageStartSequence = gpii.test.express.standardSequ
  */
 fluid.defaults("gpii.test.ul.website.caseHolder", {
     gradeNames: ["gpii.test.webdriver.caseHolder"],
-    sequenceStart: gpii.test.ul.website.anonymousPageStartSequence
+    sequenceStart: gpii.test.ul.website.anonymousPageStartSequence,
+    sequenceEnd: gpii.test.ul.website.coverageCollectionSequence
 });
 
 
@@ -169,16 +187,8 @@ fluid.defaults("gpii.test.ul.website.caseHolder.accessibilityReports", {
     }]
 });
 
-
-// Our standard test environment, includes the API, all website content, and a test browser.
-fluid.registerNamespace("gpii.test.ul.website.testEnvironment");
-gpii.test.ul.website.testEnvironment.stopFixtures = function (that) {
-    gpii.tests.ul.api.harness.stopServer(that);
-    that.browser.end();
-};
-
 fluid.defaults("gpii.test.ul.website.testEnvironment", {
-    gradeNames: ["gpii.test.webdriver.testEnvironment", "gpii.tests.ul.website.harness"],
+    gradeNames: ["gpii.test.webdriver.testEnvironment", "gpii.tests.ul.website.harness.instrumented"],
     hangWait: 20000, // pouchdb-lucene needs longer to start up.
     endpoint: "/",
     startUrl:   {
@@ -187,6 +197,26 @@ fluid.defaults("gpii.test.ul.website.testEnvironment", {
             args: ["%apiUrl%endpoint", { apiUrl: "{that}.options.urls.api", endpoint: "{that}.options.endpoint" }]
         }
     },
+    events: {
+        onFixturesConstructed: {
+            events: {
+                apiReady:      "apiReady",
+                pouchStarted:  "pouchStarted",
+                onDriverReady: "onDriverReady"
+            }
+        },
+        onFixturesStopped: {
+            events: {
+                apiStopped:    "apiStopped",
+                pouchStopped:  "pouchStopped",
+                onDriverStopped: "onDriverStopped"
+            }
+        }
+    }
+});
+
+fluid.defaults("gpii.test.ul.website.testEnvironment.withLucene", {
+    gradeNames: ["gpii.test.ul.website.testEnvironment", "gpii.tests.ul.website.harness.withLucene"],
     events: {
         onFixturesConstructed: {
             events: {
@@ -203,12 +233,6 @@ fluid.defaults("gpii.test.ul.website.testEnvironment", {
                 pouchStopped:  "pouchStopped",
                 onDriverStopped: "onDriverStopped"
             }
-        }
-    },
-    invokers: {
-        stopFixtures: {
-            funcName: "gpii.test.ul.website.testEnvironment.stopFixtures",
-            args:     ["{that}"]
         }
     }
 });

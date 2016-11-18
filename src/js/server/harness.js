@@ -240,9 +240,18 @@ fluid.defaults("gpii.ul.website.harness", {
                     suggest: {
                         type: "gpii.ul.website.suggest",
                         options: {
-                            priority: "after:allSchemas",
+                            priority: "after:api",
                             templateDirs: "{harness}.options.templateDirs",
                             urls:         "{harness}.options.urls",
+                            rules: {
+                                contextToExpose: {
+                                    req:  "req",
+                                    user: "req.session._ul_user",
+                                    model: {
+                                        user:     "req.session._ul_user"
+                                    }
+                                }
+                            },
                             listeners: {
                                 "onSchemasDereferenced.notifyParent": {
                                     func: "{express}.events.suggestReady.fire"

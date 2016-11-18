@@ -21,8 +21,6 @@ fluid.registerNamespace("gpii.tests.ul.website.harness");
 gpii.tests.ul.website.harness.stopServer = function (that) {
     gpii.express.stopServer(that.express);
     gpii.express.stopServer(that.pouch);
-
-    that.lucene.events.onReadyForShutdown.fire();
 };
 
 fluid.defaults("gpii.tests.ul.website.harness", {
@@ -30,8 +28,7 @@ fluid.defaults("gpii.tests.ul.website.harness", {
     templateDirs: ["%ul-website/src/templates", "%gpii-express-user/src/templates", "%gpii-json-schema/src/templates", "%ul-website/tests/templates"],
     ports: {
         api:    7217,
-        couch:  7218,
-        lucene: 7219
+        couch:  7218
     },
     distributeOptions: {
         record: 30000, // Searches that hit lucene need more time, at least for the first search.
@@ -41,19 +38,15 @@ fluid.defaults("gpii.tests.ul.website.harness", {
         constructFixtures: null,
         pouchStarted:      null,
         pouchStopped:      null,
-        luceneStarted:     null,
-        luceneStopped:     null,
         onFixturesConstructed: {
             events: {
                 apiReady:      "apiReady",
-                luceneStarted: "luceneStarted",
                 pouchStarted:  "pouchStarted"
             }
         },
         onFixturesStopped: {
             events: {
                 apiStopped:    "apiStopped",
-                luceneStopped: "luceneStopped",
                 pouchStopped:  "pouchStopped"
             }
         },
@@ -107,20 +100,50 @@ fluid.defaults("gpii.tests.ul.website.harness", {
                     }
                 }
             }
+        }
+    }
+});
+
+fluid.defaults("gpii.tests.ul.website.harness.withLucene", {
+    gradeNames:   ["gpii.tests.ul.website.harness"],
+    ports: {
+        lucene: 7219
+    },
+    events: {
+        luceneStarted:     null,
+        luceneStopped:     null,
+        onFixturesConstructed: {
+            events: {
+                apiReady:      "apiReady",
+                luceneStarted: "luceneStarted",
+                pouchStarted:  "pouchStarted"
+            }
         },
+        onFixturesStopped: {
+            events: {
+                apiStopped:    "apiStopped",
+                luceneStopped: "luceneStopped",
+                pouchStopped:  "pouchStopped"
+            }
+        }
+    },
+    components: {
         lucene: {
             type: "gpii.pouch.lucene",
             createOnEvent: "constructFixtures",
             options: {
-                port: "{harness}.options.ports.lucene",
-                dbUrl: "{harness}.options.urls.couch",
+                events: {
+                    onReadyForShutdown: "{gpii.tests.ul.website.harness.withLucene}.events.stopFixtures"
+                },
+                port: "{gpii.tests.ul.website.harness.withLucene}.options.ports.lucene",
+                dbUrl: "{gpii.tests.ul.website.harness.withLucene}.options.urls.couch",
                 processTimeout: 4000,
                 listeners: {
                     "onStarted.notifyParent": {
-                        func: "{harness}.events.luceneStarted.fire"
+                        func: "{gpii.tests.ul.website.harness.withLucene}.events.luceneStarted.fire"
                     },
                     "onShutdownComplete.notifyParent": {
-                        func: "{harness}.events.luceneStopped.fire"
+                        func: "{gpii.tests.ul.website.harness.withLucene}.events.luceneStopped.fire"
                     }
                 }
             }
@@ -144,4 +167,8 @@ fluid.defaults("gpii.tests.ul.website.harness.instrumented", {
             }
         }
     }
+});
+
+fluid.defaults("gpii.tests.ul.website.harness.instrumented.withLucene", {
+    gradeNames: ["gpii.tests.ul.website.harness.withLucene", "gpii.tests.ul.website.harness.instrumented"]
 });

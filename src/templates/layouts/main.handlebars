@@ -12,7 +12,23 @@
     {{> common-footer}}
 
     <script type="text/javascript">
+        // Initialise Foundation.
         $(document).foundation();
+
+        // Initialise the UIOptions panel.
+        $(document).ready(function () {
+            fluid.uiOptions.prefsEditor(".flc-prefsEditor-separatedPanel", {
+                lazyLoad: true,
+                terms: {
+                    "templatePrefix": "/nm/infusion/src/framework/preferences/html",
+                    "messagePrefix": "/nm/infusion/src/framework/preferences/messages"
+                },
+                "tocTemplate": "/nm/infusion/components/tableOfContents/html/TableOfContents.html",
+                "ignoreForToC": {
+                    "overviewPanel": ".flc-overviewPanel"
+                }
+            });
+        });
     </script>
   </body>
 </html>

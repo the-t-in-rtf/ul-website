@@ -27,7 +27,7 @@
 // {
 //   entry1: {
 //     selector:  "selector1",
-//     className: "class1 class2"
+//     toggleClass: "class1 class2"
 //   }
 // }
 //

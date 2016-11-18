@@ -50,7 +50,7 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder", {
 });
 
 fluid.defaults("gpii.tests.ul.website.search.environment", {
-    gradeNames: ["gpii.test.ul.website.testEnvironment"],
+    gradeNames: ["gpii.test.ul.website.testEnvironment.withLucene"],
     endpoint:   "/api/search",
     components: {
         caseHolder: {
@@ -203,7 +203,7 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.whetstone", {
 });
 
 fluid.defaults("gpii.tests.ul.website.search.environment.whetstone", {
-    gradeNames: ["gpii.test.ul.website.testEnvironment"],
+    gradeNames: ["gpii.test.ul.website.testEnvironment.withLucene"],
     endpoint:   "/api/search?q=%22whetstone%22",
     components: {
         caseHolder: {
@@ -271,7 +271,7 @@ fluid.defaults("gpii.tests.ul.website.search.caseHolder.status", {
 });
 
 fluid.defaults("gpii.tests.ul.website.search.environment.status", {
-    gradeNames: ["gpii.test.ul.website.testEnvironment"],
+    gradeNames: ["gpii.test.ul.website.testEnvironment.withLucene"],
     endpoint:   "/api/search?q=%22deleted%22",
     components: {
         caseHolder: {

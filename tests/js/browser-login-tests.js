@@ -21,11 +21,11 @@ fluid.defaults("gpii.tests.ul.website.login.caseHolder", {
                 type: "test",
                 sequence: [
                     {
-                        func: "{testEnvironment}.webdriver.findElement",
-                        args: [{ css: ".user-controls-toggle .button"}]
+                        func: "{testEnvironment}.webdriver.wait",
+                        args: [gpii.webdriver.until.elementLocated({ css: ".user-controls-toggle .button"})]
                     },
                     {
-                        event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
+                        event:    "{testEnvironment}.webdriver.events.onWaitComplete",
                         listener: "gpii.test.webdriver.inspectElement",
                         args:     ["The username of the logged in user should appear onscreen...", "{arguments}.0", "getText", "existing"] // message, element, elementFn, expectedValue, jqUnitFn
                     }
