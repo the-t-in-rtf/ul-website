@@ -1,0 +1,9 @@
+{{#if images}}
+<div class="ul-product-images">
+    <h5 align="center">Product Images</h5>
+
+    {{#each images}}
+        <div class="ul-product-image">{{>singleImage}}</div>
+    {{/each}}
+</div>
+{{/if}}

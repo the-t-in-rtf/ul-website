@@ -1,6 +1,11 @@
 {
   "type": "prodConfig",
   "options": {
-    "gradeNames": ["gpii.ul.website.harness"]
+    "gradeNames": ["gpii.ul.website.harness"],
+    "ports": {
+      "api":    7633,
+      "couch":  5984,
+      "lucene": 5985
+    }
   }
 }

@@ -143,8 +143,9 @@
     fluid.defaults("gpii.ul.search", {
         gradeNames: ["gpii.handlebars.templateAware"],
         events: {
-            onStartLoading: null,
-            onStopLoading:  null
+            onResultsRefreshed: null,
+            onStartLoading:     null,
+            onStopLoading:      null
         },
         model: {
             q:               "",
@@ -190,6 +191,11 @@
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
                 container:     "{search}.dom.products",
                 options: {
+                    listeners: {
+                        "onDomChange.notifyParent": {
+                            func: "{gpii.ul.search}.events.onResultsRefreshed.fire"
+                        }
+                    },
                     model: {
                         products: "{search}.model.products",
                         offset:  "{search}.model.offset",
@@ -272,6 +278,19 @@
                     },
                     listeners: {
                         "onCreate.applyBindings": "{that}.events.onRefresh"
+                    }
+                }
+            },
+            // The image "knitter" that associated images with individual search results
+            knitter: {
+                type: "gpii.ul.api.client.images.knitter",
+                container: "{that}.container",
+                options: {
+                    events: {
+                        onResultsRefreshed: "{search}.events.onResultsRefreshed"
+                    },
+                    components: {
+                        renderer: "{gpii.ul.search}.renderer"
                     }
                 }
             }

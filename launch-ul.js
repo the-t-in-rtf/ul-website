@@ -13,7 +13,15 @@ fluid.defaults("gpii.ul.website.launcher", {
     gradeNames: ["gpii.launcher"],
     yargsOptions: {
         describe: {
-            "ports": "The ports (ports.api, ports.couch, and ports.lucene) used by this instance."
+            "cacheDir":     "The full or package-relative path to the directory in which we should store generated thumbnails of full-sized images.",
+            "originalsDir": "The full or package-relative path to the directory in which full-sized images are stored.",
+            "ports.api":    "The port the API should listen to.",
+            "ports.couch":  "When running in production mode, the port on which CouchDB is running.  When running in dev mode, the port which PouchDB should listen to.",
+            "ports.lucene": "When running in production mode, the port on which couchdb-lucene is running.  When running in dev mode, the port which gpii-pouchdb-lucene should listen to.",
+            "setLogging":   "The level of log information to output to the console. Defaults to `false` (only warnings and errors)."
+        },
+        coerce: {
+            setLogging: JSON.parse
         },
         help: true,
         defaults: {

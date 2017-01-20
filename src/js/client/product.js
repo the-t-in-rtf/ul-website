@@ -381,6 +381,20 @@
                     }
                 }
             },
+            gallery: {
+                type:          "gpii.ul.images.viewGallery",
+                createOnEvent: "{product}.events.onMarkupRendered",
+                container:     ".ul-gallery-holder",
+                options: {
+                    model: {
+                        product: "{gpii.ul.product}.model.product"
+                    },
+                    components: {
+                        renderer: "{gpii.ul.product}.renderer"
+                    }
+                }
+
+            },
             edit: {
                 type:          "gpii.ul.product.edit",
                 createOnEvent: "{product}.events.onRenderedAndReadyForEdit",

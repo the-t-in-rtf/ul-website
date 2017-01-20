@@ -26,10 +26,6 @@ gpii.tests.ul.website.harness.stopServer = function (that) {
 fluid.defaults("gpii.tests.ul.website.harness", {
     gradeNames:   ["gpii.ul.website.harness"],
     templateDirs: ["%ul-website/src/templates", "%gpii-express-user/src/templates", "%gpii-json-schema/src/templates", "%ul-website/tests/templates"],
-    ports: {
-        api:    7217,
-        couch:  7218
-    },
     distributeOptions: {
         record: 30000, // Searches that hit lucene need more time, at least for the first search.
         target: "{that gpii.express.handler}.options.timeout"
@@ -106,9 +102,6 @@ fluid.defaults("gpii.tests.ul.website.harness", {
 
 fluid.defaults("gpii.tests.ul.website.harness.withLucene", {
     gradeNames:   ["gpii.tests.ul.website.harness"],
-    ports: {
-        lucene: 7219
-    },
     events: {
         luceneStarted:     null,
         luceneStopped:     null,

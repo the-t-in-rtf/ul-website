@@ -5,27 +5,22 @@
 /* eslint-env node */
 "use strict";
 var fluid = require("infusion");
-fluid.setLogging(fluid.logLevel.FAIL);
-
 require("../../../");
 
 fluid.require("%gpii-express");
 fluid.require("%gpii-express-user");
 fluid.require("%gpii-handlebars");
+
 fluid.require("%ul-api");
+
+fluid.require("%ul-api/src/js/harness.js");
 
 require("./suggest");
 
 fluid.defaults("gpii.ul.website.harness", {
-    gradeNames:   ["fluid.component"],
+    gradeNames:   ["gpii.ul.api.harness"],
     templateDirs: ["%ul-website/src/templates", "%gpii-express-user/src/templates", "%gpii-json-schema/src/templates"],
     schemaDirs:   ["%ul-website/src/schemas", "%ul-api/src/schemas", "%gpii-express-user/src/schemas"],
-    ports: {
-        api:    7633,
-        couch:  5984,
-        lucene: 5985
-    },
-    sessionKey: "_ul_user",
     rules: {
         contextToExpose: {
             "layout": "layout", // This is required to support custom layouts
@@ -67,52 +62,6 @@ fluid.defaults("gpii.ul.website.harness", {
             target: "{that gpii.handlebars.dispatcherMiddleware}.options.rules.contextToExpose"
         }
     ],
-    urls: {
-        api: {
-            expander: {
-                funcName: "fluid.stringTemplate",
-                args:     ["http://localhost:%port", { port: "{that}.options.ports.api" }]
-            }
-        },
-        login: {
-            expander: {
-                funcName: "fluid.stringTemplate",
-                args:     ["http://localhost:%port/api/user/login", { port: "{that}.options.ports.api" }]
-            }
-        },
-        couch: {
-            expander: {
-                funcName: "fluid.stringTemplate",
-                args:     ["http://localhost:%port/", { port: "{that}.options.ports.couch" }]
-            }
-        },
-        lucene: {
-            expander: {
-                funcName: "fluid.stringTemplate",
-                args:     ["http://localhost:%port/local/%dbName/_design/lucene/by_content", { port: "{that}.options.ports.lucene", dbName: "{that}.options.dbNames.ul"}]
-            }
-        },
-        ulDb: {
-            expander: {
-                funcName: "fluid.stringTemplate",
-                args:     ["http://localhost:%port/%dbName", { port: "{that}.options.ports.couch", dbName: "{that}.options.dbNames.ul"}]
-            }
-        },
-        usersDb: {
-            expander: {
-                funcName: "fluid.stringTemplate",
-                args:     ["http://localhost:%port/%dbName", { port: "{that}.options.ports.couch", dbName: "{that}.options.dbNames.users"}]
-            }
-        }
-    },
-    dbNames: {
-        ul:    "ul",
-        users: "users"
-    },
-    events: {
-        apiReady:     null,
-        apiStopped:   null
-    },
     components: {
         express: {
             type: "gpii.express.withJsonQueryParser",
@@ -174,25 +123,6 @@ fluid.defaults("gpii.ul.website.harness", {
                             }
                         }
                     },
-                    // Client-side Handlebars template bundles
-                    inline: {
-                        type: "gpii.handlebars.inlineTemplateBundlingMiddleware",
-                        options: {
-                            priority: "after:handlebars",
-                            path: "/hbs",
-                            templateDirs: "{harness}.options.templateDirs"
-                        }
-                    },
-                    // NPM dependencies
-                    nm: {
-                        type: "gpii.express.router.static",
-                        options: {
-                            priority: "after:session",
-                            path: "/nm",
-                            content: "%ul-website/node_modules"
-                        }
-
-                    },
                     // Our own source
                     src: {
                         type: "gpii.express.router.static",
@@ -220,50 +150,22 @@ fluid.defaults("gpii.ul.website.harness", {
                             schemaDirs: "{harness}.options.schemaDirs"
                         }
                     },
-                    api: {
-                        type: "gpii.ul.api",
+                    modules: {
                         options: {
-                            priority: "after:session",
-                            templateDirs: "{harness}.options.templateDirs",
-                            urls:     "{harness}.options.urls",
-                            listeners: {
-                                "onReady.notifyParent": {
-                                    func: "{harness}.events.apiReady.fire"
-                                }
-                            },
-                            components: {
-                                // Defang the "session" handling middleware included with ul-api in favor of ours.
-                                session: { type: "fluid.component" }
-                            }
+                            content: "%ul-website/node_modules"
                         }
                     },
-                    suggest: {
-                        type: "gpii.ul.website.suggest",
+                    inline: {
                         options: {
-                            priority: "after:api",
-                            templateDirs: "{harness}.options.templateDirs",
-                            urls:         "{harness}.options.urls",
-                            rules: {
-                                contextToExpose: {
-                                    req:  "req",
-                                    user: "req.session._ul_user",
-                                    model: {
-                                        user:     "req.session._ul_user"
-                                    }
-                                }
-                            },
-                            listeners: {
-                                "onSchemasDereferenced.notifyParent": {
-                                    func: "{express}.events.suggestReady.fire"
-                                }
-                            }
+                            priority: "before:dispatcher"
                         }
                     },
                     dispatcher: {
                         type: "gpii.handlebars.dispatcherMiddleware",
                         options: {
-                            priority: "after:suggest",
+                            priority: "before:htmlErrorHandler",
                             path: ["/:template", "/"],
+                            method: "get",
                             templateDirs: "{harness}.options.templateDirs",
                             rules: {
                                 contextToExpose: {
@@ -278,7 +180,7 @@ fluid.defaults("gpii.ul.website.harness", {
                     htmlErrorHandler: {
                         type:     "gpii.handlebars.errorRenderingMiddleware",
                         options: {
-                            priority: "after:dispatcher",
+                            priority: "last",
                             templateKey: "pages/error"
                         }
                     }

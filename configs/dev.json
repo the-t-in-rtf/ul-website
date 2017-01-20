@@ -2,6 +2,11 @@
   "type": "devConfig",
   "options": {
     "gradeNames": ["gpii.tests.ul.website.harness.withLucene"],
+    "ports": {
+      "api":    7217,
+      "couch":  7218,
+      "lucene": 7219
+    },
     "listeners": {
       "onCreate.constructFixtures": {
         "func": "{that}.events.constructFixtures.fire"

@@ -149,3 +149,35 @@ select.ul-updates-sources-control {
     margin-top:    .5em;
     margin-bottom: .5em;
 }
+
+.product-listing {
+    min-height: 100px;
+    padding-bottom: .25em;
+}
+
+.ul-product-images {
+    border: 1px solid #cccccc;
+    padding: 1em;
+    clear: both;
+    position: absolute;
+}
+
+.ul-product-image:first-of-type {
+    padding-left: 0em;
+}
+
+.ul-product-image {
+    float: left;
+    padding-left: .5em;
+}
+
+img {
+    box-shadow: none;
+}
+
+.ul-image-holder {
+    float: left;
+    margin-right: .5em;
+    width:  100px;
+    height: 100px;
+}
