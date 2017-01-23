@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/GPII/ul-website",
   "dependencies": {
-    "ajv": "4.8.2",
     "foundation-sites": "6.2.4",
     "gpii-binder": "1.0.0-dev.20161123T123137Z.a776add",
     "gpii-express": "1.0.1",
@@ -32,18 +31,12 @@
     "gpii-pouchdb": "1.0.0",
     "gpii-pouchdb-lucene": "0.1.0-dev.20161205T085842Z.5fc802e",
     "gpii-sort": "1.0.0-dev.20160630T152357Z.3508dc6",
-    "handlebars": "4.0.5",
-    "infusion": "git://github.com/the-t-in-rtf/infusion.git#8202f87093d60bdf7c58d95a41ecdf27aca0eca9",
-    "json-schema-ref-parser": "3.1.2",
-    "jsonpointer.js": "0.4.0",
-    "marked": "0.3.6",
-    "moment": "2.16.0",
-    "pagedown": "1.1.0",
-    "ul-api": "1.0.0-dev.20170120T153831Z.db3964d"
+    "infusion": "2.0.0-dev.20161219T170555Z.5778f7e",
+    "jquery": "2.1.4",
+    "moment": "2.17.1",
+    "ul-api": "1.0.0-dev.20170123T110030Z.df2fc3d"
   },
   "devDependencies": {
-    "accessibility-developer-tools": "2.11.0",
-    "axe-core": "2.0.7",
     "eslint": "3.11.1",
     "eslint-config-fluid": "1.0.0",
     "fluid-grunt-eslint": "18.1.2",
@@ -51,7 +44,6 @@
     "grunt": "1.0.1",
     "grunt-jsonlint": "1.1.0",
     "istanbul": "0.4.5",
-    "jquery": "2.1.4",
     "jsonlint": "1.6.2",
     "kettle": "1.2.2",
     "node-jqunit": "1.1.4",
