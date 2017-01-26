@@ -14,6 +14,9 @@
                 accept: "application/json"
             }
         },
+        events: {
+            onResultsRefreshed: null
+        },
         rules: {
             successResponseToModel: {
                 "":           "notfound",
@@ -94,6 +97,9 @@
                     listeners: {
                         "onCreate.pageAndRender": {
                             func: "{that}.pageAndRender"
+                        },
+                        "onDomChange.notifyParent": {
+                            func: "{gpii.ul.products}.events.onResultsRefreshed.fire"
                         }
                     }
                 }
@@ -182,6 +188,19 @@
                     },
                     listeners: {
                         "onCreate.applyBindings": "{that}.events.onRefresh"
+                    }
+                }
+            },
+            // The image "knitter" that associated images with individual search results
+            knitter: {
+                type: "gpii.ul.api.client.images.knitter",
+                container: "{gpii.ul.products}.container",
+                options: {
+                    events: {
+                        onResultsRefreshed: "{gpii.ul.products}.events.onResultsRefreshed"
+                    },
+                    components: {
+                        renderer: "{gpii.ul.products}.renderer"
                     }
                 }
             }
