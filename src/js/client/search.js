@@ -151,7 +151,7 @@
             q:               "",
             sources:         [],
             statuses:        [ "new", "active", "discontinued"],
-            sortBy:           "/name",
+            sortBy:           undefined,
             offset:           0,
             limit:            25,
             totalRows:        0,
@@ -232,7 +232,7 @@
             },
             // The sort controls
             sortBy: {
-                type:          "gpii.ul.sortBy",
+                type:          "gpii.ul.sortBy.search",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
                 container:     "{search}.dom.sortBy",
                 options: {

@@ -2,8 +2,19 @@
 /* global fluid */
 (function () {
     "use strict";
+    var gpii = fluid.registerNamespace("gpii");
+
+    fluid.registerNamespace("gpii.ul.select");
+
+    gpii.ul.select.renderMarkup = function (that) {
+        var selectOptionsSorted = fluid.copy(that.options.select);
+        selectOptionsSorted.options = fluid.parsePriorityRecords(selectOptionsSorted.options, "select option");
+        that.renderMarkup("initial", that.options.template, selectOptionsSorted);
+    };
+
     fluid.defaults("gpii.ul.select", {
         gradeNames: ["gpii.handlebars.templateAware"],
+        priorityName: "select option",
         selectors:  {
             initial: ""
         },
@@ -12,8 +23,8 @@
         },
         invokers: {
             renderInitialMarkup: {
-                func: "{that}.renderMarkup",
-                args: ["initial", "{that}.options.template", "{that}.options.select"]
+                funcName: "gpii.ul.select.renderMarkup",
+                args:     ["{that}"]
             }
         },
         modelListeners: {
