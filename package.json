@@ -25,7 +25,7 @@
     "gpii-express": "1.0.1",
     "gpii-express-user": "git://github.com/the-t-in-rtf/gpii-express-user.git#df88d54741a203f11bd962966252f1389108a694",
     "gpii-handlebars": "1.0.0-dev.20170119T114557Z.daf5cf9",
-    "gpii-json-schema": "1.0.0-dev.20161124T134646Z.cd96ab8",
+    "gpii-json-schema": "1.0.0-dev.20170123T134724Z.95059c1",
     "gpii-launcher": "1.0.0-dev.20161125T160059Z.e8f50d4",
     "gpii-location-bar-relay": "1.0.0-dev.20161125T161722Z.5d4d48c",
     "gpii-pouchdb": "1.0.0",
@@ -34,7 +34,7 @@
     "infusion": "2.0.0-dev.20161219T170555Z.5778f7e",
     "jquery": "2.1.4",
     "moment": "2.17.1",
-    "ul-api": "1.0.0-dev.20170123T110030Z.df2fc3d"
+    "ul-api": "1.0.0-dev.20170125T151251Z.a3b0763"
   },
   "devDependencies": {
     "eslint": "3.11.1",
