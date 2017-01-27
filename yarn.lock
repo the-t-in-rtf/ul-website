@@ -75,14 +75,14 @@ ajv-keywords@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-1.1.1.tgz#02550bc605a3e576041565628af972e06c549d50"
 
-ajv@4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.6.0.tgz#71a150742689ab6dcfb9c78cb92b35d0d098d7a8"
+ajv@4.11.2, ajv@^4.7.0:
+  version "4.11.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.2.tgz#f166c3c11cbc6cb9dcc102a5bcfe5b72c95287e6"
   dependencies:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
-ajv@4.9.0, ajv@^4.7.0:
+ajv@4.9.0:
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.9.0.tgz#5a358085747b134eb567d6d15e015f1d7802f45c"
   dependencies:
@@ -229,9 +229,9 @@ aws4@^1.2.1:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.5.0.tgz#0a29ffb79c31c9e712eeb087e8e7a64b4a56d755"
 
-axe-core@2.0.7:
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-2.0.7.tgz#b13a0d5ddd7962a284f7fcb9e0457bff370176aa"
+axe-core@2.1.7:
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-2.1.7.tgz#4f66f2b3ee3b58ec2d3db4339dd124c5b33b79c3"
 
 babel-code-frame@^6.16.0:
   version "6.16.0"
@@ -363,6 +363,21 @@ body-parser@1.15.2:
     raw-body "~2.1.7"
     type-is "~1.6.13"
 
+body-parser@1.16.0:
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.16.0.tgz#924a5e472c6229fb9d69b85a20d5f2532dec788b"
+  dependencies:
+    bytes "2.4.0"
+    content-type "~1.0.2"
+    debug "2.6.0"
+    depd "~1.1.0"
+    http-errors "~1.5.1"
+    iconv-lite "0.4.15"
+    on-finished "~2.3.0"
+    qs "6.2.1"
+    raw-body "~2.2.0"
+    type-is "~1.6.14"
+
 boom@2.x.x:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/boom/-/boom-2.10.1.tgz#39c8918ceff5799f83f9492a848f625add0c766f"
@@ -386,17 +401,6 @@ buildmail@3.10.0:
     libqp "1.1.0"
     nodemailer-fetch "1.6.0"
     nodemailer-shared "1.1.0"
-
-buildmail@3.8.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/buildmail/-/buildmail-3.8.0.tgz#191b6369710b2bd35a7819edf2cb0b642efd65bf"
-  dependencies:
-    addressparser "1.0.1"
-    libbase64 "0.1.0"
-    libmime "2.0.3"
-    libqp "1.1.0"
-    nodemailer-fetch "1.4.0"
-    nodemailer-shared "1.0.5"
 
 builtin-modules@^1.0.0:
   version "1.1.1"
@@ -774,6 +778,10 @@ crc@3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/crc/-/crc-3.4.1.tgz#65d5830b1a2569557cfb324c0e679998521473ee"
 
+crc@3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/crc/-/crc-3.4.4.tgz#9da1e980e3bd44fc5c93bf5ab3da3378d85e466b"
+
 create-error-class@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/create-error-class/-/create-error-class-3.0.2.tgz#06be7abef947a3f14a30fd610671d401bca8b7b6"
@@ -826,11 +834,17 @@ debug@0.7.4:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-0.7.4.tgz#06e1ea8082c2cb14e39806e22e2f6f757f92af39"
 
-debug@2.2.0, debug@^2.1.0, debug@^2.1.1, debug@^2.2.0, debug@~2.2.0:
+debug@2.2.0, debug@^2.1.1, debug@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
   dependencies:
     ms "0.7.1"
+
+debug@2.6.0, debug@^2.1.0, debug@^2.2.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.0.tgz#bc596bcabe7617f11d9fa15361eded5608b8499b"
+  dependencies:
+    ms "0.7.2"
 
 decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2:
   version "1.2.0"
@@ -1100,13 +1114,13 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-fluid@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-fluid/-/eslint-config-fluid-1.0.0.tgz#fd1fe8c14439c6afc009b31c0665be0d574d2892"
+eslint-config-fluid@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-fluid/-/eslint-config-fluid-1.1.0.tgz#82b8bff6d208ff2492938cbe1a011d4ca2362a97"
 
-eslint@3.11.1:
-  version "3.11.1"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.11.1.tgz#408be581041385cba947cd8d1cd2227782b55dbf"
+eslint@^3.14.1:
+  version "3.14.1"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.14.1.tgz#8a62175f2255109494747a1b25128d97b8eb3d97"
   dependencies:
     babel-code-frame "^6.16.0"
     chalk "^1.1.3"
@@ -1119,7 +1133,7 @@ eslint@3.11.1:
     esutils "^2.0.2"
     file-entry-cache "^2.0.0"
     glob "^7.0.3"
-    globals "^9.2.0"
+    globals "^9.14.0"
     ignore "^3.2.0"
     imurmurhash "^0.1.4"
     inquirer "^0.12.0"
@@ -1138,7 +1152,7 @@ eslint@3.11.1:
     require-uncached "^1.0.2"
     shelljs "^0.7.5"
     strip-bom "^3.0.0"
-    strip-json-comments "~1.0.1"
+    strip-json-comments "~2.0.1"
     table "^3.7.8"
     text-table "~0.2.0"
     user-home "^2.0.0"
@@ -1251,7 +1265,7 @@ express-handlebars@1.2.2:
     promise "^6.0.0"
     semver "^3.0.1"
 
-"express-pouchdb@https://github.com/the-t-in-rtf/express-pouchdb.git#fa2778d1fdb6ac7c9d8adf7894b12df2e9e134f0":
+"express-pouchdb@git+https://github.com/the-t-in-rtf/express-pouchdb.git#fa2778d1fdb6ac7c9d8adf7894b12df2e9e134f0":
   version "2.1.0"
   resolved "git+https://github.com/the-t-in-rtf/express-pouchdb.git#fa2778d1fdb6ac7c9d8adf7894b12df2e9e134f0"
   dependencies:
@@ -1295,20 +1309,6 @@ express-session@1.14.0:
     uid-safe "~2.1.1"
     utils-merge "1.0.0"
 
-express-session@1.14.1:
-  version "1.14.1"
-  resolved "https://registry.yarnpkg.com/express-session/-/express-session-1.14.1.tgz#600364f0f6bf5dce32649e006770bdeee80aec99"
-  dependencies:
-    cookie "0.3.1"
-    cookie-signature "1.0.6"
-    crc "3.4.0"
-    debug "~2.2.0"
-    depd "~1.1.0"
-    on-headers "~1.0.1"
-    parseurl "~1.3.1"
-    uid-safe "~2.1.2"
-    utils-merge "1.0.0"
-
 express-session@1.14.2:
   version "1.14.2"
   resolved "https://registry.yarnpkg.com/express-session/-/express-session-1.14.2.tgz#6bcf586ed6d1dc37b02570087756c9de7b80b275"
@@ -1317,6 +1317,20 @@ express-session@1.14.2:
     cookie-signature "1.0.6"
     crc "3.4.1"
     debug "~2.2.0"
+    depd "~1.1.0"
+    on-headers "~1.0.1"
+    parseurl "~1.3.1"
+    uid-safe "~2.1.3"
+    utils-merge "1.0.0"
+
+express-session@1.15.0:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/express-session/-/express-session-1.15.0.tgz#67131dd5b78a42bc57b50af0a14880265c03f919"
+  dependencies:
+    cookie "0.3.1"
+    cookie-signature "1.0.6"
+    crc "3.4.4"
+    debug "2.6.0"
     depd "~1.1.0"
     on-headers "~1.0.1"
     parseurl "~1.3.1"
@@ -1529,12 +1543,12 @@ foundation-sites@6.2.4:
     jquery "^2.2.0"
     what-input "^2.0.0"
 
-foundation-sites@6.2.4-rc1:
-  version "6.2.4-rc1"
-  resolved "https://registry.yarnpkg.com/foundation-sites/-/foundation-sites-6.2.4-rc1.tgz#1272a5a2aa3e537ddcb62ac09f87273079f6546b"
+foundation-sites@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/foundation-sites/-/foundation-sites-6.3.0.tgz#19b2d6e5edced8418a4a7b4a1d65287ee1c8d512"
   dependencies:
     jquery "^2.2.0"
-    what-input "^2.0.0"
+    what-input "^4.0.3"
 
 fresh@0.3.0:
   version "0.3.0"
@@ -1675,9 +1689,9 @@ glob@^5.0.0, glob@^5.0.15, glob@~5.0.0:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-globals@^9.2.0:
-  version "9.12.0"
-  resolved "https://registry.yarnpkg.com/globals/-/globals-9.12.0.tgz#992ce90828c3a55fa8f16fada177adb64664cf9d"
+globals@^9.14.0, globals@^9.2.0:
+  version "9.14.0"
+  resolved "https://registry.yarnpkg.com/globals/-/globals-9.14.0.tgz#8859936af0038741263053b39d0e76ca241e4034"
 
 globby@^5.0.0:
   version "5.0.0"
@@ -1706,25 +1720,19 @@ got@^6.7.1:
     unzip-response "^2.0.1"
     url-parse-lax "^1.0.0"
 
-gpii-binder@1.0.0-dev.20161123T123137Z.a776add:
-  version "1.0.0-dev.20161123T123137Z.a776add"
-  resolved "https://registry.yarnpkg.com/gpii-binder/-/gpii-binder-1.0.0-dev.20161123T123137Z.a776add.tgz#4d44015699fec6f6046e5859130254a118606442"
-  dependencies:
-    infusion "git://github.com/the-t-in-rtf/infusion.git#8202f87093d60bdf7c58d95a41ecdf27aca0eca9"
-
 gpii-binder@1.0.0-dev.20161219T173834Z.5ecfb7b:
   version "1.0.0-dev.20161219T173834Z.5ecfb7b"
   resolved "https://registry.yarnpkg.com/gpii-binder/-/gpii-binder-1.0.0-dev.20161219T173834Z.5ecfb7b.tgz#912dead98c27c10d34f52cdc0c75b75bb677f7e9"
   dependencies:
     infusion "2.0.0-dev.20161219T170555Z.5778f7e"
 
-"gpii-binder@git://github.com/the-t-in-rtf/gpii-binder#513066d82f20303e4745115f6d52d104bc359021":
-  version "1.0.0"
-  resolved "git://github.com/the-t-in-rtf/gpii-binder#0bb79d96aeb5b9ed19efd01fbc9149440f6fe4a4"
+gpii-binder@1.0.0-dev.20170127T144054Z.54a5ef2, gpii-binder@^1.0.0-dev.20170127T144054Z.54a5ef2:
+  version "1.0.0-dev.20170127T144054Z.54a5ef2"
+  resolved "https://registry.yarnpkg.com/gpii-binder/-/gpii-binder-1.0.0-dev.20170127T144054Z.54a5ef2.tgz#a56985dcfdbf0a52970a9b42fe3f39d375a50d63"
   dependencies:
-    infusion "git://github.com/the-t-in-rtf/infusion.git#056bd1a246fd63f0123fcd375db8f6b157e245b8"
+    infusion "3.0.0-dev.20170127T130413Z.103de6e"
 
-gpii-express-user@1.0.0-dev.20170123T140829Z.93d6266:
+gpii-express-user@1.0.0-dev.20170123T140829Z.93d6266, gpii-express-user@^1.0.0-dev.20170123T140829Z.93d6266:
   version "1.0.0-dev.20170123T140829Z.93d6266"
   resolved "https://registry.yarnpkg.com/gpii-express-user/-/gpii-express-user-1.0.0-dev.20170123T140829Z.93d6266.tgz#5619eda7d292b34fa683bcebf1721bb25779f44b"
   dependencies:
@@ -1739,44 +1747,6 @@ gpii-express-user@1.0.0-dev.20170123T140829Z.93d6266:
     nodemailer "2.6.4"
     nodemailer-smtp-transport "2.7.2"
     request "2.79.0"
-
-"gpii-express-user@git://github.com/the-t-in-rtf/gpii-express-user.git#df88d54741a203f11bd962966252f1389108a694":
-  version "1.0.0"
-  resolved "git://github.com/the-t-in-rtf/gpii-express-user.git#df88d54741a203f11bd962966252f1389108a694"
-  dependencies:
-    foundation-sites "6.2.4-rc1"
-    gpii-binder "git://github.com/the-t-in-rtf/gpii-binder#513066d82f20303e4745115f6d52d104bc359021"
-    gpii-express "git://github.com/the-t-in-rtf/gpii-express#baa1558d22ee7abcb6d6b6410af7cc95693f1b80"
-    gpii-handlebars "git://github.com/the-t-in-rtf/gpii-handlebars.git#1e5cc780a98bae199ba841c72ab6173f9c17f3ef"
-    gpii-json-schema "git://github.com/the-t-in-rtf/gpii-json-schema.git#f7bfbcf6766ad7ef7eaa133721d3a8e525ff7027"
-    infusion "git://github.com/the-t-in-rtf/infusion.git#056bd1a246fd63f0123fcd375db8f6b157e245b8"
-    kettle "1.1.0"
-    marked "0.3.6"
-    nodemailer "2.5.0"
-    nodemailer-smtp-transport "2.6.0"
-    request "2.74.0"
-
-gpii-express@1.0.0, "gpii-express@git://github.com/the-t-in-rtf/gpii-express#baa1558d22ee7abcb6d6b6410af7cc95693f1b80":
-  version "1.0.0"
-  resolved "git://github.com/the-t-in-rtf/gpii-express#baa1558d22ee7abcb6d6b6410af7cc95693f1b80"
-  dependencies:
-    body-parser "1.15.2"
-    cookie-parser "1.4.3"
-    express "4.14.0"
-    express-session "1.14.1"
-    infusion "2.0.0-dev.20160519T222603Z.754d2c6"
-    resolve "1.1.7"
-
-gpii-express@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/gpii-express/-/gpii-express-1.0.1.tgz#ad2b3e110d56867e171c2323362caaa378163095"
-  dependencies:
-    body-parser "1.15.2"
-    cookie-parser "1.4.3"
-    express "4.14.0"
-    express-session "1.14.2"
-    infusion "2.0.0-dev.20161027T155641Z.0bcd507"
-    resolve "1.1.7"
 
 gpii-express@1.0.1-dev.20161219T161942Z.50ed093:
   version "1.0.1-dev.20161219T161942Z.50ed093"
@@ -1800,22 +1770,29 @@ gpii-express@1.0.1-dev.20170106T131203Z.a048e61:
     infusion "2.0.0-dev.20161219T170555Z.5778f7e"
     resolve "1.2.0"
 
+gpii-express@1.0.1-dev.20170127T142027Z.d7dabd6:
+  version "1.0.1-dev.20170127T142027Z.d7dabd6"
+  resolved "https://registry.yarnpkg.com/gpii-express/-/gpii-express-1.0.1-dev.20170127T142027Z.d7dabd6.tgz#4da1933fd2918787e8182aef4152ac1bfcf2135e"
+  dependencies:
+    body-parser "1.16.0"
+    cookie-parser "1.4.3"
+    express "4.14.0"
+    express-session "1.15.0"
+    infusion "3.0.0-dev.20170127T130413Z.103de6e"
+
+gpii-express@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/gpii-express/-/gpii-express-1.0.2.tgz#be71f0d453c536b66de1b86af0056831ed738105"
+  dependencies:
+    body-parser "1.16.0"
+    cookie-parser "1.4.3"
+    express "4.14.0"
+    express-session "1.15.0"
+    infusion "3.0.0-dev.20170127T130413Z.103de6e"
+
 gpii-handlebars@1.0.0-dev.20170106T133859Z.ea8de03:
   version "1.0.0-dev.20170106T133859Z.ea8de03"
   resolved "https://registry.yarnpkg.com/gpii-handlebars/-/gpii-handlebars-1.0.0-dev.20170106T133859Z.ea8de03.tgz#dda5b505f415da81cc45177b281002140d4c87b8"
-  dependencies:
-    express-handlebars "1.2.2"
-    gpii-binder "1.0.0-dev.20161219T173834Z.5ecfb7b"
-    gpii-express "1.0.1-dev.20170106T131203Z.a048e61"
-    handlebars "4.0.6"
-    infusion "2.0.0-dev.20161219T170555Z.5778f7e"
-    marked "0.3.6"
-    pagedown "1.1.0"
-    underscore-node "0.1.2"
-
-gpii-handlebars@1.0.0-dev.20170119T113843Z.6e17ea6:
-  version "1.0.0-dev.20170119T113843Z.6e17ea6"
-  resolved "https://registry.yarnpkg.com/gpii-handlebars/-/gpii-handlebars-1.0.0-dev.20170119T113843Z.6e17ea6.tgz#8ea7f4d5c98d81909a87daefdb724b4405564180"
   dependencies:
     express-handlebars "1.2.2"
     gpii-binder "1.0.0-dev.20161219T173834Z.5ecfb7b"
@@ -1839,28 +1816,15 @@ gpii-handlebars@1.0.0-dev.20170119T114557Z.daf5cf9:
     pagedown "1.1.0"
     underscore-node "0.1.2"
 
-"gpii-handlebars@git://github.com/the-t-in-rtf/gpii-handlebars.git#1e5cc780a98bae199ba841c72ab6173f9c17f3ef":
-  version "1.0.0"
-  resolved "git://github.com/the-t-in-rtf/gpii-handlebars.git#1e5cc780a98bae199ba841c72ab6173f9c17f3ef"
+gpii-handlebars@1.0.0-dev.20170127T145319Z.2c39da4, gpii-handlebars@^1.0.0-dev.20170127T145319Z.2c39da4:
+  version "1.0.0-dev.20170127T145319Z.2c39da4"
+  resolved "https://registry.yarnpkg.com/gpii-handlebars/-/gpii-handlebars-1.0.0-dev.20170127T145319Z.2c39da4.tgz#b32e8ff0fe9a587d0956edd97d17f97f09adca63"
   dependencies:
     express-handlebars "1.2.2"
-    gpii-binder "git://github.com/the-t-in-rtf/gpii-binder#513066d82f20303e4745115f6d52d104bc359021"
-    gpii-express "git://github.com/the-t-in-rtf/gpii-express#baa1558d22ee7abcb6d6b6410af7cc95693f1b80"
-    handlebars "4.0.5"
-    infusion "git://github.com/the-t-in-rtf/infusion.git#056bd1a246fd63f0123fcd375db8f6b157e245b8"
-    marked "0.3.6"
-    pagedown "1.1.0"
-    underscore-node "0.1.2"
-
-"gpii-handlebars@git://github.com/the-t-in-rtf/gpii-handlebars.git#acbd9397d7a54d03dbbb8eaa3dd6b3f64b02eab5":
-  version "1.0.0"
-  resolved "git://github.com/the-t-in-rtf/gpii-handlebars.git#9bc7d7254d941cdea1bf168d3f9477907a72b9e8"
-  dependencies:
-    express-handlebars "1.2.2"
-    gpii-binder "git://github.com/the-t-in-rtf/gpii-binder#513066d82f20303e4745115f6d52d104bc359021"
-    gpii-express "git://github.com/the-t-in-rtf/gpii-express#baa1558d22ee7abcb6d6b6410af7cc95693f1b80"
-    handlebars "4.0.5"
-    infusion "2.0.0-dev.20160519T222603Z.754d2c6"
+    gpii-binder "1.0.0-dev.20170127T144054Z.54a5ef2"
+    gpii-express "1.0.1-dev.20170127T142027Z.d7dabd6"
+    handlebars "4.0.6"
+    infusion "3.0.0-dev.20170127T130413Z.103de6e"
     marked "0.3.6"
     pagedown "1.1.0"
     underscore-node "0.1.2"
@@ -1878,93 +1842,48 @@ gpii-json-schema@1.0.0-dev.20170123T134724Z.95059c1:
     jsonpointer.js "0.4.0"
     quoted-printable "1.0.1"
 
-"gpii-json-schema@git://github.com/the-t-in-rtf/gpii-json-schema.git#f7bfbcf6766ad7ef7eaa133721d3a8e525ff7027":
-  version "0.1.0"
-  resolved "git://github.com/the-t-in-rtf/gpii-json-schema.git#f7bfbcf6766ad7ef7eaa133721d3a8e525ff7027"
+gpii-json-schema@1.0.0-dev.20170127T145847Z.8dbab26, gpii-json-schema@^1.0.0-dev.20170127T145847Z.8dbab26:
+  version "1.0.0-dev.20170127T145847Z.8dbab26"
+  resolved "https://registry.yarnpkg.com/gpii-json-schema/-/gpii-json-schema-1.0.0-dev.20170127T145847Z.8dbab26.tgz#0c7a5d7ef46de03fbb7925a99e88097aaaea486a"
   dependencies:
-    ajv "4.6.0"
-    gpii-binder "git://github.com/the-t-in-rtf/gpii-binder#513066d82f20303e4745115f6d52d104bc359021"
-    gpii-express "git://github.com/the-t-in-rtf/gpii-express#baa1558d22ee7abcb6d6b6410af7cc95693f1b80"
-    gpii-handlebars "git://github.com/the-t-in-rtf/gpii-handlebars.git#acbd9397d7a54d03dbbb8eaa3dd6b3f64b02eab5"
-    infusion "2.0.0-dev.20160519T222603Z.754d2c6"
+    ajv "4.11.2"
+    gpii-binder "1.0.0-dev.20170127T144054Z.54a5ef2"
+    gpii-express "1.0.1-dev.20170127T142027Z.d7dabd6"
+    gpii-handlebars "^1.0.0-dev.20170127T145319Z.2c39da4"
+    infusion "3.0.0-dev.20170127T130413Z.103de6e"
     json-schema-ref-parser "3.1.2"
     jsonpointer.js "0.4.0"
-    quoted-printable "1.0.0"
+    quoted-printable "1.0.1"
 
-gpii-launcher@1.0.0-dev.20161125T160059Z.e8f50d4:
-  version "1.0.0-dev.20161125T160059Z.e8f50d4"
-  resolved "https://registry.yarnpkg.com/gpii-launcher/-/gpii-launcher-1.0.0-dev.20161125T160059Z.e8f50d4.tgz#79cfdbad6dd75cb37e4679e2cb02470e95149905"
-  dependencies:
-    infusion "2.0.0-dev.20161027T155641Z.0bcd507"
-    istanbul "0.4.5"
-    kettle "1.2.2"
-    yargs "6.4.0"
-
-gpii-launcher@1.0.0-dev.20170106T131608Z.4177cc4:
-  version "1.0.0-dev.20170106T131608Z.4177cc4"
-  resolved "https://registry.yarnpkg.com/gpii-launcher/-/gpii-launcher-1.0.0-dev.20170106T131608Z.4177cc4.tgz#e0603d90a11cc977e3ec222a2dba132f0460fd47"
+gpii-launcher@1.0.0-dev.20170113T104654Z.903ad25, gpii-launcher@^1.0.0-dev.20170113T104654Z.903ad25:
+  version "1.0.0-dev.20170113T104654Z.903ad25"
+  resolved "https://registry.yarnpkg.com/gpii-launcher/-/gpii-launcher-1.0.0-dev.20170113T104654Z.903ad25.tgz#14345198f37362ba1d483820e6c0063d67d2f428"
   dependencies:
     infusion "2.0.0"
     istanbul "0.4.5"
     kettle "1.3.0"
     yargs "6.5.0"
 
-gpii-location-bar-relay@1.0.0-dev.20161125T161722Z.5d4d48c:
-  version "1.0.0-dev.20161125T161722Z.5d4d48c"
-  resolved "https://registry.yarnpkg.com/gpii-location-bar-relay/-/gpii-location-bar-relay-1.0.0-dev.20161125T161722Z.5d4d48c.tgz#fac3c337d93da0958965b388fe6d637bcb94a126"
+gpii-location-bar-relay@1.0.0-dev.20170127T144935Z.0e36251, gpii-location-bar-relay@^1.0.0-dev.20170127T144935Z.0e36251:
+  version "1.0.0-dev.20170127T144935Z.0e36251"
+  resolved "https://registry.yarnpkg.com/gpii-location-bar-relay/-/gpii-location-bar-relay-1.0.0-dev.20170127T144935Z.0e36251.tgz#c0f5c8e21e29155f9a37da9e9268119f9440d9b2"
   dependencies:
-    gpii-express "1.0.0"
-    infusion "2.0.0-dev.20161027T155641Z.0bcd507"
+    gpii-express "1.0.1-dev.20170127T142027Z.d7dabd6"
+    infusion "3.0.0-dev.20170127T130413Z.103de6e"
 
-gpii-location-bar-relay@1.0.0-dev.20170106T133727Z.180e737:
-  version "1.0.0-dev.20170106T133727Z.180e737"
-  resolved "https://registry.yarnpkg.com/gpii-location-bar-relay/-/gpii-location-bar-relay-1.0.0-dev.20170106T133727Z.180e737.tgz#707055aed5c758efcd25355041be96162f0efa1f"
-  dependencies:
-    gpii-express "1.0.1-dev.20170106T131203Z.a048e61"
-    infusion "2.0.0-dev.20161219T170555Z.5778f7e"
-
-gpii-pouchdb-lucene@0.1.0-dev.20161205T085842Z.5fc802e:
-  version "0.1.0-dev.20161205T085842Z.5fc802e"
-  resolved "https://registry.yarnpkg.com/gpii-pouchdb-lucene/-/gpii-pouchdb-lucene-0.1.0-dev.20161205T085842Z.5fc802e.tgz#a1804e0f8bd66f22455601d80916e0190cbe464e"
+gpii-pouchdb-lucene@0.1.0-dev.20170127T145759Z.612ff0f, gpii-pouchdb-lucene@^0.1.0-dev.20170127T145759Z.612ff0f:
+  version "0.1.0-dev.20170127T145759Z.612ff0f"
+  resolved "https://registry.yarnpkg.com/gpii-pouchdb-lucene/-/gpii-pouchdb-lucene-0.1.0-dev.20170127T145759Z.612ff0f.tgz#6d30e434ebffad2e0d96b26c8d2634d48d16794b"
   dependencies:
     adm-zip "0.4.7"
-    gpii-express "1.0.0"
-    gpii-launcher "1.0.0-dev.20161125T160059Z.e8f50d4"
-    gpii-pouchdb "1.0.0"
-    infusion "2.0.0-dev.20161027T155641Z.0bcd507"
-    request "2.79.0"
-    rimraf "2.5.4"
-
-gpii-pouchdb-lucene@0.1.0-dev.20170106T133425Z.4d44038:
-  version "0.1.0-dev.20170106T133425Z.4d44038"
-  resolved "https://registry.yarnpkg.com/gpii-pouchdb-lucene/-/gpii-pouchdb-lucene-0.1.0-dev.20170106T133425Z.4d44038.tgz#ad9f51c64d4965bf5e77f7c3497f528b23eb9ec6"
-  dependencies:
-    adm-zip "0.4.7"
-    gpii-express "1.0.1-dev.20170106T131203Z.a048e61"
-    gpii-launcher "1.0.0-dev.20170106T131608Z.4177cc4"
+    gpii-express "1.0.1-dev.20170127T142027Z.d7dabd6"
+    gpii-launcher "1.0.0-dev.20170113T104654Z.903ad25"
     gpii-pouchdb "1.0.1-dev.20161219T174439Z.2373866"
-    infusion "2.0.0-dev.20161219T170555Z.5778f7e"
+    infusion "3.0.0-dev.20170127T130413Z.103de6e"
     request "2.79.0"
     rimraf "2.5.4"
 
-gpii-pouchdb@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/gpii-pouchdb/-/gpii-pouchdb-1.0.0.tgz#9b656d7eaaad031eba2e4a749701dab80ee2028a"
-  dependencies:
-    express "4.14.0"
-    express-pouchdb "https://github.com/the-t-in-rtf/express-pouchdb.git#fa2778d1fdb6ac7c9d8adf7894b12df2e9e134f0"
-    gpii-express "1.0.0"
-    infusion "2.0.0-dev.20161027T155641Z.0bcd507"
-    istanbul "0.4.5"
-    lie "3.1.0"
-    memdown "1.2.4"
-    mkdirp "0.5.1"
-    pouchdb "6.0.7"
-    rimraf "2.5.4"
-    testem "1.13.0"
-    underscore-node "0.1.2"
-
-gpii-pouchdb@1.0.1-dev.20161219T174439Z.2373866:
+gpii-pouchdb@1.0.1-dev.20161219T174439Z.2373866, gpii-pouchdb@^1.0.1-dev.20161219T174439Z.2373866:
   version "1.0.1-dev.20161219T174439Z.2373866"
   resolved "https://registry.yarnpkg.com/gpii-pouchdb/-/gpii-pouchdb-1.0.1-dev.20161219T174439Z.2373866.tgz#e0a4f8c8848cf9e007444bd148d731f93468f1d4"
   dependencies:
@@ -1981,19 +1900,19 @@ gpii-pouchdb@1.0.1-dev.20161219T174439Z.2373866:
     testem "1.13.0"
     underscore-node "0.1.2"
 
-gpii-sort@1.0.0-dev.20160630T152357Z.3508dc6:
-  version "1.0.0-dev.20160630T152357Z.3508dc6"
-  resolved "https://registry.yarnpkg.com/gpii-sort/-/gpii-sort-1.0.0-dev.20160630T152357Z.3508dc6.tgz#2c971866a993660ec23788d7ab145c33daccc408"
+gpii-sort@1.0.0-dev.20170127T144010Z.d340240, gpii-sort@^1.0.0-dev.20170127T144010Z.d340240:
+  version "1.0.0-dev.20170127T144010Z.d340240"
+  resolved "https://registry.yarnpkg.com/gpii-sort/-/gpii-sort-1.0.0-dev.20170127T144010Z.d340240.tgz#3350600901bf947b0222b93573d3c0cb7f0cb345"
   dependencies:
-    infusion "2.0.0-dev.20160519T222603Z.754d2c6"
+    infusion "3.0.0-dev.20170127T130413Z.103de6e"
 
-gpii-webdriver@1.0.0-dev.20161125T164054Z.becc872:
-  version "1.0.0-dev.20161125T164054Z.becc872"
-  resolved "https://registry.yarnpkg.com/gpii-webdriver/-/gpii-webdriver-1.0.0-dev.20161125T164054Z.becc872.tgz#a6c23b792380393cb53d352028f4c027fcfad60f"
+gpii-webdriver@^1.0.0-dev.20170127T135806Z.aa30519:
+  version "1.0.0-dev.20170127T135806Z.aa30519"
+  resolved "https://registry.yarnpkg.com/gpii-webdriver/-/gpii-webdriver-1.0.0-dev.20170127T135806Z.aa30519.tgz#5fab3f1276c33005924b3d23417556ff9e74447c"
   dependencies:
     accessibility-developer-tools "2.11.0"
-    axe-core "2.0.7"
-    infusion "2.0.0-dev.20161027T155641Z.0bcd507"
+    axe-core "2.1.7"
+    infusion "3.0.0-dev.20170127T130413Z.103de6e"
     selenium-webdriver "3.0.1"
 
 graceful-fs@^3.0.2:
@@ -2084,16 +2003,6 @@ grunt@1.0.1:
     path-is-absolute "~1.0.0"
     rimraf "~2.2.8"
 
-handlebars@4.0.5:
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.5.tgz#92c6ed6bb164110c50d4d8d0fbddc70806c6f8e7"
-  dependencies:
-    async "^1.4.0"
-    optimist "^0.6.1"
-    source-map "^0.4.4"
-  optionalDependencies:
-    uglify-js "^2.6"
-
 handlebars@4.0.6, handlebars@^4.0.1:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.6.tgz#2ce4484850537f9c97a8026d5399b935c4ed4ed7"
@@ -2180,13 +2089,13 @@ hosted-git-info@^2.1.4:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.1.5.tgz#0ba81d90da2e25ab34a332e6ec77936e1598118b"
 
-http-errors@~1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.5.0.tgz#b1cb3d8260fd8e2386cad3189045943372d48211"
+http-errors@~1.5.0, http-errors@~1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.5.1.tgz#788c0d2c1de2c81b9e6e8c01843b6b97eb920750"
   dependencies:
-    inherits "2.0.1"
-    setprototypeof "1.0.1"
-    statuses ">= 1.3.0 < 2"
+    inherits "2.0.3"
+    setprototypeof "1.0.2"
+    statuses ">= 1.3.1 < 2"
 
 http-proxy@^1.13.1:
   version "1.15.2"
@@ -2221,9 +2130,13 @@ hyperquest@~1.2.0:
     duplexer2 "~0.0.2"
     through2 "~0.6.3"
 
-iconv-lite@0.4.13, iconv-lite@^0.4.5, iconv-lite@~0.4.13:
+iconv-lite@0.4.13, iconv-lite@~0.4.13:
   version "0.4.13"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
+
+iconv-lite@0.4.15, iconv-lite@^0.4.5:
+  version "0.4.15"
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.15.tgz#fe265a218ac6a57cfe854927e9d04c19825eddeb"
 
 ignore@^3.1.2, ignore@^3.2.0:
   version "3.2.0"
@@ -2266,7 +2179,7 @@ inflight@^1.0.4:
     once "^1.3.0"
     wrappy "1"
 
-infusion@2.0.0, "infusion@git://github.com/the-t-in-rtf/infusion.git#056bd1a246fd63f0123fcd375db8f6b157e245b8":
+infusion@2.0.0:
   version "2.0.0"
   resolved "git://github.com/the-t-in-rtf/infusion.git#056bd1a246fd63f0123fcd375db8f6b157e245b8"
   dependencies:
@@ -2275,12 +2188,6 @@ infusion@2.0.0, "infusion@git://github.com/the-t-in-rtf/infusion.git#056bd1a246f
 infusion@2.0.0-dev.20151130T180545Z.18ee3f8:
   version "2.0.0-dev.20151130T180545Z.18ee3f8"
   resolved "https://registry.yarnpkg.com/infusion/-/infusion-2.0.0-dev.20151130T180545Z.18ee3f8.tgz#07ade23574f012178be2218a8f5141bab14bdaa2"
-  dependencies:
-    resolve "1.1.6"
-
-infusion@2.0.0-dev.20160519T222603Z.754d2c6:
-  version "2.0.0-dev.20160519T222603Z.754d2c6"
-  resolved "https://registry.yarnpkg.com/infusion/-/infusion-2.0.0-dev.20160519T222603Z.754d2c6.tgz#c50ecd08d6fb950be98cb2254ace373e3b37f877"
   dependencies:
     resolve "1.1.6"
 
@@ -2302,19 +2209,15 @@ infusion@2.0.0-dev.20161219T170555Z.5778f7e:
   dependencies:
     fluid-resolve "1.2.0"
 
-"infusion@git://github.com/the-t-in-rtf/infusion.git#8202f87093d60bdf7c58d95a41ecdf27aca0eca9":
-  version "2.0.0"
-  resolved "git://github.com/the-t-in-rtf/infusion.git#8202f87093d60bdf7c58d95a41ecdf27aca0eca9"
+infusion@3.0.0-dev.20170127T130413Z.103de6e:
+  version "3.0.0-dev.20170127T130413Z.103de6e"
+  resolved "https://registry.yarnpkg.com/infusion/-/infusion-3.0.0-dev.20170127T130413Z.103de6e.tgz#59d5163cd6c55d4c5b3c34af54b74fdb331b1a1d"
   dependencies:
     fluid-resolve "1.2.0"
 
 inherits@2, inherits@2.0.3, inherits@^2.0.1, inherits@~2.0.0, inherits@~2.0.1:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
-
-inherits@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.1.tgz#b17d08d326b4423e568eff719f91b0b1cbdf69f1"
 
 ini@~1.3.0:
   version "1.3.4"
@@ -2517,18 +2420,18 @@ js-tokens@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-2.0.0.tgz#79903f5563ee778cc1162e6dcf1a0027c97f9cb5"
 
-js-yaml@3.x, js-yaml@^3.2.5, js-yaml@^3.2.7, js-yaml@^3.5.1, js-yaml@^3.6.0:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.6.1.tgz#6e5fe67d8b205ce4d22fad05b7781e8dadcc4b30"
-  dependencies:
-    argparse "^1.0.7"
-    esprima "^2.6.0"
-
-js-yaml@~3.5.2:
+js-yaml@3.x, js-yaml@^3.5.1, js-yaml@~3.5.2:
   version "3.5.5"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.5.5.tgz#0377c38017cabc7322b0d1fbcd25a491641f2fbe"
   dependencies:
     argparse "^1.0.2"
+    esprima "^2.6.0"
+
+js-yaml@^3.2.5, js-yaml@^3.2.7, js-yaml@^3.6.0:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.6.1.tgz#6e5fe67d8b205ce4d22fad05b7781e8dadcc4b30"
+  dependencies:
+    argparse "^1.0.7"
     esprima "^2.6.0"
 
 jsbn@~0.1.0:
@@ -2571,6 +2474,10 @@ json3@3.3.2:
 json5@0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.0.tgz#9b20715b026cbe3778fd769edccd822d8332a5b2"
+
+json5@0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
 jsonify@~0.0.0:
   version "0.0.0"
@@ -2633,38 +2540,6 @@ jstransform@~3.0.0:
     esprima-fb "~3001.1.0-dev-harmony-fb"
     source-map "0.1.31"
 
-kettle@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/kettle/-/kettle-1.1.0.tgz#9fe868c0c73a364f5ac5c7859dcb15663c29f8cb"
-  dependencies:
-    body-parser "1.15.2"
-    cookie-parser "1.4.3"
-    express "4.14.0"
-    express-session "1.14.0"
-    infusion "2.0.0-dev.20160519T222603Z.754d2c6"
-    jsonlint "1.6.0"
-    node-uuid "1.4.7"
-    path-to-regexp "1.5.3"
-    resolve "1.1.6"
-    serve-static "1.11.1"
-    ws "1.1.1"
-
-kettle@1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/kettle/-/kettle-1.2.2.tgz#169cf6948da181170e56ae7c33b36f77ef7eb339"
-  dependencies:
-    body-parser "1.15.2"
-    cookie-parser "1.4.3"
-    express "4.14.0"
-    express-session "1.14.0"
-    infusion "2.0.0-dev.20160519T222603Z.754d2c6"
-    json5 "0.5.0"
-    jsonlint "1.6.0"
-    path-to-regexp "1.5.3"
-    resolve "1.1.6"
-    serve-static "1.11.1"
-    ws "1.1.1"
-
 kettle@1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/kettle/-/kettle-1.3.0.tgz#ac3e63d10f0b31ac6edf4abfd4ed6ba78e96a541"
@@ -2679,6 +2554,22 @@ kettle@1.3.0:
     jsonlint "1.6.0"
     path-to-regexp "1.5.3"
     serve-static "1.11.1"
+    ws "1.1.1"
+
+kettle@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/kettle/-/kettle-1.3.1.tgz#3477c6767f9a06048f28becfe809348e02ba2b0d"
+  dependencies:
+    body-parser "1.16.0"
+    cookie-parser "1.4.3"
+    express "4.14.0"
+    express-session "1.15.0"
+    fluid-resolve "1.2.0"
+    infusion "3.0.0-dev.20170127T130413Z.103de6e"
+    json5 "0.5.1"
+    jsonlint "1.6.2"
+    path-to-regexp "1.7.0"
+    serve-static "1.11.2"
     ws "1.1.1"
 
 kind-of@^3.0.2:
@@ -2758,14 +2649,6 @@ levn@^0.3.0, levn@~0.3.0:
 libbase64@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/libbase64/-/libbase64-0.1.0.tgz#62351a839563ac5ff5bd26f12f60e9830bb751e6"
-
-libmime@2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/libmime/-/libmime-2.0.3.tgz#55751aa832d31492363df3dd810580dfd59d080c"
-  dependencies:
-    iconv-lite "0.4.13"
-    libbase64 "0.1.0"
-    libqp "1.1.0"
 
 libmime@2.1.0:
   version "2.1.0"
@@ -2973,13 +2856,6 @@ ltgt@~2.1.3:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/ltgt/-/ltgt-2.1.3.tgz#10851a06d9964b971178441c23c9e52698eece34"
 
-mailcomposer@3.10.0:
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/mailcomposer/-/mailcomposer-3.10.0.tgz#ce55c7b488ae84520a38f221aa12c4ce526d5168"
-  dependencies:
-    buildmail "3.8.0"
-    libmime "2.0.3"
-
 mailcomposer@3.12.0:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/mailcomposer/-/mailcomposer-3.12.0.tgz#9c5e1188aa8e1c62ec8b86bd43468102b639e8f9"
@@ -3055,7 +2931,17 @@ methods@~1.1.2:
   version "1.24.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.24.0.tgz#e2d13f939f0016c6e4e9ad25a8652f126c467f0c"
 
-mime-types@^2.1.11, mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.7:
+mime-db@~1.26.0:
+  version "1.26.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.26.0.tgz#eaffcd0e4fc6935cf8134da246e2e6c35305adff"
+
+mime-types@^2.1.11, mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.13:
+  version "2.1.14"
+  resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.14.tgz#f7ef7d97583fcaf3b7d282b6f8b5679dab1e94ee"
+  dependencies:
+    mime-db "~1.26.0"
+
+mime-types@~2.1.7:
   version "2.1.12"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.12.tgz#152ba256777020dd4663f54c2e7bc26381e71729"
   dependencies:
@@ -3096,6 +2982,10 @@ moment@2.17.1:
 ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
+
+ms@0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
 
 multiparty@3.3.2:
   version "3.3.2"
@@ -3202,13 +3092,6 @@ node-uuid@1.4.7, node-uuid@~1.4.7:
   version "1.4.7"
   resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.7.tgz#6da5a17668c4b3dd59623bda11cf7fa4c1f60a6f"
 
-nodemailer-direct-transport@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/nodemailer-direct-transport/-/nodemailer-direct-transport-3.2.0.tgz#f327616922422b2bb6c9695ba248b3a4d773b231"
-  dependencies:
-    nodemailer-shared "1.0.5"
-    smtp-connection "2.8.0"
-
 nodemailer-direct-transport@3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/nodemailer-direct-transport/-/nodemailer-direct-transport-3.3.2.tgz#e96fafb90358560947e569017d97e60738a50a86"
@@ -3216,33 +3099,15 @@ nodemailer-direct-transport@3.3.2:
     nodemailer-shared "1.1.0"
     smtp-connection "2.12.0"
 
-nodemailer-fetch@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/nodemailer-fetch/-/nodemailer-fetch-1.4.0.tgz#08a6174f755aba6ad9d88133355a70c1dee4e698"
-
 nodemailer-fetch@1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/nodemailer-fetch/-/nodemailer-fetch-1.6.0.tgz#79c4908a1c0f5f375b73fe888da9828f6dc963a4"
-
-nodemailer-shared@1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/nodemailer-shared/-/nodemailer-shared-1.0.5.tgz#6de64484d47944422bb5f0886fffd908ada4ce5e"
-  dependencies:
-    nodemailer-fetch "1.4.0"
 
 nodemailer-shared@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/nodemailer-shared/-/nodemailer-shared-1.1.0.tgz#cf5994e2fd268d00f5cf0fa767a08169edb07ec0"
   dependencies:
     nodemailer-fetch "1.6.0"
-
-nodemailer-smtp-pool@2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/nodemailer-smtp-pool/-/nodemailer-smtp-pool-2.7.0.tgz#00bdcf0f4cd5d6313f3e89397e5dde199acc9b0f"
-  dependencies:
-    nodemailer-shared "1.0.5"
-    nodemailer-wellknown "0.1.10"
-    smtp-connection "2.8.0"
 
 nodemailer-smtp-pool@2.8.2:
   version "2.8.2"
@@ -3251,14 +3116,6 @@ nodemailer-smtp-pool@2.8.2:
     nodemailer-shared "1.1.0"
     nodemailer-wellknown "0.1.10"
     smtp-connection "2.12.0"
-
-nodemailer-smtp-transport@2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/nodemailer-smtp-transport/-/nodemailer-smtp-transport-2.6.0.tgz#f73be795bfbf6921c34aac655f170eb393dceff4"
-  dependencies:
-    nodemailer-shared "1.0.5"
-    nodemailer-wellknown "0.1.10"
-    smtp-connection "2.8.0"
 
 nodemailer-smtp-transport@2.7.2:
   version "2.7.2"
@@ -3271,18 +3128,6 @@ nodemailer-smtp-transport@2.7.2:
 nodemailer-wellknown@0.1.10:
   version "0.1.10"
   resolved "https://registry.yarnpkg.com/nodemailer-wellknown/-/nodemailer-wellknown-0.1.10.tgz#586db8101db30cb4438eb546737a41aad0cf13d5"
-
-nodemailer@2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-2.5.0.tgz#9cb782b049f4d62e17022dcbe743c3b07a2de55b"
-  dependencies:
-    libmime "2.0.3"
-    mailcomposer "3.10.0"
-    nodemailer-direct-transport "3.2.0"
-    nodemailer-shared "1.0.5"
-    nodemailer-smtp-pool "2.7.0"
-    nodemailer-smtp-transport "2.6.0"
-    socks "1.1.9"
 
 nodemailer@2.6.4:
   version "2.6.4"
@@ -3505,6 +3350,12 @@ path-to-regexp@0.1.7:
 path-to-regexp@1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-1.5.3.tgz#7221ddd42483538bddf9fead942a79ff3164f57a"
+  dependencies:
+    isarray "0.0.1"
+
+path-to-regexp@1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
   dependencies:
     isarray "0.0.1"
 
@@ -3868,19 +3719,17 @@ q@^1.1.2:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.4.1.tgz#55705bcd93c5f3673530c2c2cbc0c2b3addc286e"
 
-qs@6.2.0, qs@~6.2.0:
+qs@6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.0.tgz#3b7848c03c2dece69a9522b0fae8c4126d745f3b"
+
+qs@6.2.1, qs@~6.2.0:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.1.tgz#ce03c5ff0935bc1d9d69a9f14cbd18e568d67625"
 
 qs@~6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.0.tgz#f403b264f23bc01228c74131b407f18d5ea5d442"
-
-quoted-printable@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/quoted-printable/-/quoted-printable-1.0.0.tgz#408f6b35becb7044ec061ad2b47c0ffda962eefd"
-  dependencies:
-    utf8 "^2.0.0"
 
 quoted-printable@1.0.1:
   version "1.0.1"
@@ -3906,6 +3755,14 @@ raw-body@2.1.7, raw-body@~2.1.7:
   dependencies:
     bytes "2.4.0"
     iconv-lite "0.4.13"
+    unpipe "1.0.0"
+
+raw-body@~2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.2.0.tgz#994976cf6a5096a41162840492f0bdc5d6e7fb96"
+  dependencies:
+    bytes "2.4.0"
+    iconv-lite "0.4.15"
     unpipe "1.0.0"
 
 rc@^1.0.3, rc@^1.1.2:
@@ -4095,7 +3952,7 @@ resolve@1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.6.tgz#d3492ad054ca800f5befa612e61beac1eec98f8f"
 
-resolve@1.1.7, resolve@1.1.x, resolve@~1.1.0:
+resolve@1.1.x, resolve@~1.1.0:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
 
@@ -4161,17 +4018,17 @@ selenium-webdriver@3.0.1:
     tmp "0.0.30"
     xml2js "^0.4.17"
 
-"semver@2 || 3 || 4 || 5", "semver@2.x || 3.x || 4 || 5", semver@^5.1.0, semver@~5.1.0:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-5.1.1.tgz#a3292a373e6f3e0798da0b20641b9a9c5bc47e19"
+"semver@2 || 3 || 4 || 5", "semver@2.x || 3.x || 4 || 5", semver@^5.1.0, semver@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
 
 semver@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-3.0.1.tgz#720ac012515a252f91fb0dd2e99a56a70d6cf078"
 
-semver@^5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
+semver@~5.1.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.1.1.tgz#a3292a373e6f3e0798da0b20641b9a9c5bc47e19"
 
 send@0.14.1:
   version "0.14.1"
@@ -4191,7 +4048,25 @@ send@0.14.1:
     range-parser "~1.2.0"
     statuses "~1.3.0"
 
-serve-static@1.11.1, serve-static@~1.11.1:
+send@0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/send/-/send-0.14.2.tgz#39b0438b3f510be5dc6f667a11f71689368cdeef"
+  dependencies:
+    debug "~2.2.0"
+    depd "~1.1.0"
+    destroy "~1.0.4"
+    encodeurl "~1.0.1"
+    escape-html "~1.0.3"
+    etag "~1.7.0"
+    fresh "0.3.0"
+    http-errors "~1.5.1"
+    mime "1.3.4"
+    ms "0.7.2"
+    on-finished "~2.3.0"
+    range-parser "~1.2.0"
+    statuses "~1.3.1"
+
+serve-static@1.11.1:
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/serve-static/-/serve-static-1.11.1.tgz#d6cce7693505f733c759de57befc1af76c0f0805"
   dependencies:
@@ -4200,13 +4075,22 @@ serve-static@1.11.1, serve-static@~1.11.1:
     parseurl "~1.3.1"
     send "0.14.1"
 
+serve-static@1.11.2, serve-static@~1.11.1:
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/serve-static/-/serve-static-1.11.2.tgz#2cf9889bd4435a320cc36895c9aa57bd662e6ac7"
+  dependencies:
+    encodeurl "~1.0.1"
+    escape-html "~1.0.3"
+    parseurl "~1.3.1"
+    send "0.14.2"
+
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
 
-setprototypeof@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.0.1.tgz#52009b27888c4dc48f591949c0a8275834c1ca7e"
+setprototypeof@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.0.2.tgz#81a552141ec104b88e89ce383103ad5c66564d08"
 
 sharp@0.17.1:
   version "0.17.1"
@@ -4271,13 +4155,6 @@ smtp-connection@2.12.0:
   dependencies:
     httpntlm "1.6.1"
     nodemailer-shared "1.1.0"
-
-smtp-connection@2.8.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/smtp-connection/-/smtp-connection-2.8.0.tgz#6649220a80dbb2c72bb0f394b8d7c0129f622105"
-  dependencies:
-    httpntlm "1.6.1"
-    nodemailer-shared "1.0.5"
 
 sntp@1.x.x:
   version "1.0.9"
@@ -4413,9 +4290,9 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
 
-"statuses@>= 1.3.0 < 2", statuses@~1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.0.tgz#8e55758cb20e7682c1f4fce8dcab30bf01d1e07a"
+"statuses@>= 1.3.1 < 2", statuses@~1.3.0, statuses@~1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
 
 stream-counter@~0.2.0:
   version "0.2.0"
@@ -4476,7 +4353,7 @@ strip-indent@^1.0.1:
   dependencies:
     get-stdin "^4.0.1"
 
-strip-json-comments@^2.0.0:
+strip-json-comments@^2.0.0, strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
@@ -4643,12 +4520,12 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
-type-is@~1.6.13:
-  version "1.6.13"
-  resolved "https://registry.yarnpkg.com/type-is/-/type-is-1.6.13.tgz#6e83ba7bc30cd33a7bb0b7fb00737a2085bf9d08"
+type-is@~1.6.13, type-is@~1.6.14:
+  version "1.6.14"
+  resolved "https://registry.yarnpkg.com/type-is/-/type-is-1.6.14.tgz#e219639c17ded1ca0789092dd54a03826b817cb2"
   dependencies:
     media-typer "0.3.0"
-    mime-types "~2.1.11"
+    mime-types "~2.1.13"
 
 typedarray@~0.0.5:
   version "0.0.6"
@@ -4675,26 +4552,26 @@ uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
 
-uid-safe@~2.1.1, uid-safe@~2.1.2, uid-safe@~2.1.3:
+uid-safe@~2.1.1, uid-safe@~2.1.3:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/uid-safe/-/uid-safe-2.1.3.tgz#077e264a00b3187936b270bb7376a26473631071"
   dependencies:
     base64-url "1.3.3"
     random-bytes "~1.0.0"
 
-ul-api@1.0.0-dev.20170125T151251Z.a3b0763:
-  version "1.0.0-dev.20170125T151251Z.a3b0763"
-  resolved "https://registry.yarnpkg.com/ul-api/-/ul-api-1.0.0-dev.20170125T151251Z.a3b0763.tgz#8b7fe2272f871a4a0ca0ec1e599beed8a48082fe"
+ul-api@^1.0.0-dev.20170127T153126Z.7c3221e:
+  version "1.0.0-dev.20170127T153126Z.7c3221e"
+  resolved "https://registry.yarnpkg.com/ul-api/-/ul-api-1.0.0-dev.20170127T153126Z.7c3221e.tgz#08b6ae9b0b8d2591a526f8ca87a5ca10637ba2cf"
   dependencies:
-    gpii-binder "1.0.0-dev.20161219T173834Z.5ecfb7b"
-    gpii-express "1.0.1-dev.20170106T131203Z.a048e61"
+    gpii-binder "1.0.0-dev.20170127T144054Z.54a5ef2"
+    gpii-express "1.0.1-dev.20170127T142027Z.d7dabd6"
     gpii-express-user "1.0.0-dev.20170123T140829Z.93d6266"
-    gpii-handlebars "1.0.0-dev.20170119T113843Z.6e17ea6"
-    gpii-json-schema "1.0.0-dev.20170123T134724Z.95059c1"
-    gpii-location-bar-relay "1.0.0-dev.20170106T133727Z.180e737"
-    gpii-pouchdb-lucene "0.1.0-dev.20170106T133425Z.4d44038"
-    gpii-sort "1.0.0-dev.20160630T152357Z.3508dc6"
-    infusion "2.0.0-dev.20161219T170555Z.5778f7e"
+    gpii-handlebars "1.0.0-dev.20170127T145319Z.2c39da4"
+    gpii-json-schema "1.0.0-dev.20170127T145847Z.8dbab26"
+    gpii-location-bar-relay "1.0.0-dev.20170127T144935Z.0e36251"
+    gpii-pouchdb-lucene "0.1.0-dev.20170127T145759Z.612ff0f"
+    gpii-sort "1.0.0-dev.20170127T144010Z.d340240"
+    infusion "3.0.0-dev.20170127T130413Z.103de6e"
     mkdirp "0.5.1"
     ncp "2.0.0"
     sharp "0.17.1"
@@ -4759,7 +4636,7 @@ user-home@^2.0.0:
   dependencies:
     os-homedir "^1.0.0"
 
-utf8@^2.0.0, utf8@^2.1.0:
+utf8@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/utf8/-/utf8-2.1.0.tgz#0cfec5c8052d44a23e3aaa908104e8075f95dfd5"
 
@@ -4807,6 +4684,10 @@ vuvuzela@1.0.3:
 what-input@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/what-input/-/what-input-2.1.1.tgz#86b6e0338d670a9fd936892b8f5115c4fe0d1d0b"
+
+what-input@^4.0.3:
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/what-input/-/what-input-4.0.6.tgz#bbe3cd1e1eb5ee16e441c08af7294740f94614ec"
 
 which-module@^1.0.0:
   version "1.0.0"
@@ -4920,30 +4801,11 @@ yallist@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.0.0.tgz#306c543835f09ee1a4cb23b7bce9ab341c91cdd4"
 
-yargs-parser@^4.1.0, yargs-parser@^4.2.0:
+yargs-parser@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-4.2.0.tgz#6ced869cd05a3dca6a1eaee38b68aeed4b0b4101"
   dependencies:
     camelcase "^3.0.0"
-
-yargs@6.4.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-6.4.0.tgz#816e1a866d5598ccf34e5596ddce22d92da490d4"
-  dependencies:
-    camelcase "^3.0.0"
-    cliui "^3.2.0"
-    decamelize "^1.1.1"
-    get-caller-file "^1.0.1"
-    os-locale "^1.4.0"
-    read-pkg-up "^1.0.1"
-    require-directory "^2.1.1"
-    require-main-filename "^1.0.1"
-    set-blocking "^2.0.0"
-    string-width "^1.0.2"
-    which-module "^1.0.0"
-    window-size "^0.2.0"
-    y18n "^3.2.1"
-    yargs-parser "^4.1.0"
 
 yargs@6.5.0:
   version "6.5.0"

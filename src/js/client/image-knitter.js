@@ -112,5 +112,5 @@
             }
         }
     });
-})(jQuery, fluid_2_0_0);
+})(jQuery, fluid);
 
