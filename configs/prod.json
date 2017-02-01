@@ -1,7 +1,9 @@
 {
   "type": "prodConfig",
   "options": {
-    "gradeNames": ["gpii.ul.website.harness"],
+    "gradeNames":   ["gpii.ul.website.harness"],
+    "originalsDir": "/srv/ul-images/originalsDir",
+    "cacheDir":     "/srv/ul-images/cacheDir",
     "ports": {
       "api":    7633,
       "couch":  5984,
