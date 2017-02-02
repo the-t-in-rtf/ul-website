@@ -5,7 +5,7 @@
     "originalsDir": "/srv/ul-images/originalsDir",
     "cacheDir":     "/srv/ul-images/cacheDir",
     "ports": {
-      "api":    7633,
+      "api":    4896,
       "couch":  5984,
       "lucene": 5985
     }
