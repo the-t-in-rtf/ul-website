@@ -4,6 +4,10 @@
     "gradeNames":   ["gpii.ul.website.harness"],
     "originalsDir": "/srv/ul-images/originalsDir",
     "cacheDir":     "/srv/ul-images/cacheDir",
+    "app": {
+      "name": "Unified Listing",
+      "url":  "https://ul.gpii.net/"
+    },
     "ports": {
       "api":    4896,
       "couch":  5984,

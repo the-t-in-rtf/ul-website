@@ -60,6 +60,10 @@ fluid.defaults("gpii.ul.website.harness", {
         {
             source: "{that}.options.rules.contextToExpose",
             target: "{that gpii.handlebars.dispatcherMiddleware}.options.rules.contextToExpose"
+        },
+        {
+            source: "{that}.options.app",
+            target: "{that gpii.express.user.withMailHandler}.options.app"
         }
     ],
     components: {

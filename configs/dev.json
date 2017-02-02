@@ -2,6 +2,15 @@
   "type": "devConfig",
   "options": {
     "gradeNames": ["gpii.tests.ul.website.harness.withLucene"],
+    "app": {
+      "name": "Unified Listing (dev)",
+      "url": {
+        "expander": {
+          "funcName": "fluid.stringTemplate",
+          "args":     ["http://localhost:%port/", { "port": "{that}.options.ports.api" }]
+        }
+      }
+    },
     "ports": {
       "api":    7217,
       "couch":  7218,
