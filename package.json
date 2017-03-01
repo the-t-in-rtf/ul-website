@@ -9,10 +9,7 @@
     "test": "node node_modules/istanbul/lib/cli.js cover tests/all-tests.js --report none --print none",
     "posttest": "node node_modules/istanbul/lib/cli.js report --root coverage --dir reports text-summary html"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GPII/ul-website.git"
-  },
+  "repository": "https://github.com/GPII/ul-website.git",
   "author": "Tony Atkins <tony@raisingthefloor.org>",
   "license": "BSD-3-Clause",
   "bugs": {
@@ -24,29 +21,29 @@
     "gpii-binder": "1.0.0-dev.20170127T144054Z.54a5ef2",
     "gpii-express": "1.0.2",
     "gpii-express-user": "1.0.0-dev.20170127T161422Z.9aa9bcb",
-    "gpii-handlebars": "1.0.0-dev.20170127T160953Z.4d15347",
-    "gpii-json-schema": "1.0.0-dev.20170127T161115Z.f5942e0",
-    "gpii-launcher": "1.0.0-dev.20170113T104654Z.903ad25",
+    "gpii-handlebars": "1.0.0",
+    "gpii-json-schema": "1.0.0",
+    "gpii-launcher": "1.0.0-dev.20170207T102054Z.3d7b546",
     "gpii-location-bar-relay": "1.0.0-dev.20170127T160848Z.774e8e7",
-    "gpii-pouchdb": "1.0.1-dev.20170127T160305Z.627b5f7",
+    "gpii-pouchdb": "1.0.1-dev.20170208T180039Z.83f5aca",
     "gpii-pouchdb-lucene": "0.1.0-dev.20170127T145759Z.612ff0f",
     "gpii-sort": "1.0.0-dev.20170127T144010Z.d340240",
     "infusion": "3.0.0-dev.20170127T130413Z.103de6e",
     "jquery": "2.1.4",
     "moment": "2.17.1",
-    "ul-api": "1.0.0-dev.20170127T161614Z.aa5ea79"
+    "ul-api": "1.0.0-dev.20170301T102557Z.605e11a"
   },
   "devDependencies": {
-    "eslint": "3.14.1",
+    "eslint": "3.16.1",
     "eslint-config-fluid": "1.1.0",
     "fluid-grunt-eslint": "18.1.2",
-    "gpii-webdriver": "1.0.0-dev.20170127T135806Z.aa30519",
+    "gpii-webdriver": "1.0.0",
     "grunt": "1.0.1",
     "grunt-jsonlint": "1.1.0",
     "istanbul": "0.4.5",
     "jsonlint": "1.6.2",
-    "kettle": "1.3.1",
+    "kettle": "1.4.0",
     "node-jqunit": "1.1.4",
-    "rimraf": "2.5.4"
+    "rimraf": "2.6.1"
   }
 }
