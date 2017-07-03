@@ -32,5 +32,10 @@
         {{>product-sources-view product}}
     {{/if}}
 {{else}}
-    <p><a href="/api/product/unified/{{product.uid}}">View the unified record related to this product.</a></p>
+    {{#if sourceUrl}}
+        <a href="{{sourceUrl}}" target="_blank">View on the original site.</a>
+    {{/if}}
+    {{#if product.uid}}
+        <p><a href="/api/product/unified/{{product.uid}}">View the unified record related to this product.</a></p>
+    {{/if}}
 {{/equals}}

@@ -1,9 +1,9 @@
 {
-  "type": "devConfig",
+  "type": "devStandaloneCouchConfig",
   "options": {
-    "gradeNames": ["gpii.tests.ul.website.harness.withPouchAndLucene"],
+    "gradeNames": ["gpii.tests.ul.website.harness.withLucene"],
     "app": {
-      "name": "Unified Listing (dev)",
+      "name": "Unified Listing (dev, local couch instance)",
       "url": {
         "expander": {
           "funcName": "fluid.stringTemplate",
@@ -12,9 +12,9 @@
       }
     },
     "ports": {
-      "api":    7217,
-      "couch":  7218,
-      "lucene": 7219
+      "api":    4986,
+      "couch":  5984,
+      "lucene": 5985
     },
     "listeners": {
       "onCreate.constructFixtures": {

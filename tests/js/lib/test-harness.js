@@ -19,8 +19,8 @@ fluid.require("%gpii-express/tests/js/lib/test-middleware-hello.js");
 
 fluid.registerNamespace("gpii.tests.ul.website.harness");
 gpii.tests.ul.website.harness.stopServer = function (that) {
-    gpii.express.stopServer(that.express);
-    gpii.express.stopServer(that.pouch);
+    var expressComponents = fluid.queryIoCSelector (that, "gpii.express");
+    fluid.each(expressComponents, gpii.express.stopServer);
 };
 
 fluid.defaults("gpii.tests.ul.website.harness", {
@@ -32,18 +32,14 @@ fluid.defaults("gpii.tests.ul.website.harness", {
     },
     events: {
         constructFixtures: null,
-        pouchStarted:      null,
-        pouchStopped:      null,
         onFixturesConstructed: {
             events: {
-                apiReady:      "apiReady",
-                pouchStarted:  "pouchStarted"
+                apiReady:      "apiReady"
             }
         },
         onFixturesStopped: {
             events: {
-                apiStopped:    "apiStopped",
-                pouchStopped:  "pouchStopped"
+                apiStopped:    "apiStopped"
             }
         },
         stopFixtures: null
@@ -69,7 +65,27 @@ fluid.defaults("gpii.tests.ul.website.harness", {
                     }
                 }
             }
+        }
+    }
+});
+
+fluid.defaults("gpii.tests.ul.website.harness.withPouch", {
+    gradeNames:   ["gpii.tests.ul.website.harness"],
+    events: {
+        pouchStarted:      null,
+        pouchStopped:      null,
+        onFixturesConstructed: {
+            events: {
+                pouchStarted:  "pouchStarted"
+            }
         },
+        onFixturesStopped: {
+            events: {
+                pouchStopped:  "pouchStopped"
+            }
+        }
+    },
+    components: {
         pouch: {
             type: "gpii.express",
             createOnEvent: "constructFixtures",
@@ -107,16 +123,12 @@ fluid.defaults("gpii.tests.ul.website.harness.withLucene", {
         luceneStopped:     null,
         onFixturesConstructed: {
             events: {
-                apiReady:      "apiReady",
-                luceneStarted: "luceneStarted",
-                pouchStarted:  "pouchStarted"
+                luceneStarted: "luceneStarted"
             }
         },
         onFixturesStopped: {
             events: {
-                apiStopped:    "apiStopped",
-                luceneStopped: "luceneStopped",
-                pouchStopped:  "pouchStopped"
+                luceneStopped: "luceneStopped"
             }
         }
     },
@@ -142,6 +154,10 @@ fluid.defaults("gpii.tests.ul.website.harness.withLucene", {
             }
         }
     }
+});
+
+fluid.defaults("gpii.tests.ul.website.harness.withPouchAndLucene", {
+    gradeNames:   ["gpii.tests.ul.website.harness.withLucene", "gpii.tests.ul.website.harness.withPouch"]
 });
 
 fluid.defaults("gpii.tests.ul.website.harness.instrumented", {

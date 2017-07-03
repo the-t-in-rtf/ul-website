@@ -16,6 +16,7 @@ fluid.require("%ul-api");
 fluid.require("%ul-api/src/js/harness.js");
 
 require("./suggest");
+require("./fourohfour");
 
 fluid.defaults("gpii.ul.website.harness", {
     gradeNames:   ["gpii.ul.api.harness"],
@@ -125,6 +126,13 @@ fluid.defaults("gpii.ul.website.harness", {
                             sessionOptions: {
                                 secret: "Printer, printer take a hint-ter."
                             }
+                        }
+                    },
+                    // 404 for favicon.ico
+                    favicon: {
+                        type: "gpii.ul.website.middleware.fourohfour",
+                        options: {
+                            path: "/favicon.ico"
                         }
                     },
                     // Our own source
