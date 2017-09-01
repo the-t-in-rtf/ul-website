@@ -6,7 +6,7 @@
     "cacheDir":     "/srv/ul-images/cacheDir",
     "app": {
       "name": "Unified Listing",
-      "url":  "https://ul.gpii.net/"
+      "url":  "https://api.ul.gpii.net/"
     },
     "ports": {
       "api":    4896,
