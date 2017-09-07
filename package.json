@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/GPII/ul-website",
   "dependencies": {
-    "foundation-sites": "6.4.3",
+    "foundation-sites": "6.3.1",
     "gpii-binder": "1.0.3",
     "gpii-express": "1.0.9",
     "gpii-express-user": "1.0.0-dev.20170420T094715Z.667e69a",
@@ -31,7 +31,7 @@
     "infusion": "3.0.0-dev.20170127T130413Z.103de6e",
     "jquery": "2.1.4",
     "moment": "2.18.1",
-    "ul-api": "1.0.0-dev.20170714T115252Z.b15b397"
+    "ul-api": "1.0.0-dev.20170905T113458Z.dda173a"
   },
   "devDependencies": {
     "eslint": "4.6.1",
