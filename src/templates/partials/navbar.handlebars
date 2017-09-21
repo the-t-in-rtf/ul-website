@@ -1,11 +1,18 @@
-{{#if showNavBar}}
-  <div class="pagination-centered">
-    <ul class="pagination" role="menubar" aria-label="Pagination">
-      {{>navbar-previous}}
-      {{#each pages}}
-        <li class="{{#if current}}current{{/if}}"><a class="nav-link nav-num-link" offset="{{offset}}" href="#">{{label}}</a></li>
-      {{/each}}
-      {{>navbar-next}}
-    </ul>
-  </div>
+{{#if totalRows}}
+    <div class="row pagination-centered">
+      <div class="column medium-7 small-12">
+        {{#if showNavBar}}
+            <ul class="pagination" role="menubar" aria-label="Pagination">
+              {{>navbar-previous}}
+              {{#each pages}}
+                <li class="{{#if current}}current{{/if}}"><a class="nav-link nav-num-link" offset="{{offset}}" href="#">{{label}}</a></li>
+              {{/each}}
+              {{>navbar-next}}
+            </ul>
+        {{/if}}
+      </div>
+      <div class="column medium-5 small-12">
+        <p>Displaying {{offset}}-{{end}} of {{totalRows}} matching records.</p>
+      </div>
+    </div>
 {{/if}}

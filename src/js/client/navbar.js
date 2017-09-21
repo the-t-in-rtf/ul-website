@@ -69,10 +69,12 @@
         var showNavBar     = false;
         var hasPrevious    = false;
         var hasNext        = false;
+        var end            = that.model.totalRows;
 
         if (that.model.totalRows > 0) {
             var numPages = Math.ceil(that.model.totalRows  / that.model.limit);
             if (numPages > 1) {
+                end = that.model.offset + that.model.limit;
                 showNavBar = true;
 
                 for (var a = 0; a < numPages; a++) {
@@ -99,6 +101,7 @@
         that.applier.change("previousOffset", previousOffset);
         that.applier.change("nextOffset",     nextOffset);
         that.applier.change("pages",          newPagingData);
+        that.applier.change("end",            end);
     };
 
     fluid.defaults("gpii.ul.navbar", {
@@ -110,6 +113,7 @@
         model: {
             offset:      0,
             limit:       25,
+            end:         25,
             totalRows:   0,
             showNavBar:  false,
             hasPrevious: false,
@@ -171,6 +175,10 @@
             },
             totalRows: {
                 func:          "{that}.generatePagingData",
+                excludeSource: "init"
+            },
+            end: {
+                func:          "{that}.renderInitialMarkup",
                 excludeSource: "init"
             },
             pages: {
