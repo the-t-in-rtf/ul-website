@@ -132,14 +132,15 @@ fluid.defaults("gpii.ul.website.harness", {
                     favicon: {
                         type: "gpii.ul.website.middleware.fourohfour",
                         options: {
-                            path: "/favicon.ico"
+                            priority: "before:dispatcher",
+                            path:     "/favicon.ico"
                         }
                     },
                     // Our own source
                     src: {
                         type: "gpii.express.router.static",
                         options: {
-                            priority: "after:session",
+                            priority: "before:dispatcher",
                             path:    "/src",
                             content: "%ul-website/src"
                         }
@@ -148,16 +149,16 @@ fluid.defaults("gpii.ul.website.harness", {
                     schemas: {
                         type: "gpii.express.router.static",
                         options: {
-                            priority: "after:session",
-                            path:    "/schemas",
-                            content: "{harness}.options.schemaDirs"
+                            priority: "before:dispatcher",
+                            path:     "/schemas",
+                            content:  "{harness}.options.schemaDirs"
                         }
                     },
                     // Bundled JSON Schemas for client-side validation
                     allSchemas: {
                         type: "gpii.schema.inlineMiddleware",
                         options: {
-                            priority: "after:session",
+                            priority:   "before:dispatcher",
                             path:       "/allSchemas",
                             schemaDirs: "{harness}.options.schemaDirs"
                         }
