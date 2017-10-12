@@ -1,17 +1,19 @@
 {
-  "id": "product-get-input.json",
-  "properties": {
-    "uid": {
-      "type": "string",
-      "minLength": 1,
-      "errors": {
-        "type":      "You must provide a valid UID.",
-        "minLength": "You must provide a valid UID."
-      }
+    "id": "product-get-input.json",
+    "properties": {
+        "uid": {
+            "type": "string",
+            "minLength": 1,
+            "errors": {
+                "type": "You must provide a valid UID.",
+                "minLength": "You must provide a valid UID."
+            }
+        }
+    },
+    "required": [
+        "uid"
+    ],
+    "errors": {
+        "#/required/0": "You must provide a valid UID."
     }
-  },
-  "required": ["uid"],
-  "errors": {
-    "#/required/0":      "You must provide a valid UID."
-  }
 }
