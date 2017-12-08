@@ -12,6 +12,21 @@
       "api":    4896,
       "couch":  5984,
       "lucene": 5985
+    },
+    "components": {
+      "express": {
+        "options": {
+          "components": {
+            "updatesReports": {
+              "type":"gpii.express.router.serveContentAndIndex",
+              "options": {
+                "path": "/updates-reports",
+                "content": "/srv/ul-updates-reports"
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
