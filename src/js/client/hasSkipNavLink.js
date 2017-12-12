@@ -58,18 +58,16 @@
             }
         },
         listeners: {
-            "onMarkupRendered.wireSkipNav": [
-                {
-                    "this": "{that}.dom.link",
-                    method: "keydown",
-                    args:   "{that}.handleKeyPress"
-                },
-                {
-                    "this": "{that}.dom.link",
-                    method: "click",
-                    args:   "{that}.focusOnMain"
-                }
-            ]
+            "onMarkupRendered.wireSkipNavKeyPress": {
+                "this": "{that}.dom.link",
+                method: "keydown",
+                args:   "{that}.handleKeyPress"
+            },
+            "onMarkupRendered.wireSkipNavClick": {
+                "this": "{that}.dom.link",
+                method: "click",
+                args:   "{that}.focusOnMain"
+            }
         }
     });
 

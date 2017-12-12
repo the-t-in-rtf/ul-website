@@ -119,18 +119,16 @@
             onRefresh: null
         },
         listeners: {
-            "onRefresh.wireControls": [
-                {
-                    "this": "{that}.dom.toggle",
-                    method: "keydown",
-                    args:   "{that}.filterKeyPress"
-                },
-                {
-                    "this": "{that}.dom.toggle",
-                    method: "click",
-                    args:   "{that}.performToggle"
-                }
-            ]
+            "onRefresh.wireToggleKeyPress": {
+                "this": "{that}.dom.toggle",
+                method: "keydown",
+                args:   "{that}.filterKeyPress"
+            },
+            "onRefresh.wireToggleClick": {
+                "this": "{that}.dom.toggle",
+                method: "click",
+                args:   "{that}.performToggle"
+            }
         }
     });
 })();

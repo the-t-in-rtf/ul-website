@@ -147,18 +147,16 @@
             }
         },
         listeners: {
-            "onDomChange.wireControls": [
-                {
-                    "this": "{that}.dom.navLink",
-                    method: "keydown",
-                    args:   "{that}.checkKey"
-                },
-                {
-                    "this": "{that}.dom.navLink",
-                    method: "click",
-                    args:   "{that}.changeOffset"
-                }
-            ],
+            "onDomChange.wireNavLinkKeyPress": {
+                "this": "{that}.dom.navLink",
+                method: "keydown",
+                args:   "{that}.checkKey"
+            },
+            "onDomChange.wireNavLinkClick": {
+                "this": "{that}.dom.navLink",
+                method: "click",
+                args:   "{that}.changeOffset"
+            },
             "onMarkupRendered.focusAfterRender": {
                 funcName: "gpii.ul.navbar.focusAfterRender",
                 args:     ["{that}"]
