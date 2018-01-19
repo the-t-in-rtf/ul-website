@@ -24,6 +24,14 @@
 
     fluid.registerNamespace("gpii.ul.product.edit");
 
+    gpii.ul.product.edit.filterAndStringify = function (value, transformSpec) {
+        return JSON.stringify(fluid.filterKeys(value, fluid.makeArray(transformSpec.keys), transformSpec.exclude));
+    };
+
+    fluid.defaults("gpii.ul.product.edit.filterAndStringify", {
+        gradeNames: ["fluid.standardTransformFunction"]
+    });
+
     // The component that handles the binding, etc. for the "Edit" form.
     fluid.defaults("gpii.ul.product.edit", {
         gradeNames: ["gpii.schemas.client.errorAwareForm"],
@@ -41,8 +49,10 @@
             modelToRequestPayload: {
                 "": {
                     transform: {
-                        type:      "fluid.transforms.objectToJSONString",
-                        inputPath: "product"
+                        type:      "gpii.ul.product.edit.filterAndStringify",
+                        inputPath: "product",
+                        keys:      ["sources"],
+                        exclude:   true
                     }
                 }
             },
