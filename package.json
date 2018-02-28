@@ -28,7 +28,7 @@
         "infusion": "3.0.0-dev.20171121T212609Z.9b4fde781",
         "jquery": "2.1.4",
         "moment": "2.19.3",
-        "ul-api": "1.0.0-dev.20180117T095754Z.a6a5d5f"
+        "ul-api": "1.0.0-dev.20180228T095459Z.1141757"
     },
     "devDependencies": {
         "eslint": "4.12.1",
