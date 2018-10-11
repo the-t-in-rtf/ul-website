@@ -1,0 +1,38 @@
+version: "3.2"
+
+services:
+  # Usage: `docker-compose build ul`
+  ul:
+    # TODO: Change this later
+    image: ul-website-dev:latest
+    depends_on:
+    - couchdblucene
+    - couchdb
+    ports:
+    - "4896:4896"
+    environment:
+    - NODE_ENV="production"
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+  couchdb:
+    image: couchdb:2.2
+    ports:
+    - "5984:5984"
+    volumes:
+      - type: bind
+        source: /srv/docker-couchdb_data
+        target: /opt/couchdb/data
+      - type: bind
+        source: /srv/docker-couchdb_etc
+        target: /opt/couchdb/etc
+
+  couchdblucene:
+    image: klaemo/couchdb-lucene:2.1.0
+    depends_on:
+    - couchdb
+#    volumes:
+#      - type: bind
+#        source: /srv/docker-couchdblucene_indexes
+#        target: /opt/couchdb-lucene/indexes
