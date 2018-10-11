@@ -5,7 +5,6 @@
 /* eslint-env node */
 "use strict";
 var fluid = require("infusion");
-fluid.setLogging(true);
 
 var gpii  = fluid.registerNamespace("gpii");
 
@@ -26,6 +25,7 @@ gpii.tests.ul.website.harness.stopServer = function (that) {
 fluid.defaults("gpii.tests.ul.website.harness", {
     gradeNames:   ["gpii.ul.website.harness"],
     templateDirs: ["%ul-website/src/templates", "%gpii-express-user/src/templates", "%gpii-json-schema/src/templates", "%ul-website/tests/templates"],
+    setLogging:   true,
     distributeOptions: {
         record: 30000, // Searches that hit lucene need more time, at least for the first search.
         target: "{that gpii.express.handler}.options.timeout"
@@ -71,6 +71,9 @@ fluid.defaults("gpii.tests.ul.website.harness", {
 
 fluid.defaults("gpii.tests.ul.website.harness.withPouch", {
     gradeNames:   ["gpii.tests.ul.website.harness"],
+    ports: {
+        couch: 3368
+    },
     events: {
         pouchStarted:      null,
         pouchStopped:      null,
@@ -93,10 +96,10 @@ fluid.defaults("gpii.tests.ul.website.harness.withPouch", {
                 port: "{harness}.options.ports.couch",
                 listeners: {
                     onStarted: {
-                        func: "{harness}.events.pouchStarted.fire"
+                        func: "{gpii.tests.ul.website.harness.withPouch}.events.pouchStarted.fire"
                     },
                     onStopped: {
-                        func: "{harness}.events.pouchStopped.fire"
+                        func: "{gpii.tests.ul.website.harness.withPouch}.events.pouchStopped.fire"
                     }
                 },
                 components: {
@@ -118,6 +121,9 @@ fluid.defaults("gpii.tests.ul.website.harness.withPouch", {
 
 fluid.defaults("gpii.tests.ul.website.harness.withLucene", {
     gradeNames:   ["gpii.tests.ul.website.harness"],
+    ports: {
+        lucene: 3369
+    },
     events: {
         luceneStarted:     null,
         luceneStopped:     null,
@@ -180,4 +186,8 @@ fluid.defaults("gpii.tests.ul.website.harness.instrumented", {
 
 fluid.defaults("gpii.tests.ul.website.harness.instrumented.withLucene", {
     gradeNames: ["gpii.tests.ul.website.harness.withLucene", "gpii.tests.ul.website.harness.instrumented"]
+});
+
+fluid.defaults("gpii.tests.ul.website.harness.instrumented.withPouchAndLucene", {
+    gradeNames: ["gpii.tests.ul.website.harness.withPouchAndLucene", "gpii.tests.ul.website.harness.instrumented"]
 });

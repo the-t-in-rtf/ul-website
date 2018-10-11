@@ -1,6 +1,7 @@
 /* eslint-env node */
 "use strict";
 var fluid = require("infusion");
+fluid.setLogging(true);
 var gpii = fluid.registerNamespace("gpii");
 
 require("../../");
@@ -245,6 +246,12 @@ fluid.defaults("gpii.tests.ul.website.product.environment.unified", {
         },
         reviewerCaseHolder: {
             type: "gpii.tests.ul.website.product.caseHolder.unified.reviewer"
+        }
+    },
+    listeners: {
+        "onCreate.logOptions": {
+            funcName: "console.log",
+            args:    ["ENVIRONMENT OPTIONS:", "@expand:JSON.stringify({that}.options, null, 2)"]
         }
     }
 });

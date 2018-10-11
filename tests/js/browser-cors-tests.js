@@ -8,7 +8,6 @@
 /* eslint-env node */
 "use strict";
 var fluid = require("infusion");
-fluid.setLogging(true);
 
 var gpii = fluid.registerNamespace("gpii");
 

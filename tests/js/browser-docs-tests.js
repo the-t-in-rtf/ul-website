@@ -33,7 +33,7 @@ fluid.defaults("gpii.tests.ul.website.docs.caseHolder", {
 
 fluid.defaults("gpii.tests.ul.website.docs.environment", {
     gradeNames: ["gpii.test.ul.website.testEnvironment"],
-    endpoint: "/api",
+    endpoint: "/api/docs",
     components: {
         caseHolder: {
             type: "gpii.tests.ul.website.docs.caseHolder"

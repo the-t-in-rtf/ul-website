@@ -10,7 +10,6 @@
 (function (jQuery, fluid) {
     "use strict";
     var gpii  = fluid.registerNamespace("gpii");
-    fluid.setLogging(true);
 
     fluid.registerNamespace("gpii.ul.api.client.images.knitter");
 

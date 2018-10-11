@@ -39,7 +39,7 @@ fluid.registerNamespace("gpii.ul.website.suggest.handler");
  *
  * Handle a single incoming request.  Performs an initial permission check and then requests data from CouchDB.
  *
- * @param that - The component itself.
+ * @param {Object} that - The component itself.
  *
  */
 gpii.ul.website.suggest.handler.handleRequest = function (that) {
@@ -52,8 +52,8 @@ gpii.ul.website.suggest.handler.handleRequest = function (that) {
  *
  * Process the CouchDB response for the main record.
  *
- * @param that - The handler component itself.
- * @param couchResponse {Object} - The raw response from CouchDB.
+ * @param {Object} that - The handler component itself.
+ * @param {Object} couchResponse - The raw response from CouchDB.
  *
  */
 gpii.ul.website.suggest.handler.processExistingSuggestionResponse = function (that, couchResponse) {

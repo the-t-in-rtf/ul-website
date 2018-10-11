@@ -128,6 +128,11 @@ fluid.defaults("gpii.ul.website.harness", {
                             }
                         }
                     },
+                    api: {
+                        options: {
+                            priority:     "after:session"
+                        }
+                    },
                     // 404 for favicon.ico
                     favicon: {
                         type: "gpii.ul.website.middleware.fourohfour",

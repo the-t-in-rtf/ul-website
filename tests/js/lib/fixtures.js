@@ -134,8 +134,8 @@ fluid.defaults("gpii.test.ul.website.caseHolder.loggedIn", {
 fluid.defaults("gpii.test.ul.website.caseHolder.accessibilityReports", {
     gradeNames: ["gpii.test.webdriver.caseHolder", "gpii.tests.webDriver.hasScriptContent"],
     scriptPaths: {
-        axe: "%ul-website/node_modules/axe-core/axe.js",
-        axs: "%ul-website/node_modules/accessibility-developer-tools/dist/js/axs_testing.js"
+        axe: "%ul-website/node_modules/gpii-webdriver/node_modules/axe-core/axe.js",
+        axs: "%ul-website/node_modules/gpii-webdriver/node_modules/accessibility-developer-tools/dist/js/axs_testing.js"
     },
     sequenceStart: gpii.test.ul.website.anonymousPageStartSequence,
     axeOptions: { rules: [{ id: "color-contrast", enabled: false }]}, // We use UIOptions to handle high contrast
@@ -187,8 +187,9 @@ fluid.defaults("gpii.test.ul.website.caseHolder.accessibilityReports", {
     }]
 });
 
+
 fluid.defaults("gpii.test.ul.website.testEnvironment", {
-    gradeNames: ["gpii.test.webdriver.testEnvironment", "gpii.tests.ul.website.harness.instrumented"],
+    gradeNames: ["gpii.test.webdriver.testEnvironment", "gpii.tests.ul.website.harness.instrumented", "gpii.tests.ul.website.harness.withPouch"],
     hangWait: 20000, // pouchdb-lucene needs longer to start up.
     endpoint: "/",
     startUrl:   {
