@@ -38,4 +38,4 @@ EXPOSE 4896
 ENTRYPOINT ["node", "launch-ul.js"]
 
 # By default, pass the options to load the "prod" config.
-CMD ["--optionsFile", "configs/prod.json"]
+CMD ["--optionsFile", "configs/prod.json", "--setLogging", "true"]

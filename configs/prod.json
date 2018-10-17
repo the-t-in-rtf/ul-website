@@ -8,6 +8,11 @@
       "name": "Unified Listing",
       "url":  "https://api.ul.gpii.net/"
     },
+    "hosts": {
+      "api": "localhost",
+      "couch": "couchdb",
+      "lucene": "couchdb-lucene"
+    },
     "ports": {
       "api":    4896,
       "couch":  5984,

@@ -31,7 +31,7 @@
         "kettle": "1.8.1",
         "markdown-it": "8.4.2",
         "moment": "2.22.2",
-        "ul-api": "1.0.0-dev.20181005T092804Z.cde9d0e"
+        "ul-api": "1.0.0-dev.20181015T093237Z.ef5d29d"
     },
     "devDependencies": {
         "eslint": "5.6.1",
