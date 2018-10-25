@@ -24,7 +24,6 @@ ENV NODE_ENV production
 
 # Install our dependencies
 RUN apk update && \
-    apk add vips-dev fftw-dev --no-cache --repository https://dl-3.alpinelinux.org/alpine/edge/testing/ && \
     apk add --no-cache --virtual build-dependencies python make git g++ && \
     rm -rf node_modules/* && \
     npm install && \

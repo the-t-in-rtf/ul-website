@@ -1,17 +1,18 @@
+# Build the full suite of containers required to serve up and maintain the UL API
+#
+# Usage: `docker-compose up`
 version: "3.2"
 
 services:
-  # Usage: `docker-compose build ul`
-  ul:
+  ul-website:
     # TODO: Change this later
-#    image: ul-website-dev:latest
+    image: ul-website
+#    image: gpii/ul-website-dev:latest
     depends_on:
       - couchdb-lucene
       - couchdb
     ports:
       - "4896:4896"
-    environment:
-    - NODE_ENV=production
     volumes:
       - type: bind
         source: /srv/ul-images
@@ -28,9 +29,8 @@ services:
     image: couchdb:2.2
     ports:
       - "5984:5984"
-    environment:
-      - COUCHDB_USER=admin
-      - COUCHDB_PASSWORD=admin
+    env_file:
+      - .docker-env-couchdb
     volumes:
       - type: bind
         source: /srv/docker-couchdb_data
@@ -38,12 +38,32 @@ services:
 
   couchdb-lucene:
     image: klaemo/couchdb-lucene:2.1.0
+    # TODO: Trying disabling this, we shouldn't need to expose the port outside the cluster.
     ports:
       - "5985:5985"
     depends_on:
       - couchdb
-    # Not used, we are currently just using the container's storage itself and not retaining indices between runs.
-    # volumes:
-    #   - type: bind
-    #     source: /srv/docker-couchdblucene_indexes
-    #     target: /opt/couchdb-lucene/indexes
+  # A "task" container which starts and immediately exits on composition build.
+  # Use `docker-compose run ul-imports <npm script>` to run this container.
+  ul-imports:
+#    image: gpii/ul-imports
+    image: ul-imports
+    env_file:
+      - .docker-env-ul-imports
+    depends_on:
+      - couchdb
+      - ul-website
+    command: noop
+    volumes:
+      - type: bind
+        source: /srv/ul-diffs
+        target: /srv/ul-diffs
+      - type: bind
+        source: /srv/ul-images
+        target: /srv/ul-images
+      - type: bind
+        source: /srv/ul-import-output
+        target: /srv/ul-import-output
+      - type: bind
+        source: /srv/ul-updates-reports
+        target: /srv/ul-updates-reports
