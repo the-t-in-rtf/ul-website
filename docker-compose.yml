@@ -5,9 +5,10 @@ version: "3.2"
 
 services:
   ul-website:
-    # TODO: Change this later
     image: ul-website
-#    image: gpii/ul-website-dev:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     depends_on:
       - couchdb-lucene
       - couchdb
@@ -20,9 +21,6 @@ services:
       - type: bind
         source: /srv/ul-updates-reports
         target: /srv/ul-updates-reports
-    build:
-      context: .
-      dockerfile: Dockerfile
 
   # This must use this alias in order for couchdb-lucene to use it with its default options.
   couchdb:
@@ -38,7 +36,6 @@ services:
 
   couchdb-lucene:
     image: klaemo/couchdb-lucene:2.1.0
-    # TODO: Trying disabling this, we shouldn't need to expose the port outside the cluster.
     ports:
       - "5985:5985"
     depends_on:
@@ -46,8 +43,10 @@ services:
   # A "task" container which starts and immediately exits on composition build.
   # Use `docker-compose run ul-imports <npm script>` to run this container.
   ul-imports:
-#    image: gpii/ul-imports
     image: ul-imports
+    build:
+      context: ./node_modules/ul-imports
+      dockerfile: Dockerfile
     env_file:
       - .docker-env-ul-imports
     depends_on:
