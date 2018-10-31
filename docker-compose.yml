@@ -21,6 +21,12 @@ services:
       - type: bind
         source: /srv/ul-updates-reports
         target: /srv/ul-updates-reports
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 5
+        window: 120s
 
   # This must use this alias in order for couchdb-lucene to use it with its default options.
   couchdb:
@@ -33,6 +39,12 @@ services:
       - type: bind
         source: /srv/docker-couchdb_data
         target: /opt/couchdb/data
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 5
+        window: 120s
 
   couchdb-lucene:
     image: klaemo/couchdb-lucene:2.1.0
@@ -40,6 +52,13 @@ services:
       - "5985:5985"
     depends_on:
       - couchdb
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 5
+        window: 120s
+
   # A "task" container which starts and immediately exits on composition build.
   # Use `docker-compose run ul-imports <npm script>` to run this container.
   ul-imports:
@@ -66,3 +85,6 @@ services:
       - type: bind
         source: /srv/ul-updates-reports
         target: /srv/ul-updates-reports
+    deploy:
+      restart_policy:
+        condition: none
