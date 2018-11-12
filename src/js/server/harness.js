@@ -65,6 +65,15 @@ fluid.defaults("gpii.ul.website.harness", {
         {
             source: "{that}.options.app",
             target: "{that gpii.express.user.withMailHandler}.options.app"
+        },
+        // Pass through the mail hostname to the mailer used by gpii-express-user.
+        {
+            source: "{that}.options.ports.smtp",
+            target: "{that gpii.express.user.mailer}.options.transportOptions.port"
+        },
+        {
+            source: "{that}.options.hosts.smtp",
+            target: "{that gpii.express.user.mailer}.options.transportOptions.host"
         }
     ],
     components: {

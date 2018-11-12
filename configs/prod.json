@@ -11,12 +11,14 @@
     "hosts": {
       "api": "localhost",
       "couch": "couchdb",
-      "lucene": "couchdb-lucene"
+      "lucene": "couchdb-lucene",
+      "smtp": "localhost"
     },
     "ports": {
       "api":    4896,
       "couch":  5984,
-      "lucene": 5985
+      "lucene": 5985,
+      "smtp":   25
     },
     "components": {
       "express": {
