@@ -9,6 +9,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    env_file:
+    - .docker-env-mail
     depends_on:
       - couchdb-lucene
       - couchdb
@@ -53,6 +55,7 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .docker-env-ul-imports
+      - .docker-env-mail
     depends_on:
       - couchdb
       - ul-website
