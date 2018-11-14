@@ -28,7 +28,8 @@ RUN apk update && \
     rm -rf node_modules/* && \
     npm install && \
     npm cache clean --force && \
-    apk del build-dependencies
+    apk del build-dependencies && \
+    apk add busybox-extras
 
 # The UL API express instance runs on this port with the "prod.json" config file.
 EXPOSE 4896

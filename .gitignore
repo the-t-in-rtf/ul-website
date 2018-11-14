@@ -8,3 +8,4 @@ package-lock.json
 .docker-env-ul-imports
 # Docker environment variables for CouchDB
 .docker-env-couchdb
+.docker-env-mail
