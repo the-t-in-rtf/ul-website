@@ -1,6 +1,6 @@
 {
     "name": "ul-website",
-    "version": "1.0.0",
+    "version": "1.0.0-dev.20181205T110329Z.ef38cad",
     "description": "This package provides the web site as well as the manufacturer and contributor interface to the Unified Listing.",
     "main": "index.js",
     "scripts": {
@@ -32,7 +32,7 @@
         "markdown-it": "8.4.2",
         "moment": "2.22.2",
         "ul-api": "1.0.0-dev.20181126T142401Z.124fbf0",
-        "ul-imports": "1.0.0-dev.20181205T105745Z.accef71"
+        "ul-imports": "1.0.0-dev.20181205T115420Z.5af93eb"
     },
     "devDependencies": {
         "eslint": "5.6.1",
