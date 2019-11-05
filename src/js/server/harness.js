@@ -5,14 +5,15 @@
 /* eslint-env node */
 "use strict";
 var fluid = require("infusion");
-require("../../../");
+
+fluid.require("%ul-website");
 
 fluid.require("%gpii-express");
 fluid.require("%gpii-express-user");
 fluid.require("%gpii-handlebars");
+fluid.require("%gpii-json-schema");
 
 fluid.require("%ul-api");
-
 fluid.require("%ul-api/src/js/harness.js");
 
 require("./suggest");
@@ -20,8 +21,27 @@ require("./fourohfour");
 
 fluid.defaults("gpii.ul.website.harness", {
     gradeNames:   ["gpii.ul.api.harness"],
-    templateDirs: ["%ul-website/src/templates", "%gpii-express-user/src/templates", "%gpii-json-schema/src/templates"],
-    schemaDirs:   ["%ul-website/src/schemas", "%ul-api/src/schemas", "%gpii-express-user/src/schemas"],
+    messageDirs:  {
+        validation: "%gpii-json-schema/src/messages",
+        user: "%gpii-express-user/src/messages"
+    },
+    templateDirs: {
+        website: {
+            path: "%ul-website/src/templates"
+        },
+        user: {
+            path: "%gpii-express-user/src/templates",
+            priority: "after:website"
+        },
+        validation: {
+            priority: "after:user",
+            path: "%gpii-json-schema/src/templates"
+        },
+        api: {
+            path: "%ul-api/src/templates",
+            priority: "after:validation"
+        }
+    },
     rules: {
         contextToExpose: {
             "layout": "layout", // This is required to support custom layouts
@@ -46,10 +66,6 @@ fluid.defaults("gpii.ul.website.harness", {
         }
     },
     distributeOptions: [
-        {
-            source: "{that}.options.sessionKey",
-            target: "{that gpii.express.handler}.options.sessionKey"
-        },
         {
             source: "{that}.options.rules.contextToExpose",
             target: "{that gpii.express.singleTemplateMiddleware}.options.rules.contextToExpose"
@@ -78,9 +94,8 @@ fluid.defaults("gpii.ul.website.harness", {
     ],
     components: {
         express: {
-            type: "gpii.express.withJsonQueryParser",
             options: {
-                port :   "{harness}.options.ports.api",
+                port : "{harness}.options.ports.api",
                 templateDirs: "{harness}.options.templateDirs",
                 events: {
                     apiReady: null,
@@ -91,14 +106,6 @@ fluid.defaults("gpii.ul.website.harness", {
                             onStarted: "onStarted",
                             suggestReady: "suggestReady"
                         }
-                    }
-                },
-                listeners: {
-                    onReady:   {
-                        func: "{harness}.events.apiReady.fire"
-                    },
-                    onStopped: {
-                        func: "{harness}.events.apiStopped.fire"
                     }
                 },
                 components: {
@@ -115,11 +122,15 @@ fluid.defaults("gpii.ul.website.harness", {
                             }
                         }
                     },
+                    // TODO: The API also has a handlebars instance.
                     handlebars: {
                         type: "gpii.express.hb",
                         options: {
                             priority: "after:corsHeaders",
-                            templateDirs: "{harness}.options.templateDirs"
+                            templateDirs: "{harness}.options.templateDirs",
+                            model: {
+                                messageBundles: "{messageBundleLoader}.model.messageBundles"
+                            }
                         }
                     },
                     cookieparser: {
@@ -139,7 +150,12 @@ fluid.defaults("gpii.ul.website.harness", {
                     },
                     api: {
                         options: {
-                            priority:     "after:session"
+                            priority:     "after:session",
+                            templateDirs: "{harness}.options.templateDirs",
+                            components: {
+                                cookieparser: "{gpii.express}.cookieparser",
+                                session: "{gpii.express}.session"
+                            }
                         }
                     },
                     // 404 for favicon.ico
@@ -157,24 +173,6 @@ fluid.defaults("gpii.ul.website.harness", {
                             priority: "before:dispatcher",
                             path:    "/src",
                             content: "%ul-website/src"
-                        }
-                    },
-                    // JSON Schemas, available individually
-                    schemas: {
-                        type: "gpii.express.router.static",
-                        options: {
-                            priority: "before:dispatcher",
-                            path:     "/schemas",
-                            content:  "{harness}.options.schemaDirs"
-                        }
-                    },
-                    // Bundled JSON Schemas for client-side validation
-                    allSchemas: {
-                        type: "gpii.schema.inlineMiddleware",
-                        options: {
-                            priority:   "before:dispatcher",
-                            path:       "/allSchemas",
-                            schemaDirs: "{harness}.options.schemaDirs"
                         }
                     },
                     modules: {
@@ -209,6 +207,21 @@ fluid.defaults("gpii.ul.website.harness", {
                         options: {
                             priority: "last",
                             templateKey: "pages/error"
+                        }
+                    },
+                    messageBundleLoader: {
+                        type: "gpii.handlebars.i18n.messageBundleLoader",
+                        options: {
+                            messageDirs: "{harness}.options.messageDirs"
+                        }
+                    },
+                    messages: {
+                        type: "gpii.handlebars.inlineMessageBundlingMiddleware",
+                        options: {
+                            messageDirs: "{harness}.options.messageDirs",
+                            model: {
+                                messageBundles: "{messageBundleLoader}.model.messageBundles"
+                            }
                         }
                     }
                 }

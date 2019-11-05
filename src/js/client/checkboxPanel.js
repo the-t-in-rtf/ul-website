@@ -94,18 +94,17 @@
     In the above example, all data in a checkbox panel is transformed using the same rules.  There is currently no
     mechanism for handling multiple data types in a single checkbox panel.  As we can simply use the `toString` function
     to convert model variables to form elements, the other part of the binding is omitted.  If you need to work with
-    data that does not provide meaningful output via a `toString` function, please check out at the `gpii-binder`
+    data that does not provide meaningful output via a `toString` function, please check out the `gpii-binder`
     documentation.
 
-    TODO:  Make these into real docs once we move it into another package.
+    TODO:  Make these into real docs if we move it into another package.
  */
 // TODO:  Discuss where this should live.  I propose moving "bound" components like this that also use templates to `gpii-handlebars`.
-/* global fluid */
-(function () {
+(function (fluid) {
     "use strict";
     fluid.defaults("gpii.ul.checkboxPanel", {
-        gradeNames: ["gpii.handlebars.templateAware.serverAware", "gpii.binder.bindOnDomChange"],
-        template: "common-checkboxPanel",
+        gradeNames: ["gpii.handlebars.templateAware.serverResourceAware", "gpii.binder.bindOnDomChange"],
+        templateKey: "common-checkboxPanel",
         selectors: {
             initial:         "",
             checkboxOptions: "input[name='checkbox-option']"
@@ -119,8 +118,8 @@
         invokers: {
             renderInitialMarkup: {
                 func: "{that}.renderMarkup",
-                args: ["initial", "{that}.options.template", {id: "{that}.id", checkboxes: "{that}.options.checkboxes", legend: "{that}.options.legend"}]
+                args: ["initial", "{that}.options.templateKey", {id: "{that}.id", checkboxes: "{that}.options.checkboxes", legend: "{that}.options.legend"}]
             }
         }
     });
-})();
+})(fluid);

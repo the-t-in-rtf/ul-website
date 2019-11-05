@@ -17,7 +17,7 @@
 
     fluid.defaults("gpii.ul.images.viewGallery", {
         gradeNames: ["gpii.handlebars.ajaxCapable", "gpii.handlebars.templateAware"],
-        template:    "gallery-view",
+        templateKey:  "gallery-view",
         selectors: {
             initial: ""
         },
@@ -57,7 +57,7 @@
         invokers: {
             renderInitialMarkup: {
                 func: "{that}.renderMarkup",
-                args: ["initial", "{that}.options.template", "{that}.model", "html"]
+                args: ["initial", "{that}.options.templateKey", "{that}.model", "html"]
             }
         },
         components: {

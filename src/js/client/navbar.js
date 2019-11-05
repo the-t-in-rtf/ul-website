@@ -5,9 +5,8 @@
   individual controls for all pages.  The only difference is the template.
 
 */
-/* global fluid */
 <!-- TODO: replace this with the paging component included with infusion or at a minimum come up with a good reason why we can't -->
-(function () {
+(function (fluid) {
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
     fluid.registerNamespace("jQuery");
@@ -106,7 +105,7 @@
 
     fluid.defaults("gpii.ul.navbar", {
         gradeNames: ["gpii.handlebars.templateAware"],
-        template:   "navbar",
+        templateKey: "navbar",
         members: {
             oldFocus: undefined
         },
@@ -131,7 +130,7 @@
         invokers: {
             renderInitialMarkup: {
                 func: "{that}.renderMarkup",
-                args: ["initial", "{that}.options.template", "{that}.model"]
+                args: ["initial", "{that}.options.templateKey", "{that}.model"]
             },
             generatePagingData: {
                 funcName: "gpii.ul.navbar.generatePagingData",
@@ -185,4 +184,4 @@
             }
         }
     });
-})();
+})(fluid);

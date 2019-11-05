@@ -133,5 +133,3 @@ fluid.defaults("gpii.tests.ul.website.skipNav.environment.manufacturers", {
     endpoint:   "/manufacturers"
 });
 gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.skipNav.environment.manufacturers" });
-
-

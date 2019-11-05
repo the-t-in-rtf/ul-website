@@ -1,10 +1,9 @@
-/* global fluid */
-(function () {
+(function (fluid) {
     "use strict";
     // The base "sortBy" control that updates the sortBy values based on a predefined list of possible settings.
     fluid.defaults("gpii.ul.sortBy", {
         gradeNames: ["gpii.ul.select"],
-        template:   "sortBy",
+        templateKey: "sortBy",
         selectors:  {
             initial: "",
             select:  ".search-sortBy-select"
@@ -50,4 +49,4 @@
             }
         }
     });
-})();
+})(fluid);

@@ -1,11 +1,9 @@
 /* eslint-env node */
 "use strict";
 var fluid = require("infusion");
-var gpii = fluid.registerNamespace("gpii");
 
 require("../../");
 require("./lib/");
-
 
 fluid.defaults("gpii.tests.ul.website.fourohfour.caseHolder", {
     gradeNames: ["gpii.test.ul.website.caseHolder"],
@@ -37,11 +35,12 @@ fluid.defaults("gpii.tests.ul.website.fourohfour.environment", {
     components: {
         caseHolder: {
             type: "gpii.tests.ul.website.fourohfour.caseHolder"
-        },
-        accessibilityReports: {
-            type: "gpii.test.ul.website.caseHolder.accessibilityReports"
         }
+        // TODO: Reenable
+        //accessibilityReports: {
+        //    type: "gpii.test.ul.website.caseHolder.accessibilityReports"
+        //}
     }
 });
 
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.fourohfour.environment" });
+fluid.test.runTests("gpii.tests.ul.website.fourohfour.environment");

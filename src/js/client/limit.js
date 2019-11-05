@@ -1,10 +1,9 @@
-/* global fluid */
-(function () {
+(function (fluid) {
     "use strict";
     // The "limit" control that updates the number of products per page based on a predefined list of possible settings.
     fluid.defaults("gpii.ul.limit", {
         gradeNames: ["gpii.ul.select"],
-        template:   "limit",
+        templateKey:   "limit",
         selectors:  {
             initial: "",
             select:  ".limit-select"
@@ -50,4 +49,4 @@
             }
         }
     });
-})();
+})(fluid);

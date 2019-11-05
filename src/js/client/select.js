@@ -1,6 +1,5 @@
 // A generic component that controls and updates a single drop-down field based on a single model variable.
-/* global fluid */
-(function () {
+(function (fluid) {
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
 
@@ -9,7 +8,7 @@
     gpii.ul.select.renderMarkup = function (that) {
         var selectOptionsSorted = fluid.copy(that.options.select);
         selectOptionsSorted.options = fluid.parsePriorityRecords(selectOptionsSorted.options, "select option");
-        that.renderMarkup("initial", that.options.template, selectOptionsSorted);
+        that.renderMarkup("initial", that.options.templateKey, selectOptionsSorted);
     };
 
     fluid.defaults("gpii.ul.select", {
@@ -24,7 +23,7 @@
         invokers: {
             renderInitialMarkup: {
                 funcName: "gpii.ul.select.renderMarkup",
-                args:     ["{that}"]
+                args:     ["{that}", "{that}.options.templateKey", "{that}.model"]
             }
         },
         modelListeners: {
@@ -34,4 +33,4 @@
             }
         }
     });
-})();
+})(fluid);

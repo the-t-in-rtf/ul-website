@@ -3,8 +3,7 @@
     A component to allow users to "suggest" changes to an existing unified record.  Reuses material from the "edit" page.
 
  */
-/* global fluid */
-(function () {
+(function (fluid) {
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
 
@@ -36,8 +35,8 @@
         invokers: {
             renderInitialMarkup: {
                 func: "{that}.renderMarkup",
-                args: ["viewport", "{that}.options.templates.initial", "{that}.model"]
+                args: ["viewport", "{that}.options.templateKeys.initial", "{that}.model"]
             }
         }
     });
-})();
+})(fluid);

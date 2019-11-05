@@ -1,6 +1,5 @@
 // The "updates" report for database vendors
-/* global fluid, document, jQuery */
-(function () {
+(function (fluid) {
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
 
@@ -13,7 +12,7 @@
     // The "source picker", which is also responsible for getting the list of valid sources.
     fluid.defaults("gpii.ul.updates.controls", {
         gradeNames: ["gpii.handlebars.ajaxCapable", "gpii.handlebars.templateAware"],
-        template:   "updates-controls",
+        templateKey: "updates-controls",
         ajaxOptions: {
             method:   "GET",
             url:      "/api/sources",
@@ -38,7 +37,7 @@
         invokers: {
             renderInitialMarkup: {
                 func: "{that}.renderMarkup",
-                args: ["container", "{that}.options.template", "{that}.model"] // selector, template, data, manipulator
+                args: ["container", "{that}.options.templateKey", "{that}.model"] // selector, template, data, manipulator
             }
         },
         listeners: {
@@ -113,7 +112,7 @@
 
 
     fluid.defaults("gpii.ul.updates", {
-        gradeNames: ["gpii.schemas.client.errorAwareForm"],
+        gradeNames: ["gpii.schema.client.errorAwareForm"],
         hideOnSuccess: false,
         hideOnError:   false,
         ajaxOptions: {
@@ -125,7 +124,7 @@
             },
             traditional: true // We are passing array data, whose variable name jQuery will mangle without this option.
         },
-        templates: {
+        templateKeys: {
             "initial": "updates-viewport"
         },
         rules: {
@@ -175,7 +174,7 @@
                 container: "{updates}.options.selectors.output",
                 createOnEvent: "{updates}.events.onMarkupRendered",
                 options: {
-                    template: "updates-products",
+                    templateKey: "updates-products",
                     model: {
                         user:    "{updates}.model.user",
                         message: "{updates}.model.products"
@@ -205,4 +204,4 @@
             }
         }
     });
-})(jQuery);
+})(fluid);

@@ -1,6 +1,5 @@
 // Basic "products" component for the Unified Listing
-/* global fluid */
-(function () {
+(function (fluid) {
     "use strict";
 
     // The wrapper component that wires together all controls.
@@ -217,13 +216,13 @@
             limit:     ".products-limit",
             bottomnav: ".products-bottomnav"
         },
-        templates: {
+        templateKeys: {
             "initial": "products-viewport"
         },
         invokers: {
             renderInitialMarkup: {
                 func: "{that}.renderMarkup",
-                args: [ "initial", "{that}.options.templates.initial", "{that}.model"]
+                args: [ "initial", "{that}.options.templateKeys.initial", "{that}.model"]
             }
         }
     });
@@ -231,4 +230,4 @@
     fluid.defaults("gpii.ul.products.hasUserControls", {
         gradeNames: ["gpii.ul.products", "gpii.ul.hasUserControls"]
     });
-})();
+})(fluid);

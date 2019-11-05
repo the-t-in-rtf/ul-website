@@ -1,10 +1,9 @@
 // The "statuses" control that updates the statuses value when checkboxes are changed.
-/* global fluid */
-( function () {
+( function (fluid) {
     "use strict";
     fluid.defaults("gpii.ul.statuses", {
         gradeNames: ["gpii.ul.checkboxPanel"],
-        template: "search-statuses",
+        templateKey: "search-statuses",
         label:    "Filter by status:",
         checkboxes: {
             "new": {
@@ -25,4 +24,4 @@
             }
         }
     });
-})();
+})(fluid);

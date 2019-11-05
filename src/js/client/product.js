@@ -1,14 +1,12 @@
 // Component to display the view/edit interface for a single product.
-
-/* global fluid */
-(function () {
+(function (fluid) {
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
 
     // The sub-component that handles editing the "status" field.
     fluid.defaults("gpii.ul.product.edit.status", {
         gradeNames: ["gpii.ul.select"],
-        template: "product-edit-status",
+        templateKey: "product-edit-status",
         select: {
             options: [
                 { value: "new", label: "New"},
@@ -34,7 +32,7 @@
 
     // The component that handles the binding, etc. for the "Edit" form.
     fluid.defaults("gpii.ul.product.edit", {
-        gradeNames: ["gpii.schemas.client.errorAwareForm"],
+        gradeNames: ["gpii.schema.client.errorAwareForm"],
         schemaKey:  "product-update-input.json",
         ajaxOptions: {
             url:         "/api/product",
@@ -64,7 +62,7 @@
                 message: "Your changes have been saved."
             }
         },
-        templates: {
+        templateKeys: {
             initial: "product-edit"
         },
         selectors: {
@@ -202,6 +200,11 @@
                 options: {
                     model: {
                         select:   "{edit}.model.product.status"
+                    },
+                    listeners: {
+                        "onCreate.renderInitialMarkup": {
+                            func: "{that}.renderInitialMarkup"
+                        }
                     }
                 }
             }
@@ -332,6 +335,11 @@
         mergePolicy: {
             rules: "noexpand"
         },
+        listeners: {
+            "onRendererAvailable.renderMarkup": {
+                func: "{that}.renderInitialMarkup"
+            }
+        },
         ajaxOptions: {
             method:   "GET",
             dataType: "json",
@@ -347,7 +355,7 @@
             user:             false,
             writableSources:  []
         },
-        template: "product-viewport",
+        templateKey: "product-viewport",
         events: {
             onEditRendered: null,
             onReadyForEdit: null,
@@ -379,7 +387,7 @@
                 container:     ".product-view",
                 createOnEvent: "{product}.events.onMarkupRendered",
                 options: {
-                    template: "product-view",
+                    templateKey: "product-view",
                     model:    {
                         product: "{product}.model.product",
                         user:    "{product}.model.user"
@@ -387,6 +395,9 @@
                     listeners: {
                         "onMarkupRendered.notifyParent": {
                             func: "{product}.events.onViewRendered.fire"
+                        },
+                        "onCreate.renderInitialMarkup": {
+                            func: "{that}.renderInitialMarkup"
                         }
                     }
                 }
@@ -403,7 +414,6 @@
                         renderer: "{gpii.ul.product}.renderer"
                     }
                 }
-
             },
             edit: {
                 type:          "gpii.ul.product.edit",
@@ -412,6 +422,11 @@
                 options: {
                     model: {
                         product: "{product}.model.editableProduct"
+                    },
+                    listeners: {
+                        "onCreate.renderInitialMarkup": {
+                            func: "{that}.renderInitialMarkup"
+                        }
                     }
                 }
             },
@@ -471,8 +486,8 @@
             },
             renderInitialMarkup: {
                 func: "{that}.renderMarkup",
-                args: ["viewport", "{that}.options.template", "{that}.model"]
+                args: ["viewport", "{that}.options.templateKey", "{that}.model"]
             }
         }
     });
-})();
+})(fluid);

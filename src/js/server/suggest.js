@@ -180,10 +180,6 @@ fluid.defaults("gpii.ul.website.suggest", {
     routerOptions: {
         mergeParams: true
     },
-    events: {
-        onSchemasDereferenced: null
-    },
-    schemaDirs: ["%ul-website/src/schemas"],
     rules: {
         requestContentToValidate: {
             "uid": "params.uid"
@@ -211,13 +207,7 @@ fluid.defaults("gpii.ul.website.suggest", {
             options: {
                 priority:   "after:loginRequired",
                 namespace:  "validationMiddleware",
-                schemaDirs: "{gpii.ul.website.suggest}.options.schemaDirs",
-                schemaKey:  "ul-suggest-input.json",
-                listeners: {
-                    "onSchemasDereferenced.notifyParent": {
-                        func: "{gpii.ul.website.suggest}.events.onSchemasDereferenced.fire"
-                    }
-                }
+                schemaKey:  "ul-suggest-input.json"
             }
         },
         // We let JSON errors fall back to a more general handler, but render HTML errors ourselves
@@ -238,4 +228,3 @@ fluid.defaults("gpii.ul.website.suggest", {
         }
     }
 });
-

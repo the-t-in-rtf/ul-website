@@ -38,5 +38,3 @@ gpii.tests.ul.website.coverage.saveCoverageData = function (that, coverageData) 
         fs.writeFileSync(fullPath, JSON.stringify(coverageData, null, 2), { encoding: "utf8"});
     }
 };
-
-

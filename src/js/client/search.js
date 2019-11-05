@@ -1,6 +1,5 @@
 // Basic search component for the Unified Listing
-/* global fluid */
-(function () {
+(function (fluid) {
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
 
@@ -39,6 +38,13 @@
                 accept: "application/json"
             }
         },
+        components: {
+            error: {
+                options: {
+                    templateKey: "common-error"
+                }
+            }
+        },
         rules: {
             successResponseToModel: {
                 "":           "notfound",
@@ -68,7 +74,7 @@
             q:       ".search-query-string",
             submit:  ".search-query-submit"
         },
-        templates: {
+        templateKeys: {
             initial: "search-query",
             success: "common-success",
             error:   "common-error"
@@ -141,17 +147,21 @@
 
     // The wrapper component that wires together all controls.
     fluid.defaults("gpii.ul.search", {
-        gradeNames: ["gpii.handlebars.templateAware"],
+        gradeNames: ["gpii.handlebars.templateAware.serverResourceAware"],
         events: {
             onResultsRefreshed: null,
             onStartLoading:     null,
             onStopLoading:      null
         },
+        distributeOptions: [{
+            record: "{gpii.ul.search}.renderer",
+            target: "{that > gpii.ul.api.client.images.knitter}.options.components.renderer"
+        }],
         model: {
             q:               "",
             sources:         [],
             statuses:        [ "new", "active", "discontinued"],
-            sortBy:           undefined,
+            sortBy:           "",
             offset:           0,
             limit:            25,
             totalRows:        0,
@@ -160,29 +170,37 @@
             products:         []
         },
         components: {
+            // TODO: This is currently broken, it results in some kind of feedback loop with the binder, and propagates the user data to the location bar.
             // The component that relays changes between the URL, browser history, and model
-            relay: {
-                type: "gpii.locationBar",
-                options: {
-                    model: {
-                        "q": "{gpii.ul.search}.model.q",
-                        "sources": "{gpii.ul.search}.model.sources",
-                        "statuses": "{gpii.ul.search}.model.statuses",
-                        "sortBy": "{gpii.ul.search}.model.sortBy",
-                        "offset": "{gpii.ul.search}.model.offset",
-                        "limit": "{gpii.ul.search}.model.limit",
-                        "unified": "{gpii.ul.search}.model.unified",
-                        "includeSources": "{gpii.ul.search}.model.includeSources"
-                    }
-                }
-            },
+            //relay: {
+            //    type: "gpii.locationBar",
+            //    options: {
+            //        model: {
+            //            q:               "",
+            //            sources:         [],
+            //            statuses:        [ "new", "active", "discontinued"],
+            //            sortBy:           "",
+            //            offset:           0,
+            //            limit:            25,
+            //            totalRows:        0,
+            //            unified:          true,
+            //            includeSources:   true,
+            //            products:         []
+            //        }
+            //    }
+            //},
             // The main query form
             query: {
                 type:          "gpii.ul.search.query",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
                 container:     "{search}.dom.form",
                 options: {
-                    model: "{search}.model"
+                    model: "{search}.model",
+                    listeners: {
+                        "onCreate.renderInitialMarkup": {
+                            func: "{that}.renderInitialMarkup"
+                        }
+                    }
                 }
             },
             // The search results, if any
@@ -194,6 +212,9 @@
                     listeners: {
                         "onDomChange.notifyParent": {
                             func: "{gpii.ul.search}.events.onResultsRefreshed.fire"
+                        },
+                        "onCreate.renderInitialMarkup": {
+                            func: "{that}.renderInitialMarkup"
                         }
                     },
                     model: {
@@ -213,6 +234,11 @@
                         totalRows: "{search}.model.totalRows",
                         offset:    "{search}.model.offset",
                         limit:     "{search}.model.limit"
+                    },
+                    listeners: {
+                        "onCreate.renderInitialMarkup": {
+                            func: "{that}.renderInitialMarkup"
+                        }
                     }
                 }
             },
@@ -227,6 +253,11 @@
                         totalRows: "{search}.model.totalRows",
                         offset:    "{search}.model.offset",
                         limit:     "{search}.model.limit"
+                    },
+                    listeners: {
+                        "onCreate.renderInitialMarkup": {
+                            func: "{that}.renderInitialMarkup"
+                        }
                     }
                 }
             },
@@ -238,6 +269,11 @@
                 options: {
                     model: {
                         select:   "{search}.model.sortBy"
+                    },
+                    listeners: {
+                        "onCreate.renderInitialMarkup": {
+                            func: "{that}.renderInitialMarkup"
+                        }
                     }
                 }
             },
@@ -249,6 +285,11 @@
                 options: {
                     model: {
                         checkboxValue: "{search}.model.statuses"
+                    },
+                    listeners: {
+                        "onCreate.renderInitialMarkup": {
+                            func: "{that}.renderInitialMarkup"
+                        }
                     }
                 }
             },
@@ -260,6 +301,11 @@
                 options: {
                     model: {
                         select:   "{search}.model.limit"
+                    },
+                    listeners: {
+                        "onCreate.renderInitialMarkup": {
+                            func: "{that}.renderInitialMarkup"
+                        }
                     }
                 }
             },
@@ -280,20 +326,18 @@
                         "onCreate.applyBindings": "{that}.events.onRefresh"
                     }
                 }
-            },
-            // The image "knitter" that associated images with individual search results
-            knitter: {
-                type: "gpii.ul.api.client.images.knitter",
-                container: "{that}.container",
-                options: {
-                    events: {
-                        onResultsRefreshed: "{search}.events.onResultsRefreshed"
-                    },
-                    components: {
-                        renderer: "{gpii.ul.search}.renderer"
-                    }
-                }
             }
+            // TODO: Get this working again if anyone really wants it.
+            // The image "knitter" that associates images with individual search results
+            //knitter: {
+            //    type: "gpii.ul.api.client.images.knitter",
+            //    container: "{that}.container",
+            //    options: {
+            //        events: {
+            //            onResultsRefreshed: "{search}.events.onResultsRefreshed"
+            //        }
+            //    }
+            //}
         },
         selectors: {
             initial:   ".search-viewport",
@@ -307,13 +351,19 @@
             limit:     ".search-limit",
             bottomnav: ".search-bottomnav"
         },
-        templates: {
+        templateKeys: {
             "initial": "search-viewport"
         },
         invokers: {
             renderInitialMarkup: {
                 func: "{that}.renderMarkup",
-                args: [ "initial", "{that}.options.templates.initial", "{that}.model"]
+                args: [ "initial", "{that}.options.templateKeys.initial", "{that}.model"]
+            }
+        },
+        // TODO: Why do we have to do this manually?  It should have happened automatically.
+        listeners: {
+            "onRendererAvailable.renderMarkup": {
+                func: "{that}.renderInitialMarkup"
             }
         }
     });
@@ -321,4 +371,4 @@
     fluid.defaults("gpii.ul.search.hasUserControls", {
         gradeNames: ["gpii.ul.search", "gpii.ul.hasUserControls"]
     });
-})();
+})(fluid);

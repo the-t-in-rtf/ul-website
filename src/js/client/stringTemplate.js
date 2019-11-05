@@ -14,8 +14,7 @@
 //   }
 // }
 //
-/* global fluid */
-(function () {
+(function (fluid) {
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
 
@@ -26,4 +25,4 @@
     gpii.ul.stringTemplate = function (value, transformSpec) {
         return fluid.stringTemplate(value, transformSpec.terms);
     };
-})();
+})(fluid);

@@ -1,5 +1,4 @@
-/* globals fluid */
-( function () {
+( function (fluid) {
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
 
@@ -29,11 +28,11 @@
         selectors: {
             products: ""
         },
-        template: "products-table",
+        templateKey: "products-table",
         invokers: {
             renderInitialMarkup: {
                 func: "{that}.renderMarkup",
-                args: ["products", "{that}.options.template", "{that}.model"]
+                args: ["products", "{that}.options.templateKey", "{that}.model"]
             },
             pageAndRender: {
                 funcName: "gpii.ul.productsTable.pageAndRender",
@@ -60,4 +59,4 @@
             }
         }
     });
-})();
+})(fluid);

@@ -1,11 +1,10 @@
-/* globals fluid */
 /*
 
     A Model transformation function to transform each element in an array.  Used with the "checkbox" panel.
 
  */
 // TODO:  Discuss whether this should be moved into Fluid.
-(function () {
+(function (fluid) {
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
     fluid.registerNamespace("gpii.ul.transforms");
@@ -34,4 +33,4 @@
         gradeNames: ["fluid.standardTransformFunction"]
     });
 
-})();
+})(fluid);

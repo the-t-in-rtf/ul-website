@@ -9,8 +9,7 @@
 //
 // Your main element should be focusable (i.e. have a `tabindex` property set).
 //
-/* global fluid */
-(function () {
+(function (fluid) {
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
 
@@ -83,4 +82,4 @@
         }
     });
 
-})();
+})(fluid);

@@ -1,39 +1,41 @@
 {
-  "type": "prodConfig",
-  "options": {
-    "gradeNames":   ["gpii.ul.website.harness"],
-    "originalsDir": "/srv/ul-images/originalsDir",
-    "cacheDir":     "/srv/ul-images/cacheDir",
-    "app": {
-      "name": "Unified Listing",
-      "url":  "https://api.ul.gpii.net/"
-    },
-    "hosts": {
-      "api": "localhost",
-      "couch": "couchdb",
-      "lucene": "couchdb-lucene",
-      "smtp": "localhost"
-    },
-    "ports": {
-      "api":    4896,
-      "couch":  5984,
-      "lucene": 5985,
-      "smtp":   25
-    },
-    "components": {
-      "express": {
-        "options": {
-          "components": {
-            "updatesReports": {
-              "type":"gpii.express.router.serveContentAndIndex",
-              "options": {
-                "path": "/updates-reports",
-                "content": "/srv/ul-updates-reports"
-              }
+    "type": "prodConfig",
+    "options": {
+        "gradeNames": [
+            "gpii.ul.website.harness"
+        ],
+        "originalsDir": "/srv/ul-images/originalsDir",
+        "cacheDir": "/srv/ul-images/cacheDir",
+        "app": {
+            "name": "Unified Listing",
+            "url": "https://api.ul.gpii.net/"
+        },
+        "hosts": {
+            "api": "localhost",
+            "couch": "couchdb",
+            "lucene": "couchdb-lucene",
+            "smtp": "localhost"
+        },
+        "ports": {
+            "api": 4896,
+            "couch": 5984,
+            "lucene": 5985,
+            "smtp": 25
+        },
+        "components": {
+            "express": {
+                "options": {
+                    "components": {
+                        "updatesReports": {
+                            "type": "gpii.express.router.serveContentAndIndex",
+                            "options": {
+                                "path": "/updates-reports",
+                                "content": "/srv/ul-updates-reports"
+                            }
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
 }

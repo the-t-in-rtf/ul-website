@@ -199,4 +199,3 @@
 
     fluid.test.runTests(["gpii.tests.ul.checkboxPanel.environment.string", "gpii.tests.ul.checkboxPanel.environment.number"]);
 })();
-

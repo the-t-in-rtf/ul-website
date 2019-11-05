@@ -59,9 +59,7 @@
 //      args: ["{that}"]
 //   }
 // }
-
-/* global fluid */
-(function () {
+(function (fluid) {
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
     fluid.registerNamespace("gpii.ul.toggle");
@@ -131,4 +129,4 @@
             }
         }
     });
-})();
+})(fluid);

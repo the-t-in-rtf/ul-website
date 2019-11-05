@@ -33,7 +33,7 @@ fluid.defaults("gpii.ul.website.launcher", {
         },
         help: true,
         defaults: {
-            "optionsFile": "%ul-website/configs/dev.json"
+            "optionsFile": "%ul-website/configs/prod.json"
         }
     }
 });

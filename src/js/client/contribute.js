@@ -1,6 +1,5 @@
 // Component to allow end users to contribute changes, which can be reviewed and incorporated into the unified record.
-/* global fluid */
-(function () {
+(function (fluid) {
     "use strict";
     var gpii = fluid.registerNamespace("gpii");
 
@@ -11,7 +10,7 @@
     };
 
     fluid.defaults("gpii.ul.contribute", {
-        gradeNames: ["gpii.schemas.client.errorAwareForm"],
+        gradeNames: ["gpii.schema.client.errorAwareForm"],
         schemaKey:  "product-update-input.json",
         hideOnSuccess: false,
         hideOnError:   false,
@@ -189,7 +188,7 @@
             phone:            "manufacturer.phone",
             url:              "manufacturer.url"
         },
-        templates: {
+        templateKeys: {
             initial: "contribute-viewport"
         },
         events: {
@@ -202,4 +201,4 @@
             }
         }
     });
-})();
+})(fluid);
