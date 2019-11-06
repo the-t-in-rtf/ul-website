@@ -33,7 +33,7 @@
         "markdown-it": "10.0.0",
         "moment": "2.24.0",
         "ul-api": "1.0.0-dev.20191015T074901Z.8b1dd87.UL-65",
-        "ul-imports": "1.0.0-dev.20191105T131713Z.f747aea.UL-67"
+        "ul-imports": "1.0.0-dev.20191106T091507Z.5302765.UL-67"
     },
     "devDependencies": {
         "eslint": "6.5.1",
