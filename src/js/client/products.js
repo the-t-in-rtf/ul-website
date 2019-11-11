@@ -70,18 +70,19 @@
         },
         components: {
             // The component that relays changes between the URL, browser history, and model
-            relay: {
-                type: "gpii.locationBar",
-                options: {
-                    model: {
-                        "sources":        "{gpii.ul.products}.model.sources",
-                        "status":         "{gpii.ul.products}.model.status",
-                        "sortBy":         "{gpii.ul.products}.model.sortBy",
-                        "unified":        "{gpii.ul.products}.model.unified",
-                        "includeSources": "{gpii.ul.products}.model.includeSources"
-                    }
-                }
-            },
+            // TODO: Get this working again.
+            //relay: {
+            //    type: "gpii.locationBar",
+            //    options: {
+            //        model: {
+            //            "sources":        "{gpii.ul.products}.model.sources",
+            //            "status":         "{gpii.ul.products}.model.status",
+            //            "sortBy":         "{gpii.ul.products}.model.sortBy",
+            //            "unified":        "{gpii.ul.products}.model.unified",
+            //            "includeSources": "{gpii.ul.products}.model.includeSources"
+            //        }
+            //    }
+            //},
             // The products, if any
             products: {
                 type:          "gpii.ul.productsTable",
@@ -189,20 +190,21 @@
                         "onCreate.applyBindings": "{that}.events.onRefresh"
                     }
                 }
-            },
-            // The image "knitter" that associated images with individual search results
-            knitter: {
-                type: "gpii.ul.api.client.images.knitter",
-                container: "{gpii.ul.products}.container",
-                options: {
-                    events: {
-                        onResultsRefreshed: "{gpii.ul.products}.events.onResultsRefreshed"
-                    },
-                    components: {
-                        renderer: "{gpii.ul.products}.renderer"
-                    }
-                }
             }
+            // The image "knitter" that associated images with individual search results
+            // TODO: Get this working again if anyone wants it.
+            //knitter: {
+            //    type: "gpii.ul.api.client.images.knitter",
+            //    container: "{gpii.ul.products}.container",
+            //    options: {
+            //        events: {
+            //            onResultsRefreshed: "{gpii.ul.products}.events.onResultsRefreshed"
+            //        },
+            //        components: {
+            //            renderer: "{gpii.ul.products}.renderer"
+            //        }
+            //    }
+            //}
         },
         selectors: {
             initial:   ".products-viewport",
