@@ -49,10 +49,13 @@ services:
   # A "task" container which starts and immediately exits on composition build.
   # Use `docker-compose run ul-imports <npm script>` to run this container.
   ul-imports:
-    image: ul-imports
-    build:
-      context: ./node_modules/ul-imports
-      dockerfile: Dockerfile
+    # NOTE: You are expected to build the ul-imports container manually using a command like:
+    #
+    # `docker build -t ul-imports:latest .`
+    #
+    # You can either do this from the version installed as one of our dependencies, or from your own checkout
+    # of that repository.
+    image: ul-imports:latest
     env_file:
       - .docker-env-ul-imports
       - .docker-env-mail
