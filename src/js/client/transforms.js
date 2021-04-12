@@ -26,7 +26,7 @@
 
     gpii.ul.transforms.filterAndEncode = function (payload) {
         var filtered = fluid.filterKeys(payload, ["q", "sources", "status", "statuses", "sortBy", "unified", "includeSources"]);
-        return gpii.express.querystring.encodeObject(filtered);
+        return fluid.express.querystring.encodeObject(filtered);
     };
 
     fluid.defaults("gpii.ul.transforms.filterAndEncode", {

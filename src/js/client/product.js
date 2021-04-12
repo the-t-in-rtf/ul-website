@@ -32,7 +32,7 @@
 
     // The component that handles the binding, etc. for the "Edit" form.
     fluid.defaults("gpii.ul.product.edit", {
-        gradeNames: ["gpii.schema.client.errorAwareForm"],
+        gradeNames: ["fluid.schema.client.errorAwareForm"],
         schemaKey:  "product-update-input.json",
         ajaxOptions: {
             url:         "/api/product",
@@ -99,7 +99,7 @@
                 path:     "product.manufacturer.name",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -108,7 +108,7 @@
                 path:     "product.manufacturer.address",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -117,7 +117,7 @@
                 path:     "product.manufacturer.cityTown",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -126,7 +126,7 @@
                 path:     "product.manufacturer.provinceRegion",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -135,7 +135,7 @@
                 path:     "product.manufacturer.postalCode",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -144,7 +144,7 @@
                 path:     "product.manufacturer.country",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -153,7 +153,7 @@
                 path:     "product.manufacturer.email",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -162,7 +162,7 @@
                 path:     "product.manufacturer.phone",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -171,7 +171,7 @@
                 path:     "product.manufacturer.url",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             }
@@ -278,7 +278,7 @@
     };
 
     fluid.defaults("gpii.ul.product.permChecker", {
-        gradeNames: ["gpii.handlebars.ajaxCapable"],
+        gradeNames: ["fluid.handlebars.ajaxCapable"],
         ajaxOptions: {
             method:   "GET",
             url:      "/api/sources",
@@ -327,7 +327,7 @@
     // The component that loads the product content and controls the initial rendering.  Subcomponents
     // listen for this component to give the go ahead, and then take over parts of the interface.
     fluid.defaults("gpii.ul.product", {
-        gradeNames: ["gpii.handlebars.templateAware"],
+        gradeNames: ["fluid.handlebars.templateAware"],
         selectors: {
             viewport:     ".product-viewport",
             editControls: ".product-edit-button"
@@ -383,7 +383,7 @@
                 }
             },
             view: {
-                type:          "gpii.handlebars.templateMessage",
+                type:          "fluid.handlebars.templateMessage",
                 container:     ".product-view",
                 createOnEvent: "{product}.events.onMarkupRendered",
                 options: {

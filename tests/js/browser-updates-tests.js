@@ -41,7 +41,7 @@ fluid.defaults("gpii.tests.ul.website.updates.caseHolder.anonymous", {
                 sequence: [
                     {
                         func: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args: [fluid.webdriver.until.elementLocated(fluid.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
@@ -50,7 +50,7 @@ fluid.defaults("gpii.tests.ul.website.updates.caseHolder.anonymous", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["The first matching update should be as expected...", "{arguments}.0", "getText", "FULLMEASURE - MAAVIS"] // message, element, elementFn, expectedValue, jqUnitFn
                     },
                     {
@@ -70,7 +70,7 @@ fluid.defaults("gpii.tests.ul.website.updates.caseHolder.anonymous", {
                 sequence: [
                     {
                         func: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args: [fluid.webdriver.until.elementLocated(fluid.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
@@ -85,8 +85,8 @@ fluid.defaults("gpii.tests.ul.website.updates.caseHolder.anonymous", {
                     {
                         func: "{testEnvironment}.webdriver.actionsHelper",
                         args: [{ fn: "sendKeys", args: [
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER, // use the "skip to content" link
-                            gpii.webdriver.Key.TAB, "01", "01", "2012"        // tab to the date field and type it in.
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER, // use the "skip to content" link
+                            fluid.webdriver.Key.TAB, "01", "01", "2012"        // tab to the date field and type it in.
                         ]}]
                     },
                     // We have to manually wait because the same markup (with different results) is already present and we would pick up the old results otherwise.
@@ -115,7 +115,7 @@ fluid.defaults("gpii.tests.ul.website.updates.caseHolder.anonymous", {
                 sequence: [
                     {
                         func: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args: [fluid.webdriver.until.elementLocated(fluid.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
@@ -136,9 +136,9 @@ fluid.defaults("gpii.tests.ul.website.updates.caseHolder.anonymous", {
                     {
                         func: "{testEnvironment}.webdriver.actionsHelper",
                         args: [{ fn: "sendKeys", args: [
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                                                                       // use the "skip to content" link
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, // tab to the older/newer radio group
-                            gpii.webdriver.Key.ARROW_DOWN                                                                                           // use the arrow key to change the value
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER,                                                                       // use the "skip to content" link
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, // tab to the older/newer radio group
+                            fluid.webdriver.Key.ARROW_DOWN                                                                                           // use the arrow key to change the value
                         ]}]
                     },
                     // We have to manually wait because the same markup (with different results) is already present and we would pick up the old results otherwise.
@@ -155,13 +155,13 @@ fluid.defaults("gpii.tests.ul.website.updates.caseHolder.anonymous", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["The first matching update should be as expected...", "{arguments}.0", "getText", "Jaws For Windows"] // message, element, elementFn, expectedValue, jqUnitFn
                     },
                     {
                         func: "{testEnvironment}.webdriver.actionsHelper",
                         args: [{ fn: "sendKeys", args: [
-                            gpii.webdriver.Key.ARROW_UP // use the arrow key to change the value back
+                            fluid.webdriver.Key.ARROW_UP // use the arrow key to change the value back
                         ]}]
                     },
                     // We have to manually wait because the same markup (with different results) is already present and we would pick up the old results otherwise.
@@ -178,7 +178,7 @@ fluid.defaults("gpii.tests.ul.website.updates.caseHolder.anonymous", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["The first matching update should be as expected...", "{arguments}.0", "getText", "FULLMEASURE - MAAVIS"] // message, element, elementFn, expectedValue, jqUnitFn
                     }
                 ]
@@ -200,7 +200,7 @@ fluid.defaults("gpii.tests.ul.website.updates.environment.anonymous", {
     }
 });
 
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.updates.environment.anonymous" });
+fluid.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.updates.environment.anonymous" });
 
 fluid.defaults("gpii.tests.ul.website.updates.caseHolder.loggedIn", {
     gradeNames: ["gpii.test.ul.website.caseHolder.loggedIn"],
@@ -213,7 +213,7 @@ fluid.defaults("gpii.tests.ul.website.updates.caseHolder.loggedIn", {
                 sequence: [
                     {
                         func: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args: [fluid.webdriver.until.elementLocated(fluid.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
@@ -245,7 +245,7 @@ fluid.defaults("gpii.tests.ul.website.updates.caseHolder.loggedIn", {
                     // ~ to set source to ~existing
                     {
                         func: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args: [fluid.webdriver.until.elementLocated(fluid.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
@@ -255,8 +255,8 @@ fluid.defaults("gpii.tests.ul.website.updates.caseHolder.loggedIn", {
                     {
                         func: "{testEnvironment}.webdriver.actionsHelper",
                         args: [{ fn: "sendKeys", args: [
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                                               // use the "skip to content" link
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, // tab to the "source" controls
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER,                                               // use the "skip to content" link
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, // tab to the "source" controls
                             "~"                                                                                             // select our source (~existing)
                         ]}]
                     },
@@ -292,4 +292,4 @@ fluid.defaults("gpii.tests.ul.website.updates.environment.loggedIn", {
     }
 });
 
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.updates.environment.loggedIn" });
+fluid.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.updates.environment.loggedIn" });

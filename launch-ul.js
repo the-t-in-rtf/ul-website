@@ -1,4 +1,4 @@
-// A "test harness" that launches the website, API, along with a preconfigured gpii-pouchdb and gpii-pouchdb-lucene instance.
+// A "test harness" that launches the website, API, along with a preconfigured fluid-pouchdb and fluid-pouchdb-lucene instance.
 /* eslint-env node */
 "use strict";
 var fluid = require("infusion");
@@ -8,10 +8,10 @@ fluid.logObjectRenderChars = 20480;
 var gpii  = fluid.registerNamespace("gpii");
 require("./");
 
-require("gpii-launcher");
+require("fluid-launcher");
 
 fluid.defaults("gpii.ul.website.launcher", {
-    gradeNames: ["gpii.launcher"],
+    gradeNames: ["fluid.launcher"],
     filterKeys:false,
     yargsOptions: {
         env: true,
@@ -24,7 +24,7 @@ fluid.defaults("gpii.ul.website.launcher", {
             "hosts.smtp":   "The hostname of the mail server.",
             "ports.api":    "The port the API should listen to.",
             "ports.couch":  "When running in production mode, the port on which CouchDB is running.  When running in dev mode, the port which PouchDB should listen to.",
-            "ports.lucene": "When running in production mode, the port on which couchdb-lucene is running.  When running in dev mode, the port which gpii-pouchdb-lucene should listen to.",
+            "ports.lucene": "When running in production mode, the port on which couchdb-lucene is running.  When running in dev mode, the port which fluid-pouchdb-lucene should listen to.",
             "ports.smtp":   "The port on which the mail service is running.",
             "setLogging":   "The level of log information to output to the console. Defaults to `false` (only warnings and errors)."
         },

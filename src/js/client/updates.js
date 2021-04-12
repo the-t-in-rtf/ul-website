@@ -11,7 +11,7 @@
 
     // The "source picker", which is also responsible for getting the list of valid sources.
     fluid.defaults("gpii.ul.updates.controls", {
-        gradeNames: ["gpii.handlebars.ajaxCapable", "gpii.handlebars.templateAware"],
+        gradeNames: ["fluid.handlebars.ajaxCapable", "fluid.handlebars.templateAware"],
         templateKey: "updates-controls",
         ajaxOptions: {
             method:   "GET",
@@ -66,7 +66,7 @@
                 path:        "updatedSince",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -103,7 +103,7 @@
 
     gpii.ul.updates.filterAndEncode = function (payload) {
         var filtered = fluid.filterKeys(payload, ["sources", "updatedSince", "sourceNewer"]);
-        return gpii.express.querystring.encodeObject(filtered);
+        return fluid.express.querystring.encodeObject(filtered);
     };
 
     fluid.defaults("gpii.ul.updates.filterAndEncode", {
@@ -112,7 +112,7 @@
 
 
     fluid.defaults("gpii.ul.updates", {
-        gradeNames: ["gpii.schema.client.errorAwareForm"],
+        gradeNames: ["fluid.schema.client.errorAwareForm"],
         hideOnSuccess: false,
         hideOnError:   false,
         ajaxOptions: {
@@ -170,7 +170,7 @@
                 }
             },
             output: {
-                type: "gpii.handlebars.templateMessage",
+                type: "fluid.handlebars.templateMessage",
                 container: "{updates}.options.selectors.output",
                 createOnEvent: "{updates}.events.onMarkupRendered",
                 options: {

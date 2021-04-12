@@ -23,11 +23,11 @@
         // TODO:  Make our client-side dataSource fire an event that we can listen to instead of handling it this way.
         that.events.onStartLoading.fire();
 
-        gpii.handlebars.templateFormControl.submitForm(that, event);
+        fluid.handlebars.templateFormControl.submitForm(that, event);
     };
 
     fluid.defaults("gpii.ul.search.query", {
-        gradeNames: ["gpii.handlebars.templateFormControl"],
+        gradeNames: ["fluid.handlebars.templateFormControl"],
         hideOnSuccess: false,
         hideOnError: false,
         ajaxOptions: {
@@ -147,7 +147,7 @@
 
     // The wrapper component that wires together all controls.
     fluid.defaults("gpii.ul.search", {
-        gradeNames: ["gpii.handlebars.templateAware.serverResourceAware"],
+        gradeNames: ["fluid.handlebars.templateAware.serverResourceAware"],
         events: {
             onResultsRefreshed: null,
             onStartLoading:     null,
@@ -173,7 +173,7 @@
             // TODO: This is currently broken, it results in some kind of feedback loop with the binder, and propagates the user data to the location bar.
             // The component that relays changes between the URL, browser history, and model
             //relay: {
-            //    type: "gpii.locationBar",
+            //    type: "fluid.locationBar",
             //    options: {
             //        model: {
             //            q:               "",

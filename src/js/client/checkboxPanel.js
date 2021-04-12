@@ -41,11 +41,11 @@
     {{>common-checkboxPanel}}
     ```
 
-    This grade extends `gpii.handlebars.templateAware`.  The most important of the options used by that grade is
+    This grade extends `fluid.handlebars.templateAware`.  The most important of the options used by that grade is
     `options.selectors.initial`, which is the container in which our content will be rendered.  This is set to `""`
      by default, i.e. content will be rendered into the whole container.
 
-    The relay of data between a checkbox and an associated model variable is handled using `gpii-binder`.  By default,
+    The relay of data between a checkbox and an associated model variable is handled using `fluid-binder`.  By default,
     all form variables are expected to be strings.  If you wish to change this behavior, you will need to change
     your component's `binding` option to transform each value as it is relayed.  As checkbox panels always consist
     of arrays, you will need to use the `transformArray` function provided by this package, as in:
@@ -94,16 +94,16 @@
     In the above example, all data in a checkbox panel is transformed using the same rules.  There is currently no
     mechanism for handling multiple data types in a single checkbox panel.  As we can simply use the `toString` function
     to convert model variables to form elements, the other part of the binding is omitted.  If you need to work with
-    data that does not provide meaningful output via a `toString` function, please check out the `gpii-binder`
+    data that does not provide meaningful output via a `toString` function, please check out the `fluid-binder`
     documentation.
 
     TODO:  Make these into real docs if we move it into another package.
  */
-// TODO:  Discuss where this should live.  I propose moving "bound" components like this that also use templates to `gpii-handlebars`.
+// TODO:  Discuss where this should live.  I propose moving "bound" components like this that also use templates to `fluid-handlebars`.
 (function (fluid) {
     "use strict";
     fluid.defaults("gpii.ul.checkboxPanel", {
-        gradeNames: ["gpii.handlebars.templateAware.serverResourceAware", "gpii.binder.bindOnDomChange"],
+        gradeNames: ["fluid.handlebars.templateAware.serverResourceAware", "fluid.binder.bindOnDomChange"],
         templateKey: "common-checkboxPanel",
         selectors: {
             initial:         "",

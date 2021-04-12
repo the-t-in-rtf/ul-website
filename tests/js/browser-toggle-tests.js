@@ -20,8 +20,8 @@ fluid.defaults("gpii.tests.ul.website.toggle.caseHolder.functional", {
                         {
                             func: "{testEnvironment}.webdriver.actionsHelper",
                             args: [{ fn: "sendKeys", args: [
-                                gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER, // use the "skip to content" link
-                                gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER  // Tab to the first toggle, trigger it using the "enter" key.
+                                fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER, // use the "skip to content" link
+                                fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER  // Tab to the first toggle, trigger it using the "enter" key.
                             ]}]
                         },
                         {
@@ -31,7 +31,7 @@ fluid.defaults("gpii.tests.ul.website.toggle.caseHolder.functional", {
                         },
                         {
                             event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                            listener: "gpii.test.webdriver.inspectElement",
+                            listener: "fluid.test.webdriver.inspectElement",
                             args:     ["The first toggle panel should be hidden...", "{arguments}.0", "isDisplayed", false] // message, element, elementFn, expectedValue, jqUnitFn
                         },
                         {
@@ -40,7 +40,7 @@ fluid.defaults("gpii.tests.ul.website.toggle.caseHolder.functional", {
                         },
                         {
                             event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                            listener: "gpii.test.webdriver.inspectElement",
+                            listener: "fluid.test.webdriver.inspectElement",
                             args:     ["The second toggle panel should still be visible...", "{arguments}.0", "isDisplayed", true] // message, element, elementFn, expectedValue, jqUnitFn
                         }
                     ]
@@ -52,9 +52,9 @@ fluid.defaults("gpii.tests.ul.website.toggle.caseHolder.functional", {
                         {
                             func: "{testEnvironment}.webdriver.actionsHelper",
                             args: [{ fn: "sendKeys", args: [
-                                gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                       // use the "skip to content" link
-                                gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, // Tab to the first "long notation" toggle
-                                gpii.webdriver.Key.ENTER                                                // trigger it using the "enter" key.
+                                fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER,                       // use the "skip to content" link
+                                fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, // Tab to the first "long notation" toggle
+                                fluid.webdriver.Key.ENTER                                                // trigger it using the "enter" key.
                             ]}]
                         },
                         {
@@ -103,7 +103,7 @@ fluid.defaults("gpii.tests.ul.website.toggle.caseHolder.functional", {
                         },
                         {
                             event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                            listener: "gpii.test.webdriver.inspectElement",
+                            listener: "fluid.test.webdriver.inspectElement",
                             args:     ["The first toggle panel should be hidden...", "{arguments}.0", "isDisplayed", false] // message, element, elementFn, expectedValue, jqUnitFn
                         },
                         {
@@ -112,7 +112,7 @@ fluid.defaults("gpii.tests.ul.website.toggle.caseHolder.functional", {
                         },
                         {
                             event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                            listener: "gpii.test.webdriver.inspectElement",
+                            listener: "fluid.test.webdriver.inspectElement",
                             args:     ["The second toggle panel should still be visible...", "{arguments}.0", "isDisplayed", true] // message, element, elementFn, expectedValue, jqUnitFn
                         }
                     ]
@@ -169,4 +169,4 @@ fluid.defaults("gpii.tests.ul.website.toggle.environment.functional", {
     }
 });
 
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.toggle.environment.functional" });
+fluid.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.toggle.environment.functional" });

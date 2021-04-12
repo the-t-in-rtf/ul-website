@@ -4,7 +4,7 @@
 
     // The wrapper component that wires together all controls.
     fluid.defaults("gpii.ul.products", {
-        gradeNames: ["gpii.handlebars.ajaxCapable", "gpii.handlebars.templateAware"],
+        gradeNames: ["fluid.handlebars.ajaxCapable", "fluid.handlebars.templateAware"],
         ajaxOptions: {
             url:      "/api/products",
             method:   "GET",
@@ -72,7 +72,7 @@
             // The component that relays changes between the URL, browser history, and model
             // TODO: Get this working again.
             //relay: {
-            //    type: "gpii.locationBar",
+            //    type: "fluid.locationBar",
             //    options: {
             //        model: {
             //            "sources":        "{gpii.ul.products}.model.sources",

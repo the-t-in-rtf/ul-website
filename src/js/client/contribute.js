@@ -10,7 +10,7 @@
     };
 
     fluid.defaults("gpii.ul.contribute", {
-        gradeNames: ["gpii.schema.client.errorAwareForm"],
+        gradeNames: ["fluid.schema.client.errorAwareForm"],
         schemaKey:  "product-update-input.json",
         hideOnSuccess: false,
         hideOnError:   false,
@@ -74,7 +74,7 @@
                 path:     "product.name",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -83,7 +83,7 @@
                 path:     "product.description",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -93,7 +93,7 @@
                 path:     "product.manufacturer.name",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -102,7 +102,7 @@
                 path:     "product.manufacturer.address",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -111,7 +111,7 @@
                 path:     "product.manufacturer.cityTown",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -120,7 +120,7 @@
                 path:     "product.manufacturer.provinceRegion",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -129,7 +129,7 @@
                 path:     "product.manufacturer.postalCode",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -138,7 +138,7 @@
                 path:     "product.manufacturer.country",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -147,7 +147,7 @@
                 path:     "product.manufacturer.email",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -156,7 +156,7 @@
                 path:     "product.manufacturer.phone",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },
@@ -165,7 +165,7 @@
                 path:     "product.manufacturer.url",
                 rules: {
                     domToModel: {
-                        "": { transform: { type:  "gpii.binder.transforms.stripEmptyString", inputPath: "" } }
+                        "": { transform: { type:  "fluid.binder.transforms.stripEmptyString", inputPath: "" } }
                     }
                 }
             },

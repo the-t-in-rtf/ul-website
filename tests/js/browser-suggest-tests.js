@@ -21,7 +21,7 @@ fluid.defaults("gpii.tests.ul.website.suggest.caseHolder.anonymous", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["We should see a permission error.", "{arguments}.0", "getText", "You must be logged in to use this API endpoint."] // message, element, elementFn, expectedValue, jqUnitFn
                     }
                 ]
@@ -42,9 +42,9 @@ fluid.defaults("gpii.tests.ul.website.suggest.caseHolder.loggedIn", {
                     {
                         func: "{testEnvironment}.webdriver.actionsHelper",
                         args: [{ fn: "sendKeys", args: [
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,   // Use the "skip to content" link to skip to the form.
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB,     // Tab to the "name" field.
-                            gpii.webdriver.Key.DELETE, gpii.webdriver.Key.ENTER // delete the value, then attempt to submit the form by hitting "Enter"
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER,   // Use the "skip to content" link to skip to the form.
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB,     // Tab to the "name" field.
+                            fluid.webdriver.Key.DELETE, fluid.webdriver.Key.ENTER // delete the value, then attempt to submit the form by hitting "Enter"
                         ]}]
                     },
                     // TODO: Come up with a better way of detecting markup changes or component events.
@@ -60,7 +60,7 @@ fluid.defaults("gpii.tests.ul.website.suggest.caseHolder.loggedIn", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["There should be a validation error onscreen...", "{arguments}.0", "getText", "You must provide the name of the product."] // message, element, elementFn, expectedValue, jqUnitFn
                     }
                 ]
@@ -72,9 +72,9 @@ fluid.defaults("gpii.tests.ul.website.suggest.caseHolder.loggedIn", {
                     {
                         func: "{testEnvironment}.webdriver.actionsHelper",
                         args: [{ fn: "sendKeys", args: [
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,   // Use the "skip to content" link to skip to the form.
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB,     // Tab to the "name" field.
-                            "AAA suggested product change", gpii.webdriver.Key.ENTER // delete the value, then attempt to submit the form by hitting "Enter"
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER,   // Use the "skip to content" link to skip to the form.
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB,     // Tab to the "name" field.
+                            "AAA suggested product change", fluid.webdriver.Key.ENTER // delete the value, then attempt to submit the form by hitting "Enter"
                         ]}]
                     },
                     // TODO: Come up with a better way of detecting markup changes or component events.
@@ -90,7 +90,7 @@ fluid.defaults("gpii.tests.ul.website.suggest.caseHolder.loggedIn", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["A success message should be displayed.", "{arguments}.0", "getText", "Record updated."] // message, element, elementFn, expectedValue, jqUnitFn
                     },
                     {
@@ -100,7 +100,7 @@ fluid.defaults("gpii.tests.ul.website.suggest.caseHolder.loggedIn", {
                     {
                         event: "{testEnvironment}.webdriver.events.onGetComplete",
                         listener: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated({css: ".product-listing"})]
+                        args: [fluid.webdriver.until.elementLocated({css: ".product-listing"})]
                     },
                     {
                         event: "{testEnvironment}.webdriver.events.onWaitComplete",
@@ -109,7 +109,7 @@ fluid.defaults("gpii.tests.ul.website.suggest.caseHolder.loggedIn", {
                     },
                     {
                         event: "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args: ["Our suggested change should be listed on our contributions page...", "{arguments}.0", "getText", "AAA suggested product change"] // message, element, elementFn, expectedValue, jqUnitFn
                     }
                 ]
@@ -143,7 +143,7 @@ fluid.defaults("gpii.tests.ul.website.suggest.environment", {
     }
 });
 
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.suggest.environment" });
+fluid.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.suggest.environment" });
 
 fluid.defaults("gpii.tests.ul.website.suggest.caseHolder.noUid", {
     gradeNames: ["gpii.test.ul.website.caseHolder.loggedIn"],
@@ -160,7 +160,7 @@ fluid.defaults("gpii.tests.ul.website.suggest.caseHolder.noUid", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["A 'suggest' button should be displayed...", "{arguments}.0", "getText", "The JSON you have provided is not valid."] // message, element, elementFn, expectedValue, jqUnitFn
                     }
                 ]
@@ -179,4 +179,4 @@ fluid.defaults("gpii.tests.ul.website.suggest.environment.noUid", {
     }
 });
 
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.suggest.environment.noUid" });
+fluid.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.suggest.environment.noUid" });

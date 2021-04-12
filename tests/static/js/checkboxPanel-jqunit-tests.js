@@ -17,7 +17,7 @@
                             args: ["checkboxValue", ["a string value"]]
                         },
                         {
-                            func: "gpii.tests.binder.testElement",
+                            func: "fluid.tests.binder.testElement",
                             args: ["assertDeepEq", "The checkbox form value should have been updated", ["a string value"], "input[name='checkbox-option']"] // fnName, message, expected, selector
                         },
                         {
@@ -25,7 +25,7 @@
                             args: ["checkboxValue", ["(╯°□°）╯︵ ┻━┻", "false", "a string value"]]
                         },
                         {
-                            func: "gpii.tests.binder.testElement",
+                            func: "fluid.tests.binder.testElement",
                             args: ["assertDeepEq", "Multiple checkbox form values should have been updated", [ "a string value", "false", "(╯°□°）╯︵ ┻━┻"], "input[name='checkbox-option']"] // fnName, message, expected, selector
                         },
                         {
@@ -33,7 +33,7 @@
                             args: ["checkboxValue", ["(╯°□°）╯︵ ┻━┻"]]
                         },
                         {
-                            func: "gpii.tests.binder.testElement",
+                            func: "fluid.tests.binder.testElement",
                             args: ["assertDeepEq", "UTF8 characters should be passed to the form correctly", ["(╯°□°）╯︵ ┻━┻"], "input[name='checkbox-option']"] // fnName, message, expected, selector
                         }
                     ]
@@ -85,7 +85,7 @@
                             args:     ["checkboxValue", [3.1415926]]
                         },
                         {
-                            func: "gpii.tests.binder.testElement",
+                            func: "fluid.tests.binder.testElement",
                             args: ["assertDeepEq", "The checkbox form value should have been updated", ["3.1415926"], "input[name='checkbox-option']"] // fnName, message, expected, selector
                         },
                         {
@@ -93,7 +93,7 @@
                             args: ["checkboxValue", [6.283185, 3.1415926]]
                         },
                         {
-                            func: "gpii.tests.binder.testElement",
+                            func: "fluid.tests.binder.testElement",
                             args: ["assertDeepEq", "Multiple checkbox form values should have been updated", ["3.1415926", "6.283185"], "input[name='checkbox-option']"] // fnName, message, expected, selector
                         }
                     ]
@@ -144,7 +144,7 @@
                             args: ["checkboxValue", ["a string value"]]
                         },
                         {
-                            func: "gpii.tests.binder.testElement",
+                            func: "fluid.tests.binder.testElement",
                             args: ["assertDeepEq", "The checkbox form value should have been updated", ["a string value"], "input[name='checkbox-option']"] // fnName, message, expected, selector
                         },
                         {
@@ -152,7 +152,7 @@
                             args: ["checkboxValue", ["(╯°□°）╯︵ ┻━┻", "false", "a string value"]]
                         },
                         {
-                            func: "gpii.tests.binder.testElement",
+                            func: "fluid.tests.binder.testElement",
                             args: ["assertDeepEq", "Multiple checkbox form values should have been updated", [ "a string value", "false", "(╯°□°）╯︵ ┻━┻"], "input[name='checkbox-option']"] // fnName, message, expected, selector
                         },
                         {
@@ -160,7 +160,7 @@
                             args: ["checkboxValue", ["(╯°□°）╯︵ ┻━┻"]]
                         },
                         {
-                            func: "gpii.tests.binder.testElement",
+                            func: "fluid.tests.binder.testElement",
                             args: ["assertDeepEq", "UTF8 characters should be passed to the form correctly", ["(╯°□°）╯︵ ┻━┻"], "input[name='checkbox-option']"] // fnName, message, expected, selector
                         }
                     ]

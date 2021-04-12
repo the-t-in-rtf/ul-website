@@ -9,7 +9,7 @@ gpii.ul.website.middleware.fourohfour.middleware = function (that, req, res) {
 };
 
 fluid.defaults("gpii.ul.website.middleware.fourohfour", {
-    gradeNames: ["gpii.express.middleware"],
+    gradeNames: ["fluid.express.middleware"],
     method:     "use",
     message:    "File not found.",
     invokers: {

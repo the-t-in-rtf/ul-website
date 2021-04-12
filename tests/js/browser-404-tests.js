@@ -20,7 +20,7 @@ fluid.defaults("gpii.tests.ul.website.fourohfour.caseHolder", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["There should be an error message onscreen...", "{arguments}.0", "getText", "The page you requested could not be found."] // message, element, elementFn, expectedValue, jqUnitFn
                     }
                 ]

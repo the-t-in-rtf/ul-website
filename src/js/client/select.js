@@ -12,7 +12,7 @@
     };
 
     fluid.defaults("gpii.ul.select", {
-        gradeNames: ["gpii.handlebars.templateAware"],
+        gradeNames: ["fluid.handlebars.templateAware"],
         priorityName: "select option",
         selectors:  {
             initial: ""

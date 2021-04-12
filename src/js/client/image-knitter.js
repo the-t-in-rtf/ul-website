@@ -107,7 +107,7 @@
         },
         components: {
             renderer: {
-                type: "gpii.handlebars.renderer.standalone"
+                type: "fluid.handlebars.renderer.standalone"
             }
         }
     });

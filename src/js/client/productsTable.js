@@ -21,7 +21,7 @@
 
 
     fluid.defaults("gpii.ul.productsTable", {
-        gradeNames: ["gpii.handlebars.templateAware"],
+        gradeNames: ["fluid.handlebars.templateAware"],
         model: {
             products:  []
         },

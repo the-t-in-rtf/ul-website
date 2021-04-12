@@ -1,17 +1,17 @@
 // Launch the UL API and web site.  This script expects to communicate with a properly configured CouchDB instance
 // running on port 5984, and with a properly configured couchdb-lucene instance running on port 5985.
 //
-// See the tests in this package for a harness that loads its own gpii-pouchdb and gpii-pouchdb-lucene instance.
+// See the tests in this package for a harness that loads its own fluid-pouchdb and fluid-pouchdb-lucene instance.
 /* eslint-env node */
 "use strict";
 var fluid = require("infusion");
 
 fluid.require("%ul-website");
 
-fluid.require("%gpii-express");
-fluid.require("%gpii-express-user");
-fluid.require("%gpii-handlebars");
-fluid.require("%gpii-json-schema");
+fluid.require("%fluid-express");
+fluid.require("%fluid-express-user");
+fluid.require("%fluid-handlebars");
+fluid.require("%fluid-json-schema");
 
 fluid.require("%ul-api");
 fluid.require("%ul-api/src/js/harness.js");
@@ -22,20 +22,20 @@ require("./fourohfour");
 fluid.defaults("gpii.ul.website.harness", {
     gradeNames:   ["gpii.ul.api.harness"],
     messageDirs:  {
-        validation: "%gpii-json-schema/src/messages",
-        user: "%gpii-express-user/src/messages"
+        validation: "%fluid-json-schema/src/messages",
+        user: "%fluid-express-user/src/messages"
     },
     templateDirs: {
         website: {
             path: "%ul-website/src/templates"
         },
         user: {
-            path: "%gpii-express-user/src/templates",
+            path: "%fluid-express-user/src/templates",
             priority: "after:website"
         },
         validation: {
             priority: "after:user",
-            path: "%gpii-json-schema/src/templates"
+            path: "%fluid-json-schema/src/templates"
         },
         api: {
             path: "%ul-api/src/templates",
@@ -68,7 +68,7 @@ fluid.defaults("gpii.ul.website.harness", {
     distributeOptions: [
         {
             source: "{that}.options.rules.contextToExpose",
-            target: "{that gpii.express.singleTemplateMiddleware}.options.rules.contextToExpose"
+            target: "{that fluid.express.singleTemplateMiddleware}.options.rules.contextToExpose"
         },
         {
             source: "{that}.options.rules.contextToExpose",
@@ -76,20 +76,20 @@ fluid.defaults("gpii.ul.website.harness", {
         },
         {
             source: "{that}.options.rules.contextToExpose",
-            target: "{that gpii.handlebars.dispatcherMiddleware}.options.rules.contextToExpose"
+            target: "{that fluid.handlebars.dispatcherMiddleware}.options.rules.contextToExpose"
         },
         {
             source: "{that}.options.app",
-            target: "{that gpii.express.user.withMailHandler}.options.app"
+            target: "{that fluid.express.user.withMailHandler}.options.app"
         },
-        // Pass through the mail hostname to the mailer used by gpii-express-user.
+        // Pass through the mail hostname to the mailer used by fluid-express-user.
         {
             source: "{that}.options.ports.smtp",
-            target: "{that gpii.express.user.mailer}.options.transportOptions.port"
+            target: "{that fluid.express.user.mailer}.options.transportOptions.port"
         },
         {
             source: "{that}.options.hosts.smtp",
-            target: "{that gpii.express.user.mailer}.options.transportOptions.host"
+            target: "{that fluid.express.user.mailer}.options.transportOptions.host"
         }
     ],
     components: {
@@ -110,7 +110,7 @@ fluid.defaults("gpii.ul.website.harness", {
                 },
                 components: {
                     corsHeaders: {
-                        type: "gpii.express.middleware.headerSetter",
+                        type: "fluid.express.middleware.headerSetter",
                         options: {
                             priority: "after:queryParser",
                             headers: {
@@ -124,7 +124,7 @@ fluid.defaults("gpii.ul.website.harness", {
                     },
                     // TODO: The API also has a handlebars instance.
                     handlebars: {
-                        type: "gpii.express.hb",
+                        type: "fluid.express.hb",
                         options: {
                             priority: "after:corsHeaders",
                             templateDirs: "{harness}.options.templateDirs",
@@ -134,13 +134,13 @@ fluid.defaults("gpii.ul.website.harness", {
                         }
                     },
                     cookieparser: {
-                        type:     "gpii.express.middleware.cookieparser",
+                        type:     "fluid.express.middleware.cookieparser",
                         options: {
                             priority: "after:handlebars"
                         }
                     },
                     session: {
-                        type: "gpii.express.middleware.session",
+                        type: "fluid.express.middleware.session",
                         options: {
                             priority: "after:cookieparser",
                             sessionOptions: {
@@ -153,8 +153,8 @@ fluid.defaults("gpii.ul.website.harness", {
                             priority:     "after:session",
                             templateDirs: "{harness}.options.templateDirs",
                             components: {
-                                cookieparser: "{gpii.express}.cookieparser",
-                                session: "{gpii.express}.session"
+                                cookieparser: "{fluid.express}.cookieparser",
+                                session: "{fluid.express}.session"
                             }
                         }
                     },
@@ -168,7 +168,7 @@ fluid.defaults("gpii.ul.website.harness", {
                     },
                     // Our own source
                     src: {
-                        type: "gpii.express.router.static",
+                        type: "fluid.express.router.static",
                         options: {
                             priority: "before:dispatcher",
                             path:    "/src",
@@ -186,7 +186,7 @@ fluid.defaults("gpii.ul.website.harness", {
                         }
                     },
                     dispatcher: {
-                        type: "gpii.handlebars.dispatcherMiddleware",
+                        type: "fluid.handlebars.dispatcherMiddleware",
                         options: {
                             priority: "before:htmlErrorHandler",
                             path: ["/:template", "/"],
@@ -203,20 +203,20 @@ fluid.defaults("gpii.ul.website.harness", {
                         }
                     },
                     htmlErrorHandler: {
-                        type:     "gpii.handlebars.errorRenderingMiddleware",
+                        type:     "fluid.handlebars.errorRenderingMiddleware",
                         options: {
                             priority: "last",
                             templateKey: "pages/error"
                         }
                     },
                     messageBundleLoader: {
-                        type: "gpii.handlebars.i18n.messageBundleLoader",
+                        type: "fluid.handlebars.i18n.messageBundleLoader",
                         options: {
                             messageDirs: "{harness}.options.messageDirs"
                         }
                     },
                     messages: {
-                        type: "gpii.handlebars.inlineMessageBundlingMiddleware",
+                        type: "fluid.handlebars.inlineMessageBundlingMiddleware",
                         options: {
                             messageDirs: "{harness}.options.messageDirs",
                             model: {

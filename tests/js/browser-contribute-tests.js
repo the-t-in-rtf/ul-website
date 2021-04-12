@@ -17,7 +17,7 @@ fluid.defaults("gpii.tests.ul.website.contribute.caseHolder.anonymous", {
                 sequence: [
                     {
                         func:     "{testEnvironment}.webdriver.wait",
-                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".alert"))]
+                        args:     [fluid.webdriver.until.elementLocated(fluid.webdriver.By.css(".alert"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
@@ -26,7 +26,7 @@ fluid.defaults("gpii.tests.ul.website.contribute.caseHolder.anonymous", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["We should be instructed to log in...", "{arguments}.0", "getText", "You must log in to contribute a new record to the Unified Listing."] // message, element, elementFn, expectedValue, jqUnitFn
                     }
                 ]
@@ -48,11 +48,11 @@ fluid.defaults("gpii.tests.ul.website.contribute.caseHolder.loggedIn", {
                         func: "{testEnvironment}.webdriver.actionsHelper",
                         args: [{
                             fn: "sendKeys", args: [
-                                gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                               // use the "skip to content" link
-                                gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, "AAA contributed product name", // navigate to and fill out the product name
-                                gpii.webdriver.Key.TAB, "contributed product description",                      // navigate to and fill out the product description
-                                gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB,         // navigate to the manufacture name
-                                "contributed manufacturer name", gpii.webdriver.Key.ENTER                       // fill out the manufacturer name and hit enter to submit the form
+                                fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER,                               // use the "skip to content" link
+                                fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, "AAA contributed product name", // navigate to and fill out the product name
+                                fluid.webdriver.Key.TAB, "contributed product description",                      // navigate to and fill out the product description
+                                fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB,         // navigate to the manufacture name
+                                "contributed manufacturer name", fluid.webdriver.Key.ENTER                       // fill out the manufacturer name and hit enter to submit the form
                             ]
                         }]
                     },
@@ -69,7 +69,7 @@ fluid.defaults("gpii.tests.ul.website.contribute.caseHolder.loggedIn", {
                     },
                     {
                         event: "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args: ["We should see an entry indicating that our record was saved...", "{arguments}.0", "getText", "Your submission has been saved. You may continue revising this or close the window."] // message, element, elementFn, expectedValue, jqUnitFn
                     },
                     {
@@ -79,7 +79,7 @@ fluid.defaults("gpii.tests.ul.website.contribute.caseHolder.loggedIn", {
                     {
                         event: "{testEnvironment}.webdriver.events.onGetComplete",
                         listener: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated({css: ".product-listing"})]
+                        args: [fluid.webdriver.until.elementLocated({css: ".product-listing"})]
                     },
                     {
                         event: "{testEnvironment}.webdriver.events.onWaitComplete",
@@ -88,7 +88,7 @@ fluid.defaults("gpii.tests.ul.website.contribute.caseHolder.loggedIn", {
                     },
                     {
                         event: "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args: ["Our new contribution should be listed on our contributions page...", "{arguments}.0", "getText", "AAA contributed product name"] // message, element, elementFn, expectedValue, jqUnitFn
                     }
                 ]
@@ -101,8 +101,8 @@ fluid.defaults("gpii.tests.ul.website.contribute.caseHolder.loggedIn", {
                         func: "{testEnvironment}.webdriver.actionsHelper",
                         args: [{
                             fn: "sendKeys", args: [
-                                gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                         // use the "skip to content" link
-                                gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER  // Attempt to submit the form with no data.
+                                fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER,                         // use the "skip to content" link
+                                fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER  // Attempt to submit the form with no data.
                             ]
                         }]
                     },
@@ -119,7 +119,7 @@ fluid.defaults("gpii.tests.ul.website.contribute.caseHolder.loggedIn", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:    ["A validation error should be displayed onscreen..", "{arguments}.0", "getText", "A name is required."] // message, element, elementFn, expectedValue, jqUnitFn
                     }
                 ]
@@ -153,4 +153,4 @@ fluid.defaults("gpii.tests.ul.website.contribute.environment", {
     }
 });
 
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.contribute.environment" });
+fluid.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.contribute.environment" });

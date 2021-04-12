@@ -22,7 +22,7 @@ fluid.defaults("gpii.tests.ul.website.docs.caseHolder", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["The API documentation should be displayed onscreen...", "{arguments}.0", "getText", "Unified Listing API"] // message, element, elementFn, expectedValue, jqUnitFn
                     }
                 ]
@@ -44,4 +44,4 @@ fluid.defaults("gpii.tests.ul.website.docs.environment", {
     }
 });
 
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.docs.environment" });
+fluid.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.docs.environment" });

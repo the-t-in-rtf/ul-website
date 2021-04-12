@@ -3,11 +3,11 @@
 var fluid = require("infusion");
 var gpii  = fluid.registerNamespace("gpii");
 
-fluid.require("%gpii-webdriver");
-gpii.webdriver.loadTestingSupport();
+fluid.require("%fluid-webdriver");
+fluid.webdriver.loadTestingSupport();
 
-fluid.require("%gpii-couchdb-test-harness");
-gpii.test.couchdb.loadTestingSupport();
+fluid.require("%fluid-couchdb-test-harness");
+fluid.test.couchdb.loadTestingSupport();
 
 fluid.registerNamespace("gpii.test.ul.website");
 
@@ -40,7 +40,7 @@ fluid.defaults("gpii.test.ul.website.sequenceElements.coverage", {
     sequence: [
         {
             func: "{testEnvironment}.webdriver.executeScript",
-            args: [gpii.test.webdriver.invokeGlobal, "fluid.getGlobalValue", "window.__coverage__"]
+            args: [fluid.test.webdriver.invokeGlobal, "fluid.getGlobalValue", "window.__coverage__"]
         },
         {
             event: "{testEnvironment}.webdriver.events.onExecuteScriptComplete",
@@ -51,7 +51,7 @@ fluid.defaults("gpii.test.ul.website.sequenceElements.coverage", {
 });
 
 fluid.defaults("gpii.test.ul.website.sequences.base", {
-    gradeNames: "gpii.test.couchdb.sequence",
+    gradeNames: "fluid.test.couchdb.sequence",
     sequenceElements: {
         startDriver: {
             gradeNames: "gpii.test.ul.website.sequenceElements.startWebdriver",
@@ -90,7 +90,7 @@ fluid.defaults("gpii.test.ul.website.sequences.loadPage", {
     gradeNames: "gpii.test.ul.website.sequences.base",
     sequenceElements: {
         loadPage: {
-            gradeNames: "gpii.test.couchdb.sequenceElement.startHarness",
+            gradeNames: "fluid.test.couchdb.sequenceElement.startHarness",
             priority:   "after:startDriver"
         }
     }
@@ -110,7 +110,7 @@ fluid.defaults("gpii.test.ul.website.sequences.loadPage", {
 
  */
 fluid.defaults("gpii.test.ul.website.caseHolder", {
-    gradeNames: ["gpii.test.couchdb.caseHolder"],
+    gradeNames: ["fluid.test.couchdb.caseHolder"],
     sequenceGrade: "gpii.test.ul.website.sequences.loadPage"
 });
 
@@ -125,17 +125,17 @@ fluid.defaults("gpii.test.ul.website.sequenceElements.login", {
         {
             event:    "{testEnvironment}.webdriver.events.onGetComplete",
             listener: "{testEnvironment}.webdriver.wait",
-            args:     [gpii.webdriver.until.elementLocated({ css: ".login-form"})]
+            args:     [fluid.webdriver.until.elementLocated({ css: ".login-form"})]
         },
         {
             event:    "{testEnvironment}.webdriver.events.onWaitComplete",
             listener: "{testEnvironment}.webdriver.actionsHelper",
-            args:     [[{fn: "sendKeys", args: [gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER, gpii.webdriver.Key.TAB, "{that}.options.username", gpii.webdriver.Key.TAB, "{that}.options.password", gpii.webdriver.Key.ENTER]}]]
+            args:     [[{fn: "sendKeys", args: [fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER, fluid.webdriver.Key.TAB, "{that}.options.username", fluid.webdriver.Key.TAB, "{that}.options.password", fluid.webdriver.Key.ENTER]}]]
         },
         {
             event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
             listener: "{testEnvironment}.webdriver.wait",
-            args:     [gpii.webdriver.until.elementLocated({ css: ".login-success .success"})]
+            args:     [fluid.webdriver.until.elementLocated({ css: ".login-success .success"})]
         },
         {
             func: "{testEnvironment}.webdriver.findElement",
@@ -143,7 +143,7 @@ fluid.defaults("gpii.test.ul.website.sequenceElements.login", {
         },
         {
             event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-            listener: "gpii.test.webdriver.inspectElement",
+            listener: "fluid.test.webdriver.inspectElement",
             args:     ["A login success message should now be displayed...", "{arguments}.0", "getText", "You have successfully logged in."] // message, element, elementFn, expectedValue, jqUnitFn
         }
     ]
@@ -163,7 +163,7 @@ fluid.defaults("gpii.test.ul.website.sequences.login", {
 
 // A caseholder for tests that require the user to be logged in.
 fluid.defaults("gpii.test.ul.website.caseHolder.loggedIn", {
-    gradeNames:    ["gpii.test.couchdb.caseHolder"],
+    gradeNames:    ["fluid.test.couchdb.caseHolder"],
     sequenceGrade: "gpii.test.ul.website.sequences.login",
     username:      "existing",
     password:      "password"
@@ -172,7 +172,7 @@ fluid.defaults("gpii.test.ul.website.caseHolder.loggedIn", {
 // TODO: Write new accessibility report checking.
 
 fluid.defaults("gpii.test.ul.website.testEnvironment", {
-    gradeNames: ["gpii.test.couchdb.lucene.environment"],
+    gradeNames: ["fluid.test.couchdb.lucene.environment"],
     hangWait:   7500,
     events: {
         createDriver: null,
@@ -210,7 +210,7 @@ fluid.defaults("gpii.test.ul.website.testEnvironment", {
         },
         webdriver: {
             createOnEvent: "createDriver",
-            type: "gpii.webdriver",
+            type: "fluid.webdriver",
             options: {
                 browser: "{testEnvironment}.options.browser",
                 events: {

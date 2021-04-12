@@ -17,7 +17,7 @@ fluid.defaults("gpii.tests.ul.website.checkboxPanel.caseHolder.qunit", {
                 sequence: [
                     {
                         func: "{testEnvironment}.webdriver.executeScript",
-                        args: [gpii.test.webdriver.invokeGlobal, "fluid.getGlobalValue", "gpii.webdriver.QUnitHarness.instance.results"]
+                        args: [fluid.test.webdriver.invokeGlobal, "fluid.getGlobalValue", "fluid.webdriver.QUnitHarness.instance.results"]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onExecuteScriptComplete",
@@ -45,7 +45,7 @@ fluid.defaults("gpii.tests.ul.website.checkboxPanel.environment.qunit", {
     }
 });
 
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.checkboxPanel.environment.qunit" });
+fluid.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.checkboxPanel.environment.qunit" });
 
 fluid.defaults("gpii.tests.ul.website.checkboxPanel.caseHolder.functional", {
     gradeNames: ["gpii.test.ul.website.caseHolder"],
@@ -60,12 +60,12 @@ fluid.defaults("gpii.tests.ul.website.checkboxPanel.caseHolder.functional", {
             //     sequence: [
             //         {
             //             func: "{testEnvironment}.webdriver.actionsHelper",
-            //             args: [{ fn: "sendKeys", args: [gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER, gpii.webdriver.Key.TAB, gpii.webdriver.Key.SPACE]}]
+            //             args: [{ fn: "sendKeys", args: [fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER, fluid.webdriver.Key.TAB, fluid.webdriver.Key.SPACE]}]
             //         },
             //         {
             //             event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
             //             listener: "{testEnvironment}.webdriver.executeScript",
-            //             args:     [gpii.test.webdriver.invokeGlobal, "fluid.getGlobalValue", "stringComponent.model.checkboxValue"]
+            //             args:     [fluid.test.webdriver.invokeGlobal, "fluid.getGlobalValue", "stringComponent.model.checkboxValue"]
             //         },
             //         {
             //             event:    "{testEnvironment}.webdriver.events.onExecuteScriptComplete",
@@ -74,7 +74,7 @@ fluid.defaults("gpii.tests.ul.website.checkboxPanel.caseHolder.functional", {
             //         },
             //         {
             //             func: "{testEnvironment}.webdriver.executeScript",
-            //             args: [gpii.test.webdriver.invokeGlobal, "fluid.getGlobalValue", "secondStringComponent.model.checkboxValue"]
+            //             args: [fluid.test.webdriver.invokeGlobal, "fluid.getGlobalValue", "secondStringComponent.model.checkboxValue"]
             //         },
             //         {
             //             event:    "{testEnvironment}.webdriver.events.onExecuteScriptComplete",
@@ -89,7 +89,7 @@ fluid.defaults("gpii.tests.ul.website.checkboxPanel.caseHolder.functional", {
                 sequence: [
                     {
                         func: "{testEnvironment}.webdriver.findElement",
-                        args: [gpii.webdriver.By.css(".checkboxPanel-string-viewport input[type='checkbox']")]
+                        args: [fluid.webdriver.By.css(".checkboxPanel-string-viewport input[type='checkbox']")]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
@@ -100,7 +100,7 @@ fluid.defaults("gpii.tests.ul.website.checkboxPanel.caseHolder.functional", {
                     {
                         event:    "{testEnvironment}.webdriver.events.onActionsHelperComplete",
                         listener: "{testEnvironment}.webdriver.executeScript",
-                        args:     [gpii.test.webdriver.invokeGlobal, "fluid.getGlobalValue", "stringComponent.model.checkboxValue"]
+                        args:     [fluid.test.webdriver.invokeGlobal, "fluid.getGlobalValue", "stringComponent.model.checkboxValue"]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onExecuteScriptComplete",
@@ -109,7 +109,7 @@ fluid.defaults("gpii.tests.ul.website.checkboxPanel.caseHolder.functional", {
                     },
                     {
                         func: "{testEnvironment}.webdriver.executeScript",
-                        args: [gpii.test.webdriver.invokeGlobal, "fluid.getGlobalValue", "secondStringComponent.model.checkboxValue"]
+                        args: [fluid.test.webdriver.invokeGlobal, "fluid.getGlobalValue", "secondStringComponent.model.checkboxValue"]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onExecuteScriptComplete",
@@ -135,4 +135,4 @@ fluid.defaults("gpii.tests.ul.website.checkboxPanel.environment.functional", {
     }
 });
 
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.checkboxPanel.environment.functional" });
+fluid.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.checkboxPanel.environment.functional" });

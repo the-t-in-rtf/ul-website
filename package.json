@@ -4,46 +4,42 @@
     "description": "This package provides the web site as well as the manufacturer and contributor interface to the Unified Listing.",
     "main": "index.js",
     "scripts": {
-        "pretest": "node node_modules/rimraf/bin.js reports/* instrumented/* coverage/* && node node_modules/istanbul/lib/cli.js instrument --no-compact --output instrumented src",
-        "test": "node node_modules/istanbul/lib/cli.js cover tests/all-tests.js --report none --print none",
-        "posttest": "node node_modules/istanbul/lib/cli.js report --root coverage --dir reports text-summary html"
+        "lint": "fluid-lint-all",
+        "pretest": "npx rimraf reports/* instrumented/* coverage/* && node node_modules/istanbul/lib/cli.js instrument --no-compact --output instrumented src",
+        "test": "istanbul cover tests/all-tests.js --report none --print none",
+        "posttest": "istanbul report --root coverage --dir reports text-summary html"
     },
     "repository": "https://github.com/GPII/ul-website.git",
     "author": "Tony Atkins <tony@raisingthefloor.org>",
     "license": "BSD-3-Clause",
-    "bugs": {
-        "url": "https://issues.gpii.net/browse/UL"
-    },
     "homepage": "https://github.com/GPII/ul-website",
     "dependencies": {
-        "ajv": "6.10.2",
+        "ajv": "8.1.0",
+        "fluid-binder": "1.1.2",
+        "fluid-express": "1.0.18",
+        "fluid-express-user": "2.0.3",
+        "fluid-handlebars": "2.1.5",
+        "fluid-json-schema": "2.1.7",
+        "fluid-launcher": "1.0.0",
+        "fluid-location-bar-relay": "1.0.7",
         "foundation-sites": "6.3.1",
-        "gpii-binder": "1.0.6",
-        "gpii-express": "1.0.15",
-        "gpii-express-user": "1.0.2-dev.20191014T143404Z.150969f.GPII-3921",
-        "gpii-handlebars": "2.1.0-dev.20191014T141924Z.45a74ef.GPII-4100",
-        "gpii-json-schema": "2.1.2-dev.20191014T143306Z.8a372f7.GPII-4022",
-        "gpii-launcher": "1.0.0-dev.20170712T140305Z.aa60d4a",
-        "gpii-location-bar-relay": "1.0.4",
         "gpii-sort": "1.0.0-dev.20170420T114825Z.804ac19",
-        "handlebars": "4.4.3",
-        "infusion": "3.0.0-dev.20191009T141140Z.32c9263b4.FLUID-6148",
-        "jquery": "3.4.1",
-        "kettle": "1.11.0",
-        "markdown-it": "10.0.0",
-        "moment": "2.24.0",
-        "ul-api": "1.0.0-dev.20200407T154402Z.bd0c4cf.UL-67",
-        "ul-imports": "1.0.0-dev.20200122T143521Z.c6d4e12.UL-67"
+        "handlebars": "4.7.7",
+        "infusion": "3.0.0-dev.20210312T233557Z.0b016a6dc.FLUID-6580",
+        "jquery": "3.5.1",
+        "kettle": "2.2.0",
+        "markdown-it": "12.0.4",
+        "moment": "2.29.1",
+        "ul-api": "1.0.0-dev.20210412T131821Z.28c2e25.UL-65",
+        "ul-imports": "1.0.0-dev.20200731T125434Z.5fbc882.UL-67"
     },
     "devDependencies": {
-        "eslint": "6.5.1",
-        "eslint-config-fluid": "1.4.0",
-        "gpii-grunt-lint-all": "1.0.5",
-        "gpii-couchdb-test-harness": "1.0.0-dev.20190827T101451Z.024d2c3.GPII-3531",
-        "gpii-webdriver": "1.1.0",
-        "grunt": "1.0.4",
+        "eslint": "7.24.0",
+        "eslint-config-fluid": "2.0.0",
+        "fluid-couchdb-test-harness": "1.1.1",
+        "fluid-lint-all": "1.0.4",
+        "fluid-webdriver": "1.1.2",
         "istanbul": "0.4.5",
-        "node-jqunit": "1.1.8",
-        "rimraf": "3.0.0"
+        "node-jqunit": "1.1.9"
     }
 }

@@ -104,7 +104,7 @@
     };
 
     fluid.defaults("gpii.ul.navbar", {
-        gradeNames: ["gpii.handlebars.templateAware"],
+        gradeNames: ["fluid.handlebars.templateAware"],
         templateKey: "navbar",
         members: {
             oldFocus: undefined

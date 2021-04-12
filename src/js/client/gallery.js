@@ -16,7 +16,7 @@
     };
 
     fluid.defaults("gpii.ul.images.viewGallery", {
-        gradeNames: ["gpii.handlebars.ajaxCapable", "gpii.handlebars.templateAware"],
+        gradeNames: ["fluid.handlebars.ajaxCapable", "fluid.handlebars.templateAware"],
         templateKey:  "gallery-view",
         selectors: {
             initial: ""
@@ -74,7 +74,7 @@
             // },
             // Note, you are expected to inject a better-configured renderer with actual templates or otherwise configure this.
             renderer: {
-                type: "gpii.handlebars.renderer.standalone"
+                type: "fluid.handlebars.renderer.standalone"
             }
         }
     });

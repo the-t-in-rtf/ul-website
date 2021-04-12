@@ -27,7 +27,7 @@
                 "options": {
                     "components": {
                         "updatesReports": {
-                            "type": "gpii.express.router.serveContentAndIndex",
+                            "type": "fluid.express.router.serveContentAndIndex",
                             "options": {
                                 "path": "/updates-reports",
                                 "content": "/srv/ul-updates-reports"

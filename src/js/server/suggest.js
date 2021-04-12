@@ -8,8 +8,8 @@
 var fluid = require("infusion");
 var gpii  = fluid.registerNamespace("gpii");
 
-fluid.require("%gpii-express");
-fluid.require("%gpii-json-schema");
+fluid.require("%fluid-express");
+fluid.require("%fluid-json-schema");
 fluid.require("%kettle");
 
 fluid.defaults("gpii.ul.website.suggest.dataSource", {
@@ -26,7 +26,7 @@ fluid.defaults("gpii.ul.website.suggest.dataSource", {
     listeners: {
         // Report back to the user on failure.
         "onError.sendResponse": {
-            func: "{gpii.express.handler}.sendResponse",
+            func: "{fluid.express.handler}.sendResponse",
             args: [ 500, { message: "{arguments}.0" }] // statusCode, body
             // TODO:  Discuss with Antranig how to retrieve HTTP status codes from kettle.datasource.URL
         }
@@ -99,7 +99,7 @@ gpii.ul.website.suggest.handler.processUnifiedRecordResponse = function (that, c
 };
 
 // Our main handler.  Looks up the underlying record using a kettle.dataSource and expects to call the
-// underlying `gpii.express.handler` `that.sendResponse` invoker with the results.
+// underlying `fluid.express.handler` `that.sendResponse` invoker with the results.
 fluid.defaults("gpii.ul.website.suggest.handler", {
     gradeNames: ["gpii.ul.api.htmlMessageHandler"],
     templateKey: "pages/suggest.handlebars",
@@ -173,7 +173,7 @@ fluid.defaults("gpii.ul.website.suggest.handler", {
 });
 
 fluid.defaults("gpii.ul.website.suggest", {
-    gradeNames: ["gpii.express.router"],
+    gradeNames: ["fluid.express.router"],
     method:     "get",
     // Support all variations, including those with missing URL params so that we can return appropriate error feedback.
     path:       ["/suggest/:uid", "/suggest"],
@@ -188,22 +188,22 @@ fluid.defaults("gpii.ul.website.suggest", {
     distributeOptions: [
         {
             source: "{that}.options.rules.requestContentToValidate",
-            target: "{that gpii.express.handler}.options.rules.requestContentToValidate"
+            target: "{that fluid.express.handler}.options.rules.requestContentToValidate"
         },
         {
             source: "{that}.options.rules.requestContentToValidate",
-            target: "{that gpii.schema.validationMiddleware}.options.rules.requestContentToValidate"
+            target: "{that fluid.schema.validationMiddleware}.options.rules.requestContentToValidate"
         }
     ],
     components: {
         loginRequired: {
-            type: "gpii.express.user.middleware.loginRequired",
+            type: "fluid.express.user.middleware.loginRequired",
             options: {
                 sessionKey: "_ul_user"
             }
         },
         validationMiddleware: {
-            type: "gpii.schema.validationMiddleware",
+            type: "fluid.schema.validationMiddleware",
             options: {
                 priority:   "after:loginRequired",
                 namespace:  "validationMiddleware",
@@ -212,14 +212,14 @@ fluid.defaults("gpii.ul.website.suggest", {
         },
         // We let JSON errors fall back to a more general handler, but render HTML errors ourselves
         renderedValidationError: {
-            type: "gpii.handlebars.errorRenderingMiddleware",
+            type: "fluid.handlebars.errorRenderingMiddleware",
             options: {
                 priority:    "after:validationMiddleware",
                 templateKey: "pages/validation-error"
             }
         },
         requestAwareMiddleware: {
-            type: "gpii.express.middleware.requestAware",
+            type: "fluid.express.middleware.requestAware",
             options: {
                 method:        "use",
                 priority:      "after:renderedValidationError",

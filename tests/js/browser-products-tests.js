@@ -17,7 +17,7 @@ fluid.defaults("gpii.tests.ul.website.products.caseHolder", {
                 sequence: [
                     {
                         func:     "{testEnvironment}.webdriver.wait",
-                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args:     [fluid.webdriver.until.elementLocated(fluid.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
@@ -46,7 +46,7 @@ fluid.defaults("gpii.tests.ul.website.products.caseHolder", {
                 sequence: [
                     {
                         func: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args: [fluid.webdriver.until.elementLocated(fluid.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
@@ -55,16 +55,16 @@ fluid.defaults("gpii.tests.ul.website.products.caseHolder", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["The first product should be from the first page...", "{arguments}.0", "getText", "A record ahead of its time."] // message, element, elementFn, expectedValue, jqUnitFn
                     },
                     {
                         func: "{testEnvironment}.webdriver.actionsHelper",
                         args: [{ fn: "sendKeys", args: [
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                       // use the "skip to content" link
-                            gpii.webdriver.Key.TAB,                                                 // tab past "options"
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, // tab past "previous", "1", focus on "2"
-                            gpii.webdriver.Key.ENTER                                                // Open the second page of results
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER,                       // use the "skip to content" link
+                            fluid.webdriver.Key.TAB,                                                 // tab past "options"
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, // tab past "previous", "1", focus on "2"
+                            fluid.webdriver.Key.ENTER                                                // Open the second page of results
                         ]}]
                     },
                     {
@@ -79,10 +79,10 @@ fluid.defaults("gpii.tests.ul.website.products.caseHolder", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["The first search result should now be from the second page...", "{arguments}.0", "getText", "Whetstone 016"] // message, element, elementFn, expectedValue, jqUnitFn
                     }
-                    // TODO: Reenable this once the problems with gpii-location-bar-relay are resolved: https://issues.gpii.net/browse/GPII-2132
+                    // TODO: Reenable this once the problems with fluid-location-bar-relay are resolved: https://issues.gpii.net/browse/fluid-2132
                     // {
                     //     func: "{testEnvironment}.webdriver.navigateHelper",
                     //     args: ["back"]
@@ -99,7 +99,7 @@ fluid.defaults("gpii.tests.ul.website.products.caseHolder", {
                     // },
                     // {
                     //     event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                    //     listener: "gpii.test.webdriver.inspectElement",
+                    //     listener: "fluid.test.webdriver.inspectElement",
                     //     args:     ["The first search result should be from the first page again...", "{arguments}.0", "getText", "A record ahead of its time."] // message, element, elementFn, expectedValue, jqUnitFn
                     // }
                 ]
@@ -110,7 +110,7 @@ fluid.defaults("gpii.tests.ul.website.products.caseHolder", {
                 sequence: [
                     {
                         func: "{testEnvironment}.webdriver.wait",
-                        args: [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args: [fluid.webdriver.until.elementLocated(fluid.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
@@ -119,16 +119,16 @@ fluid.defaults("gpii.tests.ul.website.products.caseHolder", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["The first search result should be the first alphabetical entry...", "{arguments}.0", "getText", "A record ahead of its time."] // message, element, elementFn, expectedValue, jqUnitFn
                     },
                     {
                         func: "{testEnvironment}.webdriver.actionsHelper",
                         args: [{ fn: "sendKeys", args: [
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER, // use the "skip to content" link
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER, // tab to "options", hit "enter" to open it
-                            gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB,   // one tab to "products per page", one more to "sort records".
-                            "b", gpii.webdriver.Key.ENTER                     // hit "b" to select the next menu item
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER, // use the "skip to content" link
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER, // tab to "options", hit "enter" to open it
+                            fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB,   // one tab to "products per page", one more to "sort records".
+                            "b", fluid.webdriver.Key.ENTER                     // hit "b" to select the next menu item
                         ]}]
                     },
                     // We have to manually wait because the same markup (with different results) is already present and we would pick up the old results otherwise.
@@ -145,10 +145,10 @@ fluid.defaults("gpii.tests.ul.website.products.caseHolder", {
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                        listener: "gpii.test.webdriver.inspectElement",
+                        listener: "fluid.test.webdriver.inspectElement",
                         args:     ["The first search result should now be the last alphabetical entry...", "{arguments}.0", "getText", "Whetstone 499"] // message, element, elementFn, expectedValue, jqUnitFn
                     }
-                    // // TODO: Reenable this once the problems with gpii-location-bar-relay are resolved: https://issues.gpii.net/browse/GPII-2132
+                    // // TODO: Reenable this once the problems with fluid-location-bar-relay are resolved: https://issues.gpii.net/browse/fluid-2132
                     // {
                     //     func: "{testEnvironment}.webdriver.navigateHelper",
                     //     args: ["back"]
@@ -165,7 +165,7 @@ fluid.defaults("gpii.tests.ul.website.products.caseHolder", {
                     // },
                     // {
                     //     event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-                    //     listener: "gpii.test.webdriver.inspectElement",
+                    //     listener: "fluid.test.webdriver.inspectElement",
                     //     args:     ["The first search result should be the first alphabetical entry again...", "{arguments}.0", "getText", "A record ahead of its time."] // message, element, elementFn, expectedValue, jqUnitFn
                     // }
                 ]
@@ -178,10 +178,10 @@ fluid.defaults("gpii.tests.ul.website.products.caseHolder", {
             //         {
             //             func: "{testEnvironment}.webdriver.actionsHelper",
             //             args: [{ fn: "sendKeys", args: [
-            //                 gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                                               // use the "skip to content" link
-            //                 gpii.webdriver.Key.TAB, gpii.webdriver.Key.ENTER,                                               // tab to "options", hit "enter" to open it
-            //                 gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, gpii.webdriver.Key.TAB, // three tabs to "products per page", one more to "sort records".
-            //                 gpii.webdriver.Key.TAB, gpii.webdriver.Key.SPACE                                                // Tab to, and untick the "new" status.
+            //                 fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER,                                               // use the "skip to content" link
+            //                 fluid.webdriver.Key.TAB, fluid.webdriver.Key.ENTER,                                               // tab to "options", hit "enter" to open it
+            //                 fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, fluid.webdriver.Key.TAB, // three tabs to "products per page", one more to "sort records".
+            //                 fluid.webdriver.Key.TAB, fluid.webdriver.Key.SPACE                                                // Tab to, and untick the "new" status.
             //             ]}]
             //         },
             //         // We have to manually wait because the same markup (with different results) is already present and we would pick up the old results otherwise.
@@ -198,7 +198,7 @@ fluid.defaults("gpii.tests.ul.website.products.caseHolder", {
             //         },
             //         {
             //             event:    "{testEnvironment}.webdriver.events.onFindElementComplete",
-            //             listener: "gpii.test.webdriver.inspectElement",
+            //             listener: "fluid.test.webdriver.inspectElement",
             //             args:     ["The first product listing should now be a deleted record...", "{arguments}.0", "getText", "Deleted record"] // message, element, elementFn, expectedValue, jqUnitFn
             //         }
             //     ]
@@ -220,7 +220,7 @@ fluid.defaults("gpii.tests.ul.website.products.environment", {
     }
 });
 
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.products.environment" });
+fluid.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.products.environment" });
 
 fluid.defaults("gpii.tests.ul.website.products.caseHolder.contributions.anonymous", {
     gradeNames: ["gpii.test.ul.website.caseHolder"],
@@ -233,7 +233,7 @@ fluid.defaults("gpii.tests.ul.website.products.caseHolder.contributions.anonymou
                 sequence: [
                     {
                         func:     "{testEnvironment}.webdriver.wait",
-                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".alert"))]
+                        args:     [fluid.webdriver.until.elementLocated(fluid.webdriver.By.css(".alert"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
@@ -262,7 +262,7 @@ fluid.defaults("gpii.tests.ul.website.products.caseHolder.contributions.loggedIn
                 sequence: [
                     {
                         func:     "{testEnvironment}.webdriver.wait",
-                        args:     [gpii.webdriver.until.elementLocated(gpii.webdriver.By.css(".product-listing"))]
+                        args:     [fluid.webdriver.until.elementLocated(fluid.webdriver.By.css(".product-listing"))]
                     },
                     {
                         event:    "{testEnvironment}.webdriver.events.onWaitComplete",
@@ -293,4 +293,4 @@ fluid.defaults("gpii.tests.ul.website.products.environment.contributions", {
     }
 });
 
-gpii.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.products.environment.contributions" });
+fluid.test.webdriver.allBrowsers({ baseTestEnvironment: "gpii.tests.ul.website.products.environment.contributions" });
