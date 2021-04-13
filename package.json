@@ -14,7 +14,7 @@
     "license": "BSD-3-Clause",
     "homepage": "https://github.com/GPII/ul-website",
     "dependencies": {
-        "ajv": "8.1.0",
+        "ajv": "6.12.6",
         "fluid-binder": "1.1.2",
         "fluid-express": "1.0.18",
         "fluid-express-user": "2.0.3",

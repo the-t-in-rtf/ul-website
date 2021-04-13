@@ -169,6 +169,18 @@
             includeSources:   true,
             products:         []
         },
+        selectors: {
+            initial:   ".search-viewport",
+            success:   ".search-success",
+            error:     ".search-error",
+            form:      ".search-query",
+            topnav:    ".search-topnav",
+            products:  ".search-products",
+            sortBy:    ".search-sortBy",
+            statuses:  ".search-statuses",
+            limit:     ".search-limit",
+            bottomnav: ".search-bottomnav"
+        },
         components: {
             // TODO: This is currently broken, it results in some kind of feedback loop with the binder, and propagates the user data to the location bar.
             // The component that relays changes between the URL, browser history, and model
@@ -193,7 +205,7 @@
             query: {
                 type:          "gpii.ul.search.query",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
-                container:     "{search}.dom.form",
+                container:     "{gpii.ul.search}.dom.form",
                 options: {
                     model: "{search}.model",
                     listeners: {
@@ -207,7 +219,7 @@
             products: {
                 type:          "gpii.ul.search.products",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
-                container:     "{search}.dom.products",
+                container:     "{gpii.ul.search}.dom.products",
                 options: {
                     listeners: {
                         "onDomChange.notifyParent": {
@@ -228,7 +240,7 @@
             topnav: {
                 type:          "gpii.ul.navbar",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
-                container:     "{search}.dom.topnav",
+                container:     "{gpii.ul.search}.dom.topnav",
                 options: {
                     model: {
                         totalRows: "{search}.model.totalRows",
@@ -247,7 +259,7 @@
             bottomnav: {
                 type:          "gpii.ul.navbar",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
-                container:     "{search}.dom.bottomnav",
+                container:     "{gpii.ul.search}.dom.bottomnav",
                 options: {
                     model: {
                         totalRows: "{search}.model.totalRows",
@@ -265,10 +277,10 @@
             sortBy: {
                 type:          "gpii.ul.sortBy.search",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
-                container:     "{search}.dom.sortBy",
+                container:     "{gpii.ul.search}.dom.sortBy",
                 options: {
                     model: {
-                        select:   "{search}.model.sortBy"
+                        select:   "{gpii.ul.search}.model.sortBy"
                     },
                     listeners: {
                         "onCreate.renderInitialMarkup": {
@@ -281,7 +293,7 @@
             statuses: {
                 type:          "gpii.ul.statuses",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
-                container:     "{search}.dom.statuses",
+                container:     "{gpii.ul.search}.dom.statuses",
                 options: {
                     model: {
                         checkboxValue: "{search}.model.statuses"
@@ -297,10 +309,10 @@
             limit: {
                 type:          "gpii.ul.limit",
                 createOnEvent: "{gpii.ul.search}.events.onDomChange",
-                container:     "{search}.dom.limit",
+                container:     "{gpii.ul.search}.dom.limit",
                 options: {
                     model: {
-                        select:   "{search}.model.limit"
+                        select:   "{gpii.ul.search}.model.limit"
                     },
                     listeners: {
                         "onCreate.renderInitialMarkup": {
@@ -310,23 +322,23 @@
                 }
             },
             // A toggle to show/hide the search options
-            optionsToggle: {
-                type: "gpii.ul.toggle",
-                createOnEvent: "{gpii.ul.search}.events.onDomChange",
-                container:     "{search}.container",
-                options: {
-                    selectors: {
-                        toggle:    ".search-options-toggle",
-                        container: ".search-options"
-                    },
-                    toggles: {
-                        container: true
-                    },
-                    listeners: {
-                        "onCreate.applyBindings": "{that}.events.onRefresh"
-                    }
-                }
-            }
+            // optionsToggle: {
+            //     type: "gpii.ul.toggle",
+            //     createOnEvent: "{gpii.ul.search}.events.onDomChange",
+            //     container:     "{gpii.ul.search}.dom.container",
+            //     options: {
+            //         selectors: {
+            //             toggle:    ".search-options-toggle",
+            //             container: ".search-options"
+            //         },
+            //         toggles: {
+            //             container: true
+            //         },
+            //         listeners: {
+            //             "onCreate.applyBindings": "{that}.events.onRefresh"
+            //         }
+            //     }
+            // }
             // TODO: Get this working again if anyone really wants it.
             // The image "knitter" that associates images with individual search results
             //knitter: {
@@ -338,18 +350,6 @@
             //        }
             //    }
             //}
-        },
-        selectors: {
-            initial:   ".search-viewport",
-            success:   ".search-success",
-            error:     ".search-error",
-            form:      ".search-query",
-            topnav:    ".search-topnav",
-            products:  ".search-products",
-            sortBy:    ".search-sortBy",
-            statuses:  ".search-statuses",
-            limit:     ".search-limit",
-            bottomnav: ".search-bottomnav"
         },
         templateKeys: {
             "initial": "search-viewport"
