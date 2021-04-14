@@ -32,14 +32,14 @@
         "kettle": "1.11.0",
         "markdown-it": "10.0.0",
         "moment": "2.24.0",
-        "ul-api": "1.0.0-dev.20200407T154402Z.bd0c4cf.UL-67",
-        "ul-imports": "1.0.0-dev.20200122T143521Z.c6d4e12.UL-67"
+        "ul-api": "1.0.0-dev.20210413T091744Z.bfa8131.legacy-infusion",
+        "ul-imports": "1.0.0-dev.20210413T111504Z.c56b898.legacy-infusion"
     },
     "devDependencies": {
         "eslint": "6.5.1",
         "eslint-config-fluid": "1.4.0",
-        "gpii-grunt-lint-all": "1.0.5",
         "gpii-couchdb-test-harness": "1.0.0-dev.20190827T101451Z.024d2c3.GPII-3531",
+        "gpii-grunt-lint-all": "1.0.5",
         "gpii-webdriver": "1.1.0",
         "grunt": "1.0.4",
         "istanbul": "0.4.5",
